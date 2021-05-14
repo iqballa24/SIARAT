@@ -25,7 +25,7 @@ class Dashboard extends CI_Controller {
 
 		// mengirim data ke view
 		$output = array(
-						'theme_page' => 'anggota_read',
+						'theme_page' => 'dashboard/v_dashboard',
 						'judul' 	 => 'Dashboard',
 
 						// data anggota dikirim ke view
@@ -33,6 +33,6 @@ class Dashboard extends CI_Controller {
 					);
 
 		// memanggil file view
-		$this->load->view('admin/theme/index');
+		$this->load->view('admin/theme/index', $output);
 	}
 }
