@@ -137,4 +137,80 @@ class Category extends CI_Controller {
 		}
 		return TRUE;
 	}
+
+	public function update()
+	{
+
+		$this->update_submit();
+		//menangkap id data yg dipilih dari view (parameter get)
+		$id  = $this->uri->segment(4);
+		// $NIP = $this->session->userdata('nama');
+
+		//function read berfungsi mengambil 1 data dari table kategori sesuai id yg dipilih
+		$data_category_single = $this->m_category->read_single($id);
+
+		//mengirim data ke view
+		$output = array(
+			'judul'	 		=> 'Update kategori surat',
+			'theme_page' 	=> 'category/v_category_update',
+
+			//mengirim data kota yang dipilih ke view
+			'data_category_single' => $data_category_single,
+		);
+
+		//memanggil file view
+		$this->load->view('admin/theme/index', $output);
+	}
+
+	public function update_submit()
+	{
+
+		if ($this->input->post('submit') == 'Simpan') {
+
+			//aturan validasi input login
+			$this->form_validation->set_rules('kode', 'Kode surat', 'required|numeric');
+			$this->form_validation->set_rules('jenis', 'Jenis surat', 'required');
+
+			if ($this->form_validation->run() == TRUE) {
+
+				//menangkap id data yg dipilih dari view
+				$id = $this->uri->segment(3);
+
+				// menangkap data input dari view
+				$kode	  = $this->input->post('kode');
+				$jenis	  = $this->input->post('jenis');
+
+				// mengirim data ke model
+				$input = array(
+					// format : nama field/kolom table => data input dari view
+					'kd_surat'		=> $kode,
+					'jenis_surat'	=> $jenis
+				);
+
+				//memanggil function update pada kategori model
+				$data_anggota = $this->m_category->update($input, $id);
+
+				//mengembalikan halaman ke function read
+				$this->session->set_tempdata('message', 'Data berhasil di ubah !', 1);
+				redirect('admin/category/read');
+			}
+		}
+	}
+
+	public function delete() {
+
+		$id = $this->uri->segment(4);
+
+		$this->db->db_debug = false; //disable debugging queries
+		
+		// Error handling
+		if (!$this->m_category->delete($id)) {
+			$msg =  $this->db->error();
+			$this->session->set_tempdata('error', $msg['message'], 1);
+		}
+
+		//mengembalikan halaman ke function read
+		$this->session->set_tempdata('message','Data berhasil dihapus',1);
+		redirect('admin/category/read');
+	}
 }

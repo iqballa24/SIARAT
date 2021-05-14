@@ -104,10 +104,39 @@ class M_category extends CI_Model {
 		return $query->row_array();
 	}
 
+	public function read_single($id) {
+
+		// sql read
+		$this->db->select('*');
+		$this->db->from('tb_category');
+		$this->db->where('kd_surat', $id);
+
+		$query = $this->db->get();
+
+		// query -> row_array = mengirim data ke controller dalam bentuk 1 data
+        return $query->row_array();
+	}
+
 	public function insert($input)
 	{
 		// $input = data yang dikirim dari controller
 		return $this->db->insert('tb_category', $input);
+	}
+
+	public function update($input, $id)
+	{
+		//$id = id data yang dikirim dari controller (sebagai filter data yang diubah)
+		//filter data sesuai id yang dikirim dari controller
+		$this->db->where('kd_surat', $id);
+
+		//$input = data yang dikirim dari controller
+		return $this->db->update('tb_category', $input);
+	}
+
+	public function delete($id) {
+		// $id = data yang dikirim dari controller (sebagai filter data yang dihapus)
+		$this->db->where('kd_surat', $id);
+		return $this->db->delete('tb_category');
 	}
 
 }

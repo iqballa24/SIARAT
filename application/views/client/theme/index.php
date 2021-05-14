@@ -10,15 +10,15 @@
     <link href="<?= base_url('assets\img\vector\logo.svg'); ?>" rel="apple-touch-icon">
 
     <!-- css -->
-    <link rel="stylesheet" href="<?= base_url('node_modules/bootstrap/dist/css/bootstrap.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/bootstrap/dist/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css'); ?>">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- js -->
-    <script defer src="<?= base_url('node_modules/@fortawesome/fontawesome-free/js/brands.js'); ?>"></script>
-    <script defer src="<?= base_url('node_modules/@fortawesome/fontawesome-free/js/solid.js'); ?>"></script>
-    <script defer src="<?= base_url('node_modules/@fortawesome/fontawesome-free/js/regular.js'); ?>"></script>
-    <script defer src="<?= base_url('node_modules/@fortawesome/fontawesome-free/js/fontawesome.js'); ?>"></script>
+    <script defer src="<?= base_url('assets/vendor/fontawesome-free/js/brands.js'); ?>"></script>
+    <script defer src="<?= base_url('assets/vendor/fontawesome-free/js/solid.js'); ?>"></script>
+    <script defer src="<?= base_url('assets/vendor/fontawesome-free/js/regular.js'); ?>"></script>
+    <script defer src="<?= base_url('assets/vendor/fontawesome-free/js/fontawesome.js'); ?>"></script>
     <title>LSP HCMI</title>
 </head>
 
@@ -88,7 +88,7 @@
     <?php $this->load->view('client/theme/footer');; ?>
 
     <!-- js -->
-    <script src="<?= base_url('node_modules/jquery/dist/jquery.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/vendor/jquery/dist/jquery.min.js'); ?>"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="<?= base_url('assets/js/index.js'); ?>"></script>
     <!-- Start of LiveChat (www.livechatinc.com) code -->
