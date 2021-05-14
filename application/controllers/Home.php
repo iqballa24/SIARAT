@@ -31,6 +31,6 @@ class Home extends CI_Controller {
 		);
  
 		// // memanggil file view
-		$this->load->view('frontend/theme/index', $output);
+		$this->load->view('client/theme/index', $output);
 	}
 }
