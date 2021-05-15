@@ -4,15 +4,15 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Data Kategori Surat</h3>
+                        <h3 class="card-title">Data Divisi / bagian</h3>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped" id="table" width="100%" cellspacing="0">
                             <thead class="">
                                 <tr>
                                     <th> # </th>
-                                    <th> Kode Surat </th>
-                                    <th> Jenis Surat </th>
+                                    <th> Divisi </th>
+                                    <th> Kode </th>
                                     <th> Action </th>
                                 </tr>
                             </thead>
@@ -39,7 +39,7 @@
 			"serverSide": true,
 			"order": [],
 			"ajax": {
-				"url": "<?php echo site_url('admin/category/datatables') ?>",
+				"url": "<?php echo site_url('admin/divisi/datatables') ?>",
 				"type": "POST"
 			},
 			"columnDefs": [{

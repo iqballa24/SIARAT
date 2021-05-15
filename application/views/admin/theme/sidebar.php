@@ -1,8 +1,8 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-light-danger elevation-4">
     <!-- Brand Logo -->
-    <a href="../index3.html" class="brand-link">
-        <img src="<?= base_url('images/AdminLTELogo.png'); ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <a href="lsphcmi.com" class="brand-link" target="_blank">
+        <img src="<?= base_url('assets/img/vector/logo.svg'); ?>" alt="LSP HCMI Logo" class="brand-image ">
+        <span class="brand-text font-weight-light">LSP HCMI</span>
     </a>
 
     <!-- Sidebar -->
@@ -34,8 +34,10 @@
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="nav-item ">
-                    <a href="<?= site_url('admin/dashboard/read'); ?>" class="nav-link">
+               <?php $i = $this->uri->segment(2) ?>
+               <?php $x = $this->uri->segment(3) ?>
+               <li class="nav-item">
+                    <a href="<?= site_url('admin/dashboard/read'); ?>" class="nav-link <?= $i =='dashboard' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -43,8 +45,31 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-list-alt"></i>
+                    <a href="#" class="nav-link <?= $i =='divisi' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>
+                            Divisi
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/divisi/read'); ?>" class=" nav-link <?= $x =='read' && $i == 'divisi' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
+                                <p>Lihat data</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/divisi/insert'); ?>" class="nav-link <?= $x =='insert' && $i == 'divisi' ? 'active' : ''; ?>">
+                                <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
+                                <p>Tambah data</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link <?= $i == 'category' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-filter"></i>
                         <p>
                             Kategori Surat
                             <i class="right fas fa-angle-left"></i>
@@ -52,15 +77,61 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= site_url('admin/category/read'); ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Lihat kategori</p>
+                            <a href="<?= site_url('admin/category/read'); ?>" class="nav-link <?= $i == 'category' && $x == 'read'? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
+                                <p>Lihat data</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= site_url('admin/category/insert'); ?>" class="nav-link">
-                                <i class="fas fa-plus nav-icon"></i>
-                                <p>Tambah kategori</p>
+                            <a href="<?= site_url('admin/category/insert'); ?>" class="nav-link <?= $i == 'category' && $x == 'insert'? 'active' : ''; ?>">
+                                <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
+                                <p>Tambah data</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link <?= $i == 'suratmasuk'? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-folder-open"></i>
+                        <p>
+                            Surat Masuk
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/suratmasuk/read'); ?>" class="nav-link <?= $i == 'suratmasuk' && $x == 'read'? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
+                                <p>Lihat data</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/suratmasuk/insert'); ?>" class="nav-link <?= $i == 'suratmasuk' && $x == 'insert'? 'active' : ''; ?>">
+                                <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
+                                <p>Tambah data</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link <?= $i == 'suratkeluar' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-folder-open"></i>
+                        <p>
+                            Surat Keluar
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/category/read'); ?>" class="nav-link <?= $i == 'suratkeluar' && $x == 'read' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
+                                <p>Lihat data</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/category/insert'); ?>" class="nav-link <?= $i == 'suratkeluar' && $x == 'insert' ? 'active' : ''; ?>">
+                                <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
+                                <p>Tambah data</p>
                             </a>
                         </li>
                     </ul>
