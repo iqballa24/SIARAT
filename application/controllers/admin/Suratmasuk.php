@@ -99,7 +99,7 @@ class Suratmasuk extends CI_Controller {
 		if ($this->input->post('submit') == 'Simpan') {
 
 			//aturan validasi input login
-			$this->form_validation->set_rules('no_surat', 'No surat', 'required');
+			$this->form_validation->set_rules('no_surat', 'No surat', 'required|callback_insert_check');
 			$this->form_validation->set_rules('perihal', 'Perihal', 'required');
 			$this->form_validation->set_rules('tgl_terima', 'Tanggal terima', 'required');
 			$this->form_validation->set_rules('jenis_surat', 'Jenis surat', 'required');
@@ -198,18 +198,15 @@ class Suratmasuk extends CI_Controller {
 		$this->update_submit();
 		//menangkap id data yg dipilih dari view (parameter get)
 		$id  = $this->uri->segment(4);
-		// $NIP = $this->session->userdata('nama');
-
-		//function read berfungsi mengambil 1 data dari table kategori sesuai id yg dipilih
-		$data_category_single = $this->m_category->read_single($id);
+        $data_category = $this->m_category->read();
+		$data_suratmasuk_single = $this->m_suratmasuk->read_single($id);
 
 		//mengirim data ke view
 		$output = array(
-			'judul'	 		=> 'Update kategori surat',
-			'theme_page' 	=> 'category/v_category_update',
-
-			//mengirim data kota yang dipilih ke view
-			'data_category_single' => $data_category_single,
+			'judul'	 		=> 'Surat masuk',
+			'theme_page' 	=> 'surat/v_suratmasuk_update',
+			'data_category' => $data_category,
+			'data_suratmasuk_single' => $data_suratmasuk_single,
 		);
 
 		//memanggil file view
@@ -217,39 +214,70 @@ class Suratmasuk extends CI_Controller {
 	}
 
 	public function update_submit()
-	{
+    {
+        //setting library upload
+        $config['upload_path']          = './upload_folder/pdf';
+        $config['allowed_types']        = 'gif|jpg|png|pdf';
+        $config['max_size']             = 5000;
+        $this->load->library('upload', $config);
 
-		if ($this->input->post('submit') == 'Simpan') {
+        //menangkap data input dari view
+        $no_surat	  	= $this->input->post('no_surat');
+		$perihal	  	= $this->input->post('perihal');
+		$tgl_terima     = $this->input->post('tgl_terima');
+		$jenis_surat	= $this->input->post('jenis_surat');
+		$tgl_surat  	= $this->input->post('tgl_surat');
+		$keterangan     = $this->input->post('ket');
 
-			//aturan validasi input login
-			$this->form_validation->set_rules('kode', 'Kode surat', 'required|numeric');
-			$this->form_validation->set_rules('jenis', 'Jenis surat', 'required');
+        //menangkap id data yg dipilih dari view (parameter get)
+        $id = $this->uri->segment(4);
 
-			if ($this->form_validation->run() == TRUE) {
+        //jika gagal upload
+        if (!$this->upload->do_upload('userfile')) {
 
-				//menangkap id data yg dipilih dari view
-				$id = $this->uri->segment(3);
+			$id  					= $this->uri->segment(4);
+			$data_category			= $this->m_category->read();
+            $response 				= $this->upload->display_errors();
+			$data_suratmasuk_single = $this->m_suratmasuk->read_single($id);
+	
+			//mengirim data ke view
+			$output = array(
+				'judul'	 				 => 'Surat masuk',
+				'theme_page' 			 => 'surat/v_suratmasuk_update',
+				'data_category' 		 => $data_category,
+				'response'				 => $response,
+				'data_suratmasuk_single' => $data_suratmasuk_single,
+			);
+	
+			//memanggil file view
+			$this->load->view('admin/theme/index', $output);
 
-				// menangkap data input dari view
-				$kode	  = $this->input->post('kode');
-				$jenis	  = $this->input->post('jenis');
+         //jika berhasil upload
+        } else {
+            $this->upload->do_upload('userfile');
+            $upload_data = $this->upload->data('file_name');
 
-				// mengirim data ke model
-				$input = array(
-					// format : nama field/kolom table => data input dari view
-					'kd_surat'		=> $kode,
-					'jenis_surat'	=> $jenis
-				);
+            //mengirim data ke model
+            $input = array(
+                //format : nama field/kolom table => data input dari view
+                'no_surat'    	=> $no_surat,
+				'perihal' 	  	=> $perihal,
+				'tgl_terima'  	=> $tgl_terima,
+				'kd_jenis_surat'=> $jenis_surat,
+				'tgl_surat'   	=> $tgl_surat,
+				'keterangan'  	=> $keterangan,
+				'lampiran'    	=> $upload_data
+            );
 
-				//memanggil function update pada kategori model
-				$data_anggota = $this->m_category->update($input, $id);
+            //memanggil function insert pada kota model
+            //function insert berfungsi menyimpan/create data ke table buku di database
+            $data_buku = $this->m_suratmasuk->update($input, $id);
 
-				//mengembalikan halaman ke function read
-				$this->session->set_tempdata('message', 'Data berhasil di ubah !', 1);
-				redirect('admin/category/read');
-			}
-		}
-	}
+            //mengembalikan halaman ke function read
+            $this->session->set_tempdata('message', 'Data berhasil disimpan', 1);
+            Redirect('admin/suratmasuk/read');
+        }
+    }
 
 	public function delete() {
 

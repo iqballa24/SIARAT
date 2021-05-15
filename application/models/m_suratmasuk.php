@@ -23,7 +23,8 @@ class M_suratmasuk extends CI_Model {
 	{
 
 		$this->db->select('*');
-		$this->db->from($this->table);
+		$this->db->from('tb_suratmasuk a');
+        $this->db->join('tb_category b', 'a.kd_jenis_surat = b.kd_surat');
 
 		$i = 0;
 
@@ -109,7 +110,7 @@ class M_suratmasuk extends CI_Model {
 		// sql read
 		$this->db->select('*');
 		$this->db->from('tb_suratmasuk');
-		$this->db->where('no_surat', $id);
+		$this->db->where('id', $id);
 
 		$query = $this->db->get();
 
@@ -127,10 +128,10 @@ class M_suratmasuk extends CI_Model {
 	{
 		//$id = id data yang dikirim dari controller (sebagai filter data yang diubah)
 		//filter data sesuai id yang dikirim dari controller
-		$this->db->where('kd_surat', $id);
+		$this->db->where('id', $id);
 
 		//$input = data yang dikirim dari controller
-		return $this->db->update('tb_category', $input);
+		return $this->db->update('tb_suratmasuk', $input);
 	}
 
 	public function delete($id) {
@@ -145,6 +146,7 @@ class M_suratmasuk extends CI_Model {
         //sql read
         $this->db->select('*');
         $this->db->from('tb_suratmasuk a');
+        $this->db->join('tb_category b', 'a.kd_jenis_surat = b.kd_surat');
         $this->db->where('a.id', $id);
         $query = $this->db->get();
 
