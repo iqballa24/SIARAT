@@ -11,7 +11,7 @@
                             <thead class="">
                                 <tr>
                                     <th> # </th>
-                                    <th> Surat </th>
+                                    <th> Surat masuk </th>
                                     <th> Tanggal terima </th>
                                     <th> Jenis surat </th>
                                     <th> keterangan </th>

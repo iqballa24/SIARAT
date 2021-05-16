@@ -286,14 +286,14 @@ class Suratmasuk extends CI_Controller {
 		$this->db->db_debug = false; //disable debugging queries
 		
 		// Error handling
-		if (!$this->m_category->delete($id)) {
+		if (!$this->m_suratmasuk->delete($id)) {
 			$msg =  $this->db->error();
 			$this->session->set_tempdata('error', $msg['message'], 1);
 		}
 
 		//mengembalikan halaman ke function read
 		$this->session->set_tempdata('message','Data berhasil dihapus',1);
-		redirect('admin/category/read');
+		redirect('admin/suratmasuk/read');
 	}
 
 	public function detail()

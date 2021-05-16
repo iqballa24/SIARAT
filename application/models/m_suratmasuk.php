@@ -6,7 +6,7 @@ class M_suratmasuk extends CI_Model {
 	var $table = array('tb_suratmasuk');
 
 	//field yang ditampilkan
-	var $column_order = array(null,'no_surat', 'tgl_terima', 'jenis_surat', 'keterangan');
+	var $column_order = array(null,'id', 'tgl_terima', 'jenis_surat', 'keterangan');
 
 	//field yang diizin untuk pencarian 
 	var $column_search = array('no_surat', 'tgl_terima', 'jenis_surat', 'keterangan');
@@ -136,8 +136,8 @@ class M_suratmasuk extends CI_Model {
 
 	public function delete($id) {
 		// $id = data yang dikirim dari controller (sebagai filter data yang dihapus)
-		$this->db->where('kd_surat', $id);
-		return $this->db->delete('tb_category');
+		$this->db->where('id', $id);
+		return $this->db->delete('tb_suratmasuk');
 	}
 
 	public function detail($id)
