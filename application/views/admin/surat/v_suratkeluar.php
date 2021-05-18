@@ -4,15 +4,18 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Data Kategori Surat</h3>
+                        <h3 class="card-title">Data surat keluar</h3>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-responsive-md" id="table" width="100%" cellspacing="0">
                             <thead class="">
                                 <tr>
                                     <th> # </th>
-                                    <th> Kode Surat </th>
-                                    <th> Jenis Surat </th>
+                                    <th> Surat keluar </th>
+                                    <th> Jenis surat </th>
+                                    <th> Ditujukan </th>
+                                    <th> Divisi/bagian </th>
+                                    <th> Keterangan </th>
                                     <th> Action </th>
                                 </tr>
                             </thead>
@@ -39,15 +42,14 @@
 			"serverSide": true,
 			"order": [],
 			"ajax": {
-				"url": "<?php echo site_url('admin/category/datatables') ?>",
+				"url": "<?php echo site_url('admin/suratkeluar/datatables') ?>",
 				"type": "POST"
 			},
 			"columnDefs": [{
-				"targets": [0, 3],
+				"targets": [0, 6],
 				"className": 'dt-center',
 				"orderable": false,
 			}],
 		});
-
 	});
 </script>

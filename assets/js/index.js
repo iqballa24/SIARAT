@@ -25,8 +25,9 @@ $(document).ready(() => {
 
     // Alert 
     const message = $('.flash-data').data('tempdata');
-    const error = $('.flash-data-error').data('tempdata');
-    const info = $('.flash-data-info').data('tempdata');
+    const error   = $('.flash-data-error').data('tempdata');
+    const info    = $('.flash-data-info').data('tempdata');
+    const confirm = $('.flash-data-confirm').data('tempdata');
     if (error) {
         Swal.fire({
             title: 'Oops...',
@@ -46,6 +47,15 @@ $(document).ready(() => {
             text: info,
             icon: 'info'
         });
+    }else if(confirm) {
+        Swal.fire({
+            title: 'Success',
+            text: confirm,
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: '<a href="http://localhost/lsp_archive/admin/suratkeluar/getTemplate" style="text-decoration: none; color:white;">Download Template</a>'
+        })
     }else {
         console.log('Pindah halaman');
     }

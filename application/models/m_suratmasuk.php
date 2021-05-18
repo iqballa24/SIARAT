@@ -6,13 +6,13 @@ class M_suratmasuk extends CI_Model {
 	var $table = array('tb_suratmasuk');
 
 	//field yang ditampilkan
-	var $column_order = array(null,'id', 'tgl_terima', 'jenis_surat', 'keterangan');
+	var $column_order = array(null,'id_surat', 'tgl_terima', 'jenis_surat', 'keterangan');
 
 	//field yang diizin untuk pencarian 
-	var $column_search = array('no_surat', 'tgl_terima', 'jenis_surat', 'keterangan');
+	var $column_search = array('perihal','no_surat', 'tgl_terima','tgl_surat' ,'jenis_surat', 'keterangan');
 
 	//field pertama yang diurutkan
-	var $order = array('id' => 'asc');
+	var $order = array('id_surat' => 'desc');
 
 	public function __construct()
 	{
@@ -110,7 +110,7 @@ class M_suratmasuk extends CI_Model {
 		// sql read
 		$this->db->select('*');
 		$this->db->from('tb_suratmasuk');
-		$this->db->where('id', $id);
+		$this->db->where('id_surat', $id);
 
 		$query = $this->db->get();
 
@@ -126,9 +126,7 @@ class M_suratmasuk extends CI_Model {
 
 	public function update($input, $id)
 	{
-		//$id = id data yang dikirim dari controller (sebagai filter data yang diubah)
-		//filter data sesuai id yang dikirim dari controller
-		$this->db->where('id', $id);
+		$this->db->where('id_surat', $id);
 
 		//$input = data yang dikirim dari controller
 		return $this->db->update('tb_suratmasuk', $input);
@@ -136,7 +134,7 @@ class M_suratmasuk extends CI_Model {
 
 	public function delete($id) {
 		// $id = data yang dikirim dari controller (sebagai filter data yang dihapus)
-		$this->db->where('id', $id);
+		$this->db->where('id_surat', $id);
 		return $this->db->delete('tb_suratmasuk');
 	}
 
@@ -147,7 +145,7 @@ class M_suratmasuk extends CI_Model {
         $this->db->select('*');
         $this->db->from('tb_suratmasuk a');
         $this->db->join('tb_category b', 'a.kd_jenis_surat = b.kd_surat');
-        $this->db->where('a.id', $id);
+        $this->db->where('a.id_surat', $id);
         $query = $this->db->get();
 
         // $query -> result_array = mengirim data ke controller dalam bentuk semua data

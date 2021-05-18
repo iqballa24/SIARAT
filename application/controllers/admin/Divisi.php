@@ -48,10 +48,10 @@ class Divisi extends CI_Controller {
 			$row[] = $field['divisi'];
 			$row[] = $field['kode'];
 			$row[] = '
-					<a href="'.site_url('admin/divisi/update/'.$field['id']). '" class="btn btn-warning btn-sm " title="Edit">
+					<a href="'.site_url('admin/divisi/update/'.$field['kode']). '" class="btn btn-warning btn-sm " title="Edit">
 						<i class="fas fa-edit"></i> 
 					</a>
-					<a href="'.site_url('admin/divisi/delete/'.$field['id']).'" class="btn btn-danger btn-sm btnHapus" title="Hapus" data = "'.$field['id'].'">
+					<a href="'.site_url('admin/divisi/delete/'.$field['kode']).'" class="btn btn-danger btn-sm btnHapus" title="Hapus" data = "'.$field['kode'].'">
 						<i class="fas fa-trash-alt"></i> 
 					</a>';
 
@@ -185,7 +185,6 @@ class Divisi extends CI_Controller {
 					'divisi'	=> $divisi
 				);
 
-				//memanggil function update pada kategori model
 				$data_divisi = $this->m_divisi->update($input, $id);
 
 				//mengembalikan halaman ke function read
@@ -202,14 +201,14 @@ class Divisi extends CI_Controller {
 		$this->db->db_debug = false; //disable debugging queries
 		
 		// Error handling
-		if (!$this->m_category->delete($id)) {
+		if (!$this->m_divisi->delete($id)) {
 			$msg =  $this->db->error();
 			$this->session->set_tempdata('error', $msg['message'], 1);
 		}
 
 		//mengembalikan halaman ke function read
 		$this->session->set_tempdata('message','Data berhasil dihapus',1);
-		redirect('admin/category/read');
+		redirect('admin/divisi/read');
 	}
     
 }

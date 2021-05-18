@@ -7,7 +7,7 @@
                         <h3 class="card-title">Update data</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="<?= site_url('admin/suratmasuk/update/'.$data_suratmasuk_single['id']); ?>" enctype="multipart/form-data">
+                        <form method="post" action="<?= site_url('admin/suratmasuk/update_submit/'.$data_suratmasuk_single['id_surat']); ?>" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label>No surat</label>
@@ -49,7 +49,8 @@
                                 </div>
                                 <label>Lampiran file</label>
                                 <div class="custom-file">
-                                    <input type="file" class="" name="userfile" id="validatedInputGroupCustomFile" required>
+                                    <input type="file" class="" name="userfile" id="validatedInputGroupCustomFile" value="<?= $data_suratmasuk_single['lampiran']; ?>">
+                                    <input type="hidden" class="" name="userfileold" id="validatedInputGroupCustomFile" value="<?= $data_suratmasuk_single['lampiran']; ?>">
                                     <!--response setelah upload-->
                                     <?php if (!empty($response)) : ?>
                                         <small class="text-danger pl-3">

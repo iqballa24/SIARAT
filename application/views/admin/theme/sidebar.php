@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-light-danger elevation-4">
     <!-- Brand Logo -->
     <a href="lsphcmi.com" class="brand-link" target="_blank">
-        <img src="<?= base_url('assets/img/vector/logo.svg'); ?>" alt="LSP HCMI Logo" class="brand-image ">
-        <span class="brand-text font-weight-light">LSP HCMI</span>
+        <img src="<?= base_url('assets/img/logo.svg'); ?>" alt="LSP HCMI Logo" class="brand-image ">
+        <span class="   brand-text font-weight-light">LSP HCMI</span>
     </a>
 
     <!-- Sidebar -->
@@ -10,7 +10,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?= base_url('images/user4-128x128.jpg'); ?>" class="img-circle elevation-2" alt="User Image">
+                <img src="<?= base_url('assets/img/user4-128x128.jpg'); ?>" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">Alexander Pierce</a>
@@ -123,13 +123,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= site_url('admin/category/read'); ?>" class="nav-link <?= $i == 'suratkeluar' && $x == 'read' ? 'active' : ''; ?>">
+                            <a href="<?= site_url('admin/suratkeluar/read'); ?>" class="nav-link <?= $i == 'suratkeluar' && $x == 'read' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
                                 <p>Lihat data</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= site_url('admin/category/insert'); ?>" class="nav-link <?= $i == 'suratkeluar' && $x == 'insert' ? 'active' : ''; ?>">
+                            <a href="<?= site_url('admin/suratkeluar/insert'); ?>" class="nav-link <?= $i == 'suratkeluar' && $x == 'insert' ? 'active' : ''; ?>">
                                 <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
                                 <p>Tambah data</p>
                             </a>

@@ -7,7 +7,7 @@
                         <h3 class="card-title">Data Divisi / bagian</h3>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped" id="table" width="100%" cellspacing="0">
+                        <table class="table table-striped table-responsive-md" id="table" width="100%" cellspacing="0">
                             <thead class="">
                                 <tr>
                                     <th> # </th>

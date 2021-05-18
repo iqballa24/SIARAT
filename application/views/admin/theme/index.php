@@ -37,7 +37,7 @@
    <?php $this->load->view('admin/theme/sidebar');; ?>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper text-sm">
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <div class="container-fluid">
@@ -50,29 +50,18 @@
       </section>
 
       <!-- Alert -->
-      <div class="flash-data" data-tempdata="<?= $this->session->tempdata('message') ?>"></div>
-      <div class="flash-data-info" data-tempdata="<?= $this->session->tempdata('info') ?>"></div>
-      <div class="flash-data-error" data-tempdata="<?= $this->session->tempdata('error') ?>"></div>
+      <?php $this->load->view('admin/theme/alert');; ?>
+      
       
       <!-- Main content -->
       <?php $this->load->view('admin/'.$theme_page);; ?>
       <!-- /.content -->
 
-      <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
-        <i class="fas fa-chevron-up"></i>
-      </a>
     </div>
     <!-- /.content-wrapper -->
 
-    <footer class="main-footer text-center">
-      <strong>Copyright &copy; 2021 <a href="https://lsphcmi.com">LSP HCMI</a>.</strong> All rights reserved.
-    </footer>
+    <?php $this->load->view('admin/theme/footer');; ?>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
 

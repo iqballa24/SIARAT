@@ -106,8 +106,6 @@ class Category extends CI_Controller {
 								'jenis_surat'	=> $jenis
 							);
 		
-				// memanggil function insert pada anggota_model.php
-				// function insert berfungsi menyimpan/create data ke table anggota di database
 				$data_category = $this->m_category->insert($input);
 
 				// mengembalikan halaman ke function read

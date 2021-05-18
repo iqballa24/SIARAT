@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <div class="card card-primary card-outline">
+                <div class="card card-danger card-outline">
                     <div class="card-body">
                         <?php foreach ($dt_suratmasuk as $data) : ?>
                             <ul class="list-group list-group-unbordered mb-3">
