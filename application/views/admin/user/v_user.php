@@ -36,6 +36,7 @@
 		$('#table').DataTable({
 			"responsive": true,
 			"processing": true,
+            "bAutoWidth": true,
 			"language": {
 				"processing": '<i class="fas fa-circle-notch fa-spin fa-1x fa-fw"></i><span>Loading...</span> '
 			},

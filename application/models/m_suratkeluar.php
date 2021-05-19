@@ -94,7 +94,7 @@ class M_suratkeluar extends CI_Model {
 
 	public function getLastDataNoSurat()
     {
-        $query = $this->db->query("SELECT no_surat from tb_suratkeluar order by id_surat desc LIMIT 1");
+        $query = $this->db->query("SELECT no_surat from tb_suratkeluar order by nosurat desc LIMIT 1");
 		$hasil = $query->row();
 
         return $hasil->no_surat;

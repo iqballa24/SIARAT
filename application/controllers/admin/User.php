@@ -62,7 +62,7 @@ class User extends CI_Controller
             $row[] = $no;
             $row[] = $field['username'];
             $row[] = $field['name'];
-            $row[] = $field['level'] == '1' ? 'Admin' : 'User';
+            $row[] = $field['level'] == '1' ? 'User' : 'Admin';
             $row[] = '<img src="'.base_url('upload_folder/img/' .$field['image']).'" class="img-fluid" style="width:55px;" alt="'.$field['image'].'">';
             $row[] = $field['is_active'] == 'y' ? '<div class ="btn btn-success btn-sm disabled">Active</div>' : '<div class="btn btn-danger btn-sm disabled">Inactive</div>';
             $row[] = '
@@ -73,7 +73,7 @@ class User extends CI_Controller
 						<i class="fas fa-trash-alt"></i>
 					</a>
                     <a href="' . site_url('admin/user/reset/' . $field['id_user']) . '" class="btn btn-info btn-sm btnReset" title="Reset password" data = "' . $field['id_user'] . '">
-						<i class="fas fa-key"></i> Reset password
+						<i class="fas fa-key"></i> Reset
 					</a>';
 
             $data[] = $row;

@@ -23,8 +23,8 @@
                                     <label>Level</label>
                                     <select name="level" class="form-control" value="<?= set_value('level'); ?>" required>
                                         <option selected disabled>-- select --</option>
-                                        <option value="1">admin</option>
-                                        <option value="2">user</option>
+                                        <option value="1">user</option>
+                                        <option value="2">admin</option>
                                     </select>
                                     <?= form_error('level', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
