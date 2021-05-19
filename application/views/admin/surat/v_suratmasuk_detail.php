@@ -35,13 +35,14 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <object data="<?= base_url('upload_folder/pdf/'.$data['lampiran']); ?>" type="application/pdf" width="100%" height="500px">
+            <?php $lampiran = $data['lampiran'] ? $data['lampiran'] : 'UPLOAD YOUR FILE.pdf'; ?>
+                <object data="<?= base_url('upload_folder/pdf/'.$lampiran); ?>" type="application/pdf" width="100%" height="500px">
                     <p>
                         This browser does not support PDFs. Please download the PDF to
                         view it
                     </p>
                 </object>
-                    <a href="<?= base_url('upload_folder/pdf/'.$data['lampiran']); ?>" class="btn btn-primary mt-3 float-right" download target="_blank"> <i class="fas fa-download nav-icon"></i> Download file</a>
+                    <a href="<?= base_url('upload_folder/pdf/'.$lampiran); ?>" class="btn btn-primary mt-3 float-right" download target="_blank"> <i class="fas fa-download nav-icon"></i> Download file</a>
                         <?php endforeach ?>
             </div>
         </div>

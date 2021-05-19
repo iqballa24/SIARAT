@@ -7,7 +7,7 @@
                         <h3 class="card-title">Update data</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="<?= site_url('admin/divisi/update/'.$data_divisi_single['id']); ?>">
+                        <form method="post" action="<?= site_url('admin/divisi/update/'.$data_divisi_single['kode']); ?>">
                             <div class="form-row">
                                 <div class="form-group col-12">
                                     <label>Kode</label>

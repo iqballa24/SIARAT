@@ -16,17 +16,17 @@
   <link rel="stylesheet" href="<?= base_url('assets/dist/css/adminlte.min.css'); ?>">
 
   <!-- Custom styles for this page -->
-  <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/plugins/datatables/dataTables.bootstrap4.min.css'); ?>" rel="stylesheet">
   
   <!-- Page level plugins -->
   <script src="<?= base_url('assets/plugins/jquery/jquery.min.js'); ?>"></script>
   <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
   <script src="<?= base_url('assets/plugins/datatables/dataTables.bootstrap4.min.js'); ?>"></script>
-  <script src="<?= base_url('assets/plugins/sweetalert/sweetalert2.all.min.js'); ?>"></script>
+  <script src="<?= base_url('assets/plugins/sweetalert2/sweetalert2.all.min.js'); ?>"></script>
   
 </head>
-
-<body class="hold-transition sidebar-mini">
+<?php foreach ($data_setting as $data) : ?>
+<body class="hold-transition sidebar-mini <?= $data['mode']; ?>-mode">
   <div class="wrapper">
 
     <!-- Load Navbar -->
@@ -37,7 +37,7 @@
    <?php $this->load->view('admin/theme/sidebar');; ?>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper text-sm">
+    <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <div class="container-fluid">
@@ -60,6 +60,7 @@
     </div>
     <!-- /.content-wrapper -->
 
+    <!-- footer -->
     <?php $this->load->view('admin/theme/footer');; ?>
 
   </div>
@@ -75,5 +76,6 @@
   <script src="<?= base_url('assets/dist/js/index.js'); ?>"></script>
 
 </body>
+<?php endforeach ?>
 
 </html>

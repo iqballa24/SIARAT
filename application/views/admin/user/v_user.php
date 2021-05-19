@@ -4,18 +4,18 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Data surat masuk</h3>
+                        <h3 class="card-title">Data user</h3>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-responsive-md" id="table" width="100%" cellspacing="0">
                             <thead class="">
                                 <tr>
                                     <th> # </th>
-                                    <th> Surat masuk </th>
-                                    <th> Pengirim </th>
-                                    <th> Tanggal terima </th>
-                                    <th> Jenis surat </th>
-                                    <th> keterangan </th>
+                                    <th> Username </th>
+                                    <th> Nama </th>
+                                    <th> Level </th>
+                                    <th> Image </th>
+                                    <th> Status </th>
                                     <th> Action </th>
                                 </tr>
                             </thead>
@@ -42,7 +42,7 @@
 			"serverSide": true,
 			"order": [],
 			"ajax": {
-				"url": "<?php echo site_url('admin/suratmasuk/datatables') ?>",
+				"url": "<?php echo site_url('admin/user/datatables') ?>",
 				"type": "POST"
 			},
 			"columnDefs": [{

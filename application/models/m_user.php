@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_suratmasuk extends CI_Model {
+class M_user extends CI_Model {
 
-	var $table = array('tb_suratmasuk');
+	var $table = array('tb_user');
 
 	//field yang ditampilkan
-	var $column_order = array(null,'id_surat', 'tgl_terima','pengirim', 'jenis_surat', 'keterangan');
+	var $column_order = array(null,'username','nama', 'level', 'image','status');
 
 	//field yang diizin untuk pencarian 
-	var $column_search = array('perihal','no_surat', 'tgl_terima','pengirim','tgl_surat' ,'jenis_surat', 'keterangan');
+	var $column_search = array('id_user','username','nama', 'level', 'image','status');
 
 	//field pertama yang diurutkan
-	var $order = array('id_surat' => 'desc');
+	var $order = array('id_user' => 'asc');
 
 	public function __construct()
 	{
@@ -23,8 +23,7 @@ class M_suratmasuk extends CI_Model {
 	{
 
 		$this->db->select('*');
-		$this->db->from('tb_suratmasuk a');
-        $this->db->join('tb_category b', 'a.kd_jenis_surat = b.kd_surat');
+		$this->db->from($this->table);
 
 		$i = 0;
 
@@ -88,29 +87,19 @@ class M_suratmasuk extends CI_Model {
 
 		//sql read
 		$this->db->select('*');
-		$this->db->from('tb_suratmasuk');
+		$this->db->from('tb_user');
 		$query = $this->db->get();
 
 		// $query -> result_array = mengirim data ke controller dalam bentuk semua data
         return $query->result_array();
 	}
 
-	public function read_check($kode)
-	{
-		$this->db->select('*');
-		$this->db->from('tb_suratmasuk');
-		$this->db->where('no_surat', $kode);
-		$query = $this->db->get();
-
-		return $query->row_array();
-	}
-
 	public function read_single($id) {
 
 		// sql read
 		$this->db->select('*');
-		$this->db->from('tb_suratmasuk');
-		$this->db->where('id_surat', $id);
+		$this->db->from('tb_user');
+		$this->db->where('id_user', $id);
 
 		$query = $this->db->get();
 
@@ -118,38 +107,37 @@ class M_suratmasuk extends CI_Model {
         return $query->row_array();
 	}
 
+	public function read_check($username)
+	{
+		$this->db->select('*');
+		$this->db->from('tb_user');
+		$this->db->where('username', $username);
+		$query = $this->db->get();
+
+		return $query->row_array();
+	}
+    
+	// function insert berfungsi menyimpan/create data ke table anggota di database
 	public function insert($input)
 	{
 		// $input = data yang dikirim dari controller
-		return $this->db->insert('tb_suratmasuk', $input);
+		return $this->db->insert('tb_user', $input);
 	}
 
 	public function update($input, $id)
 	{
-		$this->db->where('id_surat', $id);
+		//$id = id data yang dikirim dari controller (sebagai filter data yang diubah)
+		//filter data sesuai id yang dikirim dari controller
+		$this->db->where('id_user', $id);
 
 		//$input = data yang dikirim dari controller
-		return $this->db->update('tb_suratmasuk', $input);
+		return $this->db->update('tb_user', $input);
 	}
 
-	public function delete($id) {
-		// $id = data yang dikirim dari controller (sebagai filter data yang dihapus)
-		$this->db->where('id_surat', $id);
-		return $this->db->delete('tb_suratmasuk');
-	}
-
-	public function detail($id)
+	public function delete($id)
     {
-
-        //sql read
-        $this->db->select('*');
-        $this->db->from('tb_suratmasuk a');
-        $this->db->join('tb_category b', 'a.kd_jenis_surat = b.kd_surat');
-        $this->db->where('a.id_surat', $id);
-        $query = $this->db->get();
-
-        // $query -> result_array = mengirim data ke controller dalam bentuk semua data
-        return $query->result_array();
+        //$id = id data yang dikirim dari controller (sebagai filter data yang dihapus)
+        $this->db->where('id_user', $id);
+        return $this->db->delete('tb_user');
     }
-
 }

@@ -84,9 +84,9 @@ class M_suratkeluar extends CI_Model {
 		return $this->db->count_all_results();
 	}
 
-	public function getMaxData()
+	public function getMaxData($year)
     {
-        $query = $this->db->query("SELECT MAX(id_surat) as nosurat from tb_suratkeluar");
+        $query = $this->db->query("SELECT MAX(id_surat) as nosurat from tb_suratkeluar where tahun = $year");
         $hasil = $query->row();
 
         return $hasil->nosurat;

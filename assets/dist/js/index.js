@@ -23,6 +23,26 @@ $(document).ready(() => {
         })
     });
 
+    // action ketika reset password
+    $('#table tbody').on('click', '.btnReset', function(e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+
+        Swal.fire({
+            title: 'Reset password ?',
+            text: "Default password : lsphcmi2020",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, reset it!'
+        }).then((result) => {
+            if (result.value) {
+                document.location.href = href;
+            }
+        })
+    });
+
     // Alert 
     const message = $('.flash-data').data('tempdata');
     const error   = $('.flash-data-error').data('tempdata');
@@ -54,7 +74,7 @@ $(document).ready(() => {
             icon: 'success',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
-            confirmButtonText: '<a href="http://localhost/lsp_archive/admin/suratkeluar/getTemplate" style="text-decoration: none; color:white;">Download Template</a>'
+            confirmButtonText: '<a href="http://localhost/lsp_archive/admin/suratkeluar/getTemplate" style="text-decoration: none; color:white;" target="_blank">Download Template</a>'
         })
     }else {
         console.log('Pindah halaman');

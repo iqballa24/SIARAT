@@ -19,6 +19,11 @@
                                     <input type="text" class="form-control" name="perihal" value="<?= set_value('perihal'); ?>">
                                     <?= form_error('perihal', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
+                                <div class="form-group col-12">
+                                    <label>Pengirim</label>
+                                    <input type="text" class="form-control" name="pengirim" value="<?= set_value('pengirim'); ?>">
+                                    <?= form_error('pengirim', '<small class="text-danger pl-3">', '</small>'); ?>
+                                </div>
                                 <div class="form-group col-6">
                                     <label>Tanggal terima</label>
                                     <input type="date" name="tgl_terima" class="form-control" value="<?= set_value('tgl_terima');?>">

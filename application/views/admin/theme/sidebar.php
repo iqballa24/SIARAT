@@ -1,19 +1,21 @@
-<aside class="main-sidebar sidebar-light-danger elevation-4">
+<?php foreach ($data_setting as $data) : ?>
+<aside class="main-sidebar sidebar-<?= $data['mode'] ?>-<?= $data['theme']; ?> elevation-4">
     <!-- Brand Logo -->
     <a href="lsphcmi.com" class="brand-link" target="_blank">
         <img src="<?= base_url('assets/img/logo.svg'); ?>" alt="LSP HCMI Logo" class="brand-image ">
-        <span class="   brand-text font-weight-light">LSP HCMI</span>
+        <span class="brand-text font-weight-light">LSP HCMI</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <?php $img =  $image ? $image : 'user4-128x128.jpg' ;?>
             <div class="image">
-                <img src="<?= base_url('assets/img/user4-128x128.jpg'); ?>" class="img-circle elevation-2" alt="User Image">
+                <img src="<?= base_url('upload_folder/img/'.$img); ?>" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block"><?= $name ;?></a>
             </div>
         </div>
 
@@ -30,7 +32,7 @@
         </div> -->
 
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
+        <nav class="mt-2 <?= $data['sidebar'] ?>">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -136,11 +138,45 @@
                         </li>
                     </ul>
                 </li>
-                
+                <?php $level =  $this->session->userdata('level'); ?>
+                <li class="nav-header text-md <?= $level == 2 ? 'd-none' : '' ?> ">SYSTEM</li>
+                <li class="nav-item <?= $level == 2 ? 'd-none' : '' ?> ">
+                    <a href="#" class="nav-link <?= $i == 'user' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            User management
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/user/read'); ?>" class="nav-link <?= $i == 'user' && $x == 'read' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
+                                <p>Lihat data</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/user/insert'); ?>" class="nav-link <?= $i == 'user' && $x == 'insert' ? 'active' : ''; ?>">
+                                <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
+                                <p>Tambah data</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item <?= $level == 2 ? 'd-none' : '' ?> ">
+                    <a href="<?= site_url('admin/setting/read'); ?>" class="nav-link <?= $i =='setting' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-sliders-h"></i>
+                        <p>
+                            Setting
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
+
+
     </div>
     <!-- /.sidebar -->
 
 </aside>
+<?php endforeach ?>

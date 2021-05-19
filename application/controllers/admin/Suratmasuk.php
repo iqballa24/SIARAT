@@ -6,10 +6,13 @@ class Suratmasuk extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 
-		// if (empty($this->session->userdata('NIP'))) {
-		// 	redirect('petugas/login');
-		// }
-        $this->load->model(array('m_suratmasuk', 'm_category'));
+		if (empty($this->session->userdata('username'))) {
+			redirect('admin/auth');
+		}
+		if ($this->session->userdata('is_active') == 'n') {
+			redirect('admin/auth');
+		}
+        $this->load->model(array('m_suratmasuk', 'm_category','m_setting'));
     }
 
     public function index() {
@@ -19,11 +22,16 @@ class Suratmasuk extends CI_Controller {
 
 	public function read() {
 	
-		// $NIP = $this->session->userdata('nama');
+		$name  		   = $this->session->userdata('name');
+		$image 		   = $this->session->userdata('image');
+		$data_setting  = $this->m_setting->read();
 
 		$output = array(
-						'theme_page' => 'surat/v_suratmasuk.php',
-						'judul' 	 => 'Surat masuk'
+						'theme_page'   => 'surat/v_suratmasuk.php',
+						'judul' 	   => 'Surat masuk',
+						'data_setting' => $data_setting,
+						'name'		   => $name,
+						'image'		   => $image,
 					);
 
 		// memanggil file view
@@ -48,6 +56,7 @@ class Suratmasuk extends CI_Controller {
 			$row = array();
 			$row[] = $no;
 			$row[] = '<b>No surat: </b>'.$field['no_surat'].'<br><b>Perihal: </b>'.$field['perihal'].'<br><b>Tanggal surat: </b>'.date_format($date2, "D, d M Y");
+			$row[] = $field['pengirim'];
 			$row[] = date_format($date1, "D, d M Y");
 			$row[] = $field['jenis_surat'];
 			$row[] = $field['keterangan'];
@@ -82,12 +91,18 @@ class Suratmasuk extends CI_Controller {
 
 		$this->insert_submit();
         $data_category = $this->m_category->read();
+		$name  = $this->session->userdata('name');
+		$image = $this->session->userdata('image');
+		$data_setting  = $this->m_setting->read();
 	
 		// mengirim data ke view
 		$output = array(
 						'theme_page' 	=> 'surat/v_suratmasuk_insert',
 						'judul' 	 	=> 'Surat masuk',
-                        'data_category' => $data_category
+                        'data_category' => $data_category,
+						'data_setting'  => $data_setting,
+						'name'		 => $name,
+						'image'		 => $image,
 					);
 
 		// memanggil file view
@@ -101,8 +116,9 @@ class Suratmasuk extends CI_Controller {
 			//aturan validasi input login
 			$this->form_validation->set_rules('no_surat', 'No surat', 'required|callback_insert_check');
 			$this->form_validation->set_rules('perihal', 'Perihal', 'required');
+			$this->form_validation->set_rules('pengirim', 'Pengirim', 'required');
 			$this->form_validation->set_rules('tgl_terima', 'Tanggal terima', 'required');
-			$this->form_validation->set_rules('jenis_surat', 'Jenis surat', 'required');
+			$this->form_validation->set_rules('jenis_surat', 'Jenis surat');
 			$this->form_validation->set_rules('tgl_surat', 'Tanggal surat', 'required');
 			$this->form_validation->set_rules('ket', 'Keterangan');
 
@@ -120,6 +136,7 @@ class Suratmasuk extends CI_Controller {
 				// menangkap data input dari view
 				$no_surat	  	= $this->input->post('no_surat');
 				$perihal	  	= $this->input->post('perihal');
+				$pengirim	  	= $this->input->post('pengirim');
 				$tgl_terima     = $this->input->post('tgl_terima');
 				$jenis_surat	= $this->input->post('jenis_surat');
 				$tgl_surat  	= $this->input->post('tgl_surat');
@@ -130,12 +147,18 @@ class Suratmasuk extends CI_Controller {
         
                     $response = $this->upload->display_errors();
                     $data_category = $this->m_category->read();
-	
+					$name  = $this->session->userdata('name');
+					$image = $this->session->userdata('image');
+					$data_setting  = $this->m_setting->read();
+
                     $output = array(
                         'theme_page' 	=> 'surat/v_suratmasuk_insert',
                         'judul' 	 	=> 'Surat masuk',
                         'response'      => $response,
-                        'data_category' => $data_category
+                        'data_category' => $data_category,
+						'data_setting'	=> $data_setting,
+						'name'		 => $name,
+						'image'		 => $image,
                     );  
 			
 					// memanggil file view
@@ -151,6 +174,7 @@ class Suratmasuk extends CI_Controller {
                         //format : nama field/kolom table => data input dari view
                         'no_surat'    	 => $no_surat,
                         'perihal' 	  	 => $perihal,
+                        'pengirim' 	  	 => $pengirim,
                         'tgl_terima'  	 => $tgl_terima,
                         'kd_jenis_surat' => $jenis_surat,
                         'tgl_surat'  	 => $tgl_surat,
@@ -197,13 +221,19 @@ class Suratmasuk extends CI_Controller {
 		$id  					= $this->uri->segment(4);
         $data_category 			= $this->m_category->read();
 		$data_suratmasuk_single = $this->m_suratmasuk->read_single($id);
+		$name  					= $this->session->userdata('name');
+		$image 					= $this->session->userdata('image');
+		$data_setting  			= $this->m_setting->read();
 
 		//mengirim data ke view
 		$output = array(
 			'judul'	 			     => 'Surat masuk',
 			'theme_page' 		   	 => 'surat/v_suratmasuk_update',
 			'data_category' 		 => $data_category,
+			'data_setting'			 => $data_setting,	
 			'data_suratmasuk_single' => $data_suratmasuk_single,
+			'name'		 			 => $name,
+			'image'					 => $image,
 		);
 
 		//memanggil file view
@@ -221,6 +251,7 @@ class Suratmasuk extends CI_Controller {
         //menangkap data input dari view
         $no_surat	  	= $this->input->post('no_surat');
 		$perihal	  	= $this->input->post('perihal');
+		$pengirim	    = $this->input->post('pengirim');
 		$tgl_terima     = $this->input->post('tgl_terima');
 		$jenis_surat	= $this->input->post('jenis_surat');
 		$tgl_surat  	= $this->input->post('tgl_surat');
@@ -239,6 +270,10 @@ class Suratmasuk extends CI_Controller {
 				$data_category			= $this->m_category->read();
 				$response 				= $this->upload->display_errors();
 				$data_suratmasuk_single = $this->m_suratmasuk->read_single($id);
+				$name 				    = $this->session->userdata('name');
+				$image				    = $this->session->userdata('image');
+				$data_setting  			= $this->m_setting->read();
+
 		
 				//mengirim data ke view
 				$output = array(
@@ -247,6 +282,9 @@ class Suratmasuk extends CI_Controller {
 					'data_category' 		 => $data_category,
 					'response'				 => $response,
 					'data_suratmasuk_single' => $data_suratmasuk_single,
+					'data_setting'			 => $data_setting,
+					'name'		 => $name,
+					'image'		 => $image,
 				);
 		
 				//memanggil file view
@@ -262,6 +300,7 @@ class Suratmasuk extends CI_Controller {
 					//format : nama field/kolom table => data input dari view
 					'no_surat'    	=> $no_surat,
 					'perihal' 	  	=> $perihal,
+					'pengirim' 	  	=> $pengirim,
 					'tgl_terima'  	=> $tgl_terima,
 					'kd_jenis_surat'=> $jenis_surat,
 					'tgl_surat'   	=> $tgl_surat,
@@ -283,6 +322,7 @@ class Suratmasuk extends CI_Controller {
 				//format : nama field/kolom table => data input dari view
 				'no_surat'    	=> $no_surat,
 				'perihal' 	  	=> $perihal,
+				'pengirim' 	  	=> $pengirim,
 				'tgl_terima'  	=> $tgl_terima,
 				'kd_jenis_surat'=> $jenis_surat,
 				'tgl_surat'   	=> $tgl_surat,
@@ -321,12 +361,18 @@ class Suratmasuk extends CI_Controller {
 
         $id            = $this->uri->segment(4);
         $dt_suratmasuk = $this->m_suratmasuk->detail($id);
+		$name 		   = $this->session->userdata('name');
+		$image		   = $this->session->userdata('image');
+		$data_setting  = $this->m_setting->read();
         
         // mengirim data ke view
         $output = array(
             'theme_page'    => 'surat/v_suratmasuk_detail',
             'judul'         => 'Detail surat masuk',
-            'dt_suratmasuk' => $dt_suratmasuk
+            'dt_suratmasuk' => $dt_suratmasuk,
+			'data_setting'  => $data_setting,
+			'name'		 	=> $name,
+			'image'		 	=> $image,
         );
 
         // memanggil file view

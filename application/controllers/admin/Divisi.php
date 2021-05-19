@@ -6,10 +6,13 @@ class Divisi extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 
-		// if (empty($this->session->userdata('NIP'))) {
-		// 	redirect('petugas/login');
-		// }
-        $this->load->model('m_divisi');
+		if (empty($this->session->userdata('username'))) {
+			redirect('admin/auth');
+		}
+		if ($this->session->userdata('is_active') == 'n') {
+			redirect('admin/auth');
+		}
+        $this->load->model(array('m_divisi', 'm_setting'));
     }
 
     public function index() {
@@ -19,11 +22,16 @@ class Divisi extends CI_Controller {
 
 	public function read() {
 	
-		// $NIP = $this->session->userdata('nama');
+		$name  		   = $this->session->userdata('name');
+		$image 		   = $this->session->userdata('image');
+		$data_setting  = $this->m_setting->read();
 
 		$output = array(
-						'theme_page' => 'divisi/v_divisi.php',
-						'judul' 	 => 'Divisi / bagian'
+						'theme_page'   => 'divisi/v_divisi.php',
+						'judul' 	   => 'Divisi / bagian',
+						'data_setting' => $data_setting,
+						'name'		   => $name,
+						'image'		   => $image,
 					);
 
 		// memanggil file view
@@ -73,12 +81,18 @@ class Divisi extends CI_Controller {
 	public function insert() {
 
 		$this->insert_submit();
-		// $NIP = $this->session->userdata('nama');
+		$name  = $this->session->userdata('name');
+		$image = $this->session->userdata('image');
+		$data_setting  = $this->m_setting->read();
+
 	
 		// mengirim data ke view
 		$output = array(
 						'theme_page' 	=> 'divisi/v_divisi_insert',
 						'judul' 	 	=> 'Divisi / bagian',
+						'data_setting'  => $data_setting,
+						'name'		 => $name,
+						'image'		 => $image,
 					);
 
 		// memanggil file view
@@ -142,7 +156,9 @@ class Divisi extends CI_Controller {
 		$this->update_submit();
 		//menangkap id data yg dipilih dari view (parameter get)
 		$id  = $this->uri->segment(4);
-		// $NIP = $this->session->userdata('nama');
+		$name  = $this->session->userdata('name');
+		$image = $this->session->userdata('image');
+		$data_setting  = $this->m_setting->read();
 
 		//function read berfungsi mengambil 1 data dari table kategori sesuai id yg dipilih
 		$data_divisi_single = $this->m_divisi->read_single($id);
@@ -151,6 +167,9 @@ class Divisi extends CI_Controller {
 		$output = array(
 			'judul'	 		=> 'Divisi / bagian',
 			'theme_page' 	=> 'divisi/v_divisi_update',
+			'data_setting'  => $data_setting,
+			'name'		 => $name,
+			'image'		 => $image,
 
 			//mengirim data kota yang dipilih ke view
 			'data_divisi_single' => $data_divisi_single,

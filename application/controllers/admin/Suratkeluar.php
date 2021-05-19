@@ -7,10 +7,13 @@ class Suratkeluar extends CI_Controller {
 	{
 		parent::__construct();
 
-		// if (empty($this->session->userdata('NIP'))) {
-		// 	redirect('petugas/login');
-		// }
-        $this->load->model(array('m_suratkeluar', 'm_category', 'm_divisi'));
+		if (empty($this->session->userdata('username'))) {
+			redirect('admin/auth');
+		}
+		if ($this->session->userdata('is_active') == 'n') {
+			redirect('admin/auth');
+		}
+        $this->load->model(array('m_suratkeluar', 'm_category', 'm_divisi','m_setting'));
     }
 
     public function index() 
@@ -22,11 +25,16 @@ class Suratkeluar extends CI_Controller {
 	public function read() 
 	{
 	
-		// $NIP = $this->session->userdata('nama');
+		$name  = $this->session->userdata('name');
+		$image = $this->session->userdata('image');
+		$data_setting  = $this->m_setting->read();
 
 		$output = array(
-						'theme_page' => 'surat/v_suratkeluar.php',
-						'judul' 	 => 'Surat keluar'
+						'theme_page'  => 'surat/v_suratkeluar.php',
+						'judul' 	  => 'Surat keluar',
+						'data_setting'=> $data_setting,
+						'name'		  => $name,
+						'image'		  => $image,
 					);
 
 		// memanggil file view
@@ -130,9 +138,13 @@ class Suratkeluar extends CI_Controller {
 
         $data_category = $this->m_category->read();
 		$data_divisi   = $this->m_divisi->read();
+		$name  = $this->session->userdata('name');
+		$image = $this->session->userdata('image');
+		$data_setting  = $this->m_setting->read();
 
 		// no urut surat
-		$maxData    = $this->m_suratkeluar->getMaxData();
+		$year 		= date('Y'); 
+		$maxData    = $this->m_suratkeluar->getMaxData($year);
 		$no_urut 	= $maxData + 1;
 	
 		// mengirim data ke view
@@ -141,7 +153,10 @@ class Suratkeluar extends CI_Controller {
 						'judul' 	 	=> 'Surat keluar',
                         'data_category' => $data_category,
 						'data_divisi'	=> $data_divisi,
-						'no_urut'		=> $no_urut
+						'no_urut'		=> $no_urut,
+						'name'		 	=> $name,
+						'image'			=> $image,
+						'data_setting'  => $data_setting
 					);
 
 		// memanggil file view
@@ -180,14 +195,15 @@ class Suratkeluar extends CI_Controller {
 				//mengirim data ke model
 				$input = array(
 					//format : nama field/kolom table => data input dari view
-					'id_surat'		 => $no_urut,
+					'no_urut'		 => $no_urut,
 					'kd_jenis_surat' => $jenis_surat,
 					'perihal' 	  	 => $perihal,
 					'tgl_surat'  	 => $tgl_surat,
 					'tujuan'    	 => $tujuan,
 					'kd_divisi'	  	 => $divisi,
 					'keterangan' 	 => $keterangan,
-					'no_surat'		 => $no_surat 
+					'no_surat'		 => $no_surat ,
+					'tahun'			 => $year
 				);
 				
 				$data_suratkeluar = $this->m_suratkeluar->insert($input);
@@ -257,6 +273,9 @@ class Suratkeluar extends CI_Controller {
         $data_category 			 = $this->m_category->read();
 		$data_suratkeluar_single = $this->m_suratkeluar->read_single($id);
 		$data_divisi   			 = $this->m_divisi->read();
+		$name  					 = $this->session->userdata('name');
+		$image 					 = $this->session->userdata('image');
+		$data_setting     		 = $this->m_setting->read();
 
 		//mengirim data ke view
 		$output = array(
@@ -264,7 +283,10 @@ class Suratkeluar extends CI_Controller {
 			'theme_page' 		   	  => 'surat/v_suratkeluar_update',
 			'data_category' 		  => $data_category,
 			'data_suratkeluar_single' => $data_suratkeluar_single,
-			'data_divisi'			  => $data_divisi
+			'data_divisi'			  => $data_divisi,
+			'data_setting'			  => $data_setting,
+			'name'		 			  => $name,
+			'image'		 			  => $image,
 		);
 
 		//memanggil file view
@@ -287,6 +309,7 @@ class Suratkeluar extends CI_Controller {
 		$tgl_surat      = $this->input->post('tgl_surat');
 		$divisi  	    = $this->input->post('divisi');
 		$keterangan     = $this->input->post('ket');
+		$tahun 			= $this->input->post('tahun');
 		$oldfile		= $this->input->post('userfileold');
 
 		$getBulan	 = date('n');
@@ -307,6 +330,9 @@ class Suratkeluar extends CI_Controller {
 				$data_category 			 = $this->m_category->read();
 				$data_suratkeluar_single = $this->m_suratkeluar->read_single($id);
 				$data_divisi   			 = $this->m_divisi->read();
+				$name  					 = $this->session->userdata('name');
+				$image 					 = $this->session->userdata('image');
+				$data_setting     		 = $this->m_setting->read();
 
 				//mengirim data ke view
 				$output = array(
@@ -314,7 +340,10 @@ class Suratkeluar extends CI_Controller {
 					'theme_page' 		   	  => 'surat/v_suratkeluar_update',
 					'data_category' 		  => $data_category,
 					'data_suratkeluar_single' => $data_suratkeluar_single,
-					'data_divisi'			  => $data_divisi
+					'data_divisi'			  => $data_divisi,
+					'data_setting'			  => $data_setting,
+					'name'		 			  => $name,
+					'image'		 			  => $image
 				);
 		
 				//memanggil file view
@@ -328,7 +357,7 @@ class Suratkeluar extends CI_Controller {
 				//mengirim data ke model
 				$input = array(
 					//format : nama field/kolom table => data input dari view
-					'id_surat'		 => $no_urut,
+					'no_urut'		 => $no_urut,
 					'kd_jenis_surat' => $jenis_surat,
 					'perihal' 	  	 => $perihal,
 					'tgl_surat'  	 => $tgl_surat,
@@ -336,6 +365,7 @@ class Suratkeluar extends CI_Controller {
 					'kd_divisi'	  	 => $divisi,
 					'keterangan' 	 => $keterangan,
 					'no_surat'		 => $no_surat,
+					'tahun'			 => $tahun,
 					'lampiran'    	 => $upload_data
 				);
 	
@@ -359,7 +389,8 @@ class Suratkeluar extends CI_Controller {
 				'kd_divisi'	  	 => $divisi,
 				'keterangan' 	 => $keterangan,
 				'no_surat'		 => $no_surat,
-				'lampiran'    	 => $oldfile
+				'lampiran'    	 => $oldfile,
+				'tahun'			 => $tahun
 			);
 
 			$data_surat = $this->m_suratkeluar->update($input, $id);
@@ -391,14 +422,20 @@ class Suratkeluar extends CI_Controller {
 	public function detail()
     {
 
-        $id            = $this->uri->segment(4);
+        $id           	= $this->uri->segment(4);
         $dt_suratkeluar = $this->m_suratkeluar->detail($id);
+		$name  			= $this->session->userdata('name');
+		$image 			= $this->session->userdata('image');
+		$data_setting   = $this->m_setting->read();
         
         // mengirim data ke view
         $output = array(
-            'theme_page'    => 'surat/v_suratkeluar_detail',
-            'judul'         => 'Detail surat keluar',
-            'dt_suratkeluar' => $dt_suratkeluar
+            'theme_page'     => 'surat/v_suratkeluar_detail',
+            'judul'          => 'Detail surat keluar',
+            'dt_suratkeluar' => $dt_suratkeluar,
+			'data_setting'   => $data_setting,
+			'name'		 	 => $name,
+			'image'		 	 => $image,
         );
 
         // memanggil file view
