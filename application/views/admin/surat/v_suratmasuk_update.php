@@ -9,22 +9,27 @@
                     <div class="card-body">
                         <form method="post" action="<?= site_url('admin/suratmasuk/update_submit/'.$data_suratmasuk_single['id_surat']); ?>" enctype="multipart/form-data">
                             <div class="form-row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-12">
                                     <label>No surat</label>
                                     <input type="text" class="form-control" name="no_surat" value="<?= $data_suratmasuk_single['no_surat'] ?>">
                                     <?= form_error('no_surat', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-12">
                                     <label>Perihal</label>
                                     <input type="text" class="form-control" name="perihal" value="<?= $data_suratmasuk_single['perihal'] ?>">
                                     <?= form_error('perihal', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <div class="form-group col-12">
+                                    <label>Pengirim</label>
+                                    <input type="text" class="form-control" name="pengirim" value="<?= $data_suratmasuk_single['pengirim']; ?>">
+                                    <?= form_error('pengirim', '<small class="text-danger pl-3">', '</small>'); ?>
+                                </div>
+                                <div class="form-group col-6">
                                     <label>Tanggal terima</label>
                                     <input type="date" name="tgl_terima" class="form-control" value="<?= $data_suratmasuk_single['tgl_terima'] ?>">
                                     <?= form_error('tgl_terima', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-6">
                                     <label>Jenis surat</label>
                                     <select name="jenis_surat" class="form-control" value="<?= set_value('jenis_surat'); ?>" required>
                                         <?php foreach ($data_category as $kategori) : ?>
@@ -37,12 +42,12 @@
                                     </select>
                                     <?= form_error('tgl_terima', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-6">
                                     <label>Tanggal surat</label>
                                     <input type="date" name="tgl_surat" class="form-control" value="<?= $data_suratmasuk_single['tgl_surat'] ?>">
                                     <?= form_error('tgl_surat', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-6">
                                     <label>Keterangan</label>
                                     <input type="text" class="form-control" name="ket" value="<?= $data_suratmasuk_single['keterangan'] ?>">
                                     <?= form_error('ket', '<small class="text-danger pl-3">', '</small>'); ?>

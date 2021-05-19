@@ -37,7 +37,8 @@
                                     <select name="theme" class="form-control" value="<?= set_value('theme'); ?>">
                                         <option name="" selected value="<?= $data['theme'] ?>"><?= $data['theme'] ?></option>
                                         <option value="blue">blue</option>
-                                        <option value="hijau">green</option>
+                                        <option value="lightblue">light blue</option>
+                                        <option value="green">green</option>
                                         <option value="yellow">yellow</option>
                                         <option value="red">red</option>
                                         <option value="indigo">indigo</option>
@@ -46,6 +47,9 @@
                                         <option value="orange">orange</option>
                                         <option value="maroon">maroon</option>
                                         <option value="navy">navy</option>
+                                        <option value="lime">lime</option>
+                                        <option value="teal">teal</option>
+                                        <option value="olive">olive</option>
                                     </select>
                                 </div>
                             </div>

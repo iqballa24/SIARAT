@@ -2,8 +2,8 @@
 <aside class="main-sidebar sidebar-<?= $data['mode'] ?>-<?= $data['theme']; ?> elevation-4">
     <!-- Brand Logo -->
     <a href="lsphcmi.com" class="brand-link" target="_blank">
-        <img src="<?= base_url('assets/img/logo.svg'); ?>" alt="LSP HCMI Logo" class="brand-image ">
-        <span class="brand-text font-weight-light">LSP HCMI</span>
+        <img src="<?= base_url('upload_folder/img/'.$data['logo']); ?>" alt="<?= $data['owner']; ?>" class="brand-image ">
+        <span class="brand-text font-weight-light"><?= $data['owner']; ?></span>
     </a>
 
     <!-- Sidebar -->

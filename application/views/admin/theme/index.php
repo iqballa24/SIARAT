@@ -26,7 +26,7 @@
   
 </head>
 <?php foreach ($data_setting as $data) : ?>
-<body class="hold-transition sidebar-mini <?= $data['mode']; ?>-mode">
+<body class="hold-transition sidebar-mini <?= $data['mode']; ?>-mode text-md" >
   <div class="wrapper">
 
     <!-- Load Navbar -->

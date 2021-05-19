@@ -1,5 +1,5 @@
 <?php foreach ($data_setting as $data) : ?>
-<nav class="main-header navbar navbar-expand navbar-<?= $data['theme']; ?> navbar-dark border-bottom-0">
+<nav class="main-header navbar navbar-expand navbar-<?= $data['mode'] == 'dark' ? 'dark' : $data['theme']; ?> navbar-dark border-bottom-0">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
     <li class="nav-item">

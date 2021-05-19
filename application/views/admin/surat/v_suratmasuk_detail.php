@@ -15,6 +15,10 @@
                                     <p href="" class=""><?= $data['perihal']; ?></p>
                                 </li>
                                 <li class="list-group-item">
+                                    <b>Pengirim: </b>
+                                    <p href="" class=""><?= $data['pengirim']; ?></p>
+                                </li>
+                                <li class="list-group-item">
                                     <b>Tanggal surat: </b>
                                     <p href="" class=""><?= date('d F Y', strtotime($data['tgl_surat'])); ?></p>
                                 </li>
@@ -36,7 +40,7 @@
             </div>
             <div class="col-md-8">
             <?php $lampiran = $data['lampiran'] ? $data['lampiran'] : 'UPLOAD YOUR FILE.pdf'; ?>
-                <object data="<?= base_url('upload_folder/pdf/'.$lampiran); ?>" type="application/pdf" width="100%" height="500px">
+                <object data="<?= base_url('upload_folder/pdf/'.$lampiran); ?>" type="application/pdf" width="100%" height="550px">
                     <p>
                         This browser does not support PDFs. Please download the PDF to
                         view it

@@ -40,7 +40,7 @@
             </div>
             <div class="col-md-8">
                 <?php $lampiran = $data['lampiran'] ? $data['lampiran'] : 'UPLOAD YOUR FILE.pdf'; ?>
-                <object data="<?= base_url('upload_folder/pdf/'.$lampiran); ?>" type="application/pdf" width="100%" height="500px">
+                <object data="<?= base_url('upload_folder/pdf/'.$lampiran); ?>" type="application/pdf" width="100%" height="550px">
                     <p>
                         This browser does not support PDFs. Please download the PDF to
                         view it

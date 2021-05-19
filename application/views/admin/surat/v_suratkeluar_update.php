@@ -31,11 +31,6 @@
                                     <input type="text" class="form-control" name="perihal" value="<?= $data_suratkeluar_single['perihal']; ?>">
                                     <?= form_error('perihal', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-12">
-                                    <label>Pengirim</label>
-                                    <input type="text" class="form-control" name="pengirim" value="<?= $data_suratkeluar_single['pengirim']; ?>">
-                                    <?= form_error('pengirim', '<small class="text-danger pl-3">', '</small>'); ?>
-                                </div>
                                 <div class="form-group col-6">
                                     <label>Tujuan</label>
                                     <input type="text" name="tujuan" class="form-control" value="<?= $data_suratkeluar_single['tujuan'];?>">
