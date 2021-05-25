@@ -34,4 +34,25 @@ class M_dashboard extends CI_Model
 
         return $query->result_array();
     }
+
+    public function getTotalInvoice() {
+        $this->db->select('COUNT(no_invoice) as total');
+        $this->db->from('tb_invoice');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function getInvoice() {
+
+		//sql read
+		$this->db->select('*');
+		$this->db->from('tb_invoice');
+		$this->db->where('status', '2');
+		$query = $this->db->get();
+
+		// $query -> result_array = mengirim data ke controller dalam bentuk semua data
+        return $query->result_array();
+	}
+
 }

@@ -46,6 +46,7 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-header text-md">SURAT</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link <?= $i =='divisi' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-user-friends"></i>
@@ -132,6 +133,53 @@
                         </li>
                         <li class="nav-item">
                             <a href="<?= site_url('admin/suratkeluar/insert'); ?>" class="nav-link <?= $i == 'suratkeluar' && $x == 'insert' ? 'active' : ''; ?>">
+                                <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
+                                <p>Tambah data</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-header text-md">KEUANGAN</li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link <?= $i == 'invoice' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-folder-open"></i>
+                        <p>
+                            Invoice
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/invoice/read'); ?>" class="nav-link <?= $i == 'invoice' && $x == 'read' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
+                                <p>Lihat data</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/invoice/insert'); ?>" class="nav-link <?= $i == 'invoice' && $x == 'insert' ? 'active' : ''; ?>">
+                                <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
+                                <p>Tambah data</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link <?= $i == 'kwitansi' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-folder-open"></i>
+                        <p>
+                            kwitansi
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/kwitansi/read'); ?>" class="nav-link <?= $i == 'kwitansi' && $x == 'read' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
+                                <p>Lihat data</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/kwitansi/insert'); ?>" class="nav-link <?= $i == 'kwitansi' && $x == 'insert' ? 'active' : ''; ?>">
                                 <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
                                 <p>Tambah data</p>
                             </a>

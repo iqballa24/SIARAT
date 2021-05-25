@@ -28,8 +28,10 @@ class Dashboard extends CI_Controller {
 		// $NIP = $this->session->userdata('nama');
         $divisi       = $this->m_dashboard->getTotalDivisi();
         $category     = $this->m_dashboard->getTotalCategory();
+        $totalInvoice = $this->m_dashboard->getTotalInvoice();
         $suratkeluar  = $this->m_dashboard->getTotalSuratKeluar();
         $suratmasuk   = $this->m_dashboard->getTotalSuratMasuk();
+        $invoice	  = $this->m_dashboard->getInvoice();
 		$name  = $this->session->userdata('name');
 		$image = $this->session->userdata('image');
 		$data_setting  = $this->m_setting->read();
@@ -40,8 +42,10 @@ class Dashboard extends CI_Controller {
 						'judul' 	 => 'Dashboard',
 						'divisi'	 => $divisi,
 						'category' 	 => $category,
+						'allInvoice' => $totalInvoice,
 						'suratkeluar'=> $suratkeluar,
 						'suratmasuk' => $suratmasuk,
+						'invoice'	 => $invoice,
 						'name'		 => $name,
 						'image'		 => $image,
 						'data_setting' => $data_setting

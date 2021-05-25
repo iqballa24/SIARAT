@@ -64,7 +64,6 @@
                                 <div class="custom-file">
                                     <input type="hidden" class="" name="userfileold" id="validatedInputGroupCustomFile" value="<?= $data_suratkeluar_single['lampiran']; ?>">
                                     <input type="file" class="" name="userfile" id="validatedInputGroupCustomFile" value="<?= $data_suratkeluar_single['lampiran']; ?>">
-                                    <input type="hidden" class="" name="userfileold" id="validatedInputGroupCustomFile" value="<?= $data_suratkeluar_single['lampiran']; ?>">
                                     <!--response setelah upload-->
                                     <?php if (!empty($response)) : ?>
                                         <small class="text-danger pl-3">

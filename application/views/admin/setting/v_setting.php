@@ -32,6 +32,24 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="inputName" class="col-sm-2 col-form-label">Alamat</label>
+                                <div class="col-sm-10">
+                                    <textarea type="text" class="form-control" id="inputName" placeholder="Alamat" name="address" value="<?= $data['address'] ?>"><?= $data['address'] ?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputName" class="col-sm-2 col-form-label">Telepon</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputName" placeholder="Telepon" name="phone" value="<?= $data['phone'] ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputName" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputName" placeholder="Email" name="email" value="<?= $data['email'] ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">theme</label>
                                 <div class="col-sm-10">
                                     <select name="theme" class="form-control" value="<?= set_value('theme'); ?>">

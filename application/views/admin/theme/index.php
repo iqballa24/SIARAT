@@ -19,6 +19,7 @@
   <link href="<?= base_url('assets/plugins/datatables/dataTables.bootstrap4.min.css'); ?>" rel="stylesheet">
   
   <!-- Page level plugins -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
   <script src="<?= base_url('assets/plugins/jquery/jquery.min.js'); ?>"></script>
   <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
   <script src="<?= base_url('assets/plugins/datatables/dataTables.bootstrap4.min.js'); ?>"></script>

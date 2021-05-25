@@ -49,6 +49,9 @@ class Setting extends CI_Controller {
 
         // menangkap data input dari view
 		$owner		= $this->input->post('owner');
+		$address	= $this->input->post('address');
+		$phone		= $this->input->post('phone');
+		$email		= $this->input->post('email');
 		$theme		= $this->input->post('theme');
 		$sidebar	= $this->input->post('sidebar');
 		$mode	  	= $this->input->post('mode');
@@ -87,6 +90,9 @@ class Setting extends CI_Controller {
 				$input = array(
 					//format : nama field/kolom table => data input dari view
                     'owner'      => $owner,
+                    'address'    => $address,
+                    'email'      => $email,
+                    'phone'      => $phone,
 					'theme'		 => $theme,
 					'sidebar'    => $sidebar,
 					'mode' 	  	 => $mode,
@@ -106,6 +112,9 @@ class Setting extends CI_Controller {
 			$input = array(
 				//format : nama field/kolom table => data input dari view
                 'owner'      => $owner,
+				'address'    => $address,
+				'email'      => $email,
+				'phone'      => $phone,
 				'theme'		 => $theme,
                 'sidebar'    => $sidebar,
                 'mode' 	  	 => $mode,
