@@ -105,15 +105,20 @@ class Suratkeluar extends CI_Controller {
 			$row[] = $field['divisi'];
 			$row[] = $field['keterangan'];
 			$row[] = '
+				<div class="btn-group" role="group" aria-label="Basic outlined example">
 					<a href="'.site_url('admin/suratkeluar/detail/'.$field['id_surat']).'" class="btn btn-info btn-sm" title="View" data = "'.$field['id_surat'].'">
 						<i class="fas fa-search"></i> 
 					</a>
 					<a href="'.site_url('admin/suratkeluar/update/'.$field['id_surat']). '" class="btn btn-warning btn-sm " title="Edit">
 						<i class="fas fa-edit"></i> 
 					</a>
+					<a href="'.site_url('admin/suratKeluar/getTemplate/'.$field['id_surat']). '" class="btn btn-success btn-sm " title="Template">
+						<i class="fas fa-file-invoice-dollar"></i> 
+					</a>
 					<a href="'.site_url('admin/suratkeluar/delete/'.$field['id_surat']).'" class="btn btn-danger btn-sm btnHapus" title="Hapus" data = "'.$field['id_surat'].'">
 						<i class="fas fa-trash-alt"></i> 
 					</a>
+				</div>
 					';
 
 			$data[] = $row;
@@ -240,12 +245,13 @@ class Suratkeluar extends CI_Controller {
 	public function getTemplate() 
 	{
 		$document = file_get_contents("./assets/template.rtf");
+		$id  	  = $this->uri->segment(4);
 
 		// menangkap data input dari view
-		$lastDataNoSurat		= $this->m_suratkeluar->getLastDataNoSurat();
-		$lastDataPerihal		= $this->m_suratkeluar->getLastDataPerihal();
-		$lastDataTujuan	     	= $this->m_suratkeluar->getLastDataTujuan();
-		$lastDataTanggal		= $this->m_suratkeluar->getLastDataTanggal();
+		$lastDataNoSurat		= $this->m_suratkeluar->getLastDataNoSurat($id);
+		$lastDataPerihal		= $this->m_suratkeluar->getLastDataPerihal($id);
+		$lastDataTujuan	     	= $this->m_suratkeluar->getLastDataTujuan($id);
+		$lastDataTanggal		= $this->m_suratkeluar->getLastDataTanggal($id);
 
 		$no_surat 	  	= $lastDataNoSurat;
 		$perihal	  	= $lastDataPerihal;

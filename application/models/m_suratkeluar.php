@@ -92,33 +92,33 @@ class M_suratkeluar extends CI_Model {
         return $hasil->nosurat;
     }
 
-	public function getLastDataNoSurat()
+	public function getLastDataNoSurat($id)
     {
-        $query = $this->db->query("SELECT no_surat from tb_suratkeluar order by no_surat desc LIMIT 1");
+        $query = $this->db->query("SELECT no_surat from tb_suratkeluar where id_surat = $id");
 		$hasil = $query->row();
 
         return $hasil->no_surat;
     }
 
-	public function getLastDataPerihal()
+	public function getLastDataPerihal($id)
     {
-        $query = $this->db->query("SELECT perihal from tb_suratkeluar order by id_surat desc LIMIT 1");
+        $query = $this->db->query("SELECT perihal from tb_suratkeluar where id_surat = $id");
 		$hasil = $query->row();
 
         return $hasil->perihal;
     }
 
-	public function getLastDataTujuan()
+	public function getLastDataTujuan($id)
     {
-        $query = $this->db->query("SELECT tujuan from tb_suratkeluar order by id_surat desc LIMIT 1");
+        $query = $this->db->query("SELECT tujuan from tb_suratkeluar where id_surat = $id");
 		$hasil = $query->row();
 
         return $hasil->tujuan;
     }
 
-	public function getLastDataTanggal()
+	public function getLastDataTanggal($id)
     {
-        $query = $this->db->query("SELECT tgl_surat from tb_suratkeluar order by id_surat desc LIMIT 1");
+        $query = $this->db->query("SELECT tgl_surat from tb_suratkeluar where id_surat = $id");
 		$hasil = $query->row();
 
         return $hasil->tgl_surat;
