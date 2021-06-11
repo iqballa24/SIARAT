@@ -192,7 +192,7 @@ class Suratkeluar extends CI_Controller {
 				$divisi  	    = $this->input->post('divisi');
 				$keterangan     = $this->input->post('ket');
 
-				$getBulan	 = date('n');
+				$getBulan	 = date('n', strtotime($tgl_surat));
 				$bulan		 = $this->getRomawi($getBulan);
 				$year		 = date('Y');
 				$no_surat	 = $jenis_surat.'.'.$no_urut.'/'.$divisi.'./LSP-HCMI/'.$bulan.'/'.$year;

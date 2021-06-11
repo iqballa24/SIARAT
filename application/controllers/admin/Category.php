@@ -83,6 +83,7 @@ class Category extends CI_Controller {
 	public function insert() {
 
 		$this->insert_submit();
+		
 		$name  = $this->session->userdata('name');
 		$image = $this->session->userdata('image');
 		$data_setting  = $this->m_setting->read();
