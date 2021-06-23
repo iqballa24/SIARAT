@@ -106,14 +106,14 @@
                         <h3 class="card-title">Invoice unpaid status</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-plus"></i>
+                                <i class="fas fa-minus"></i>
                             </button>
                             <button type="button" class="btn btn-tool" data-card-widget="remove">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: none;">
+                    <div class="card-body" style="display: block;">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered" id="table" width="100%" cellspacing="0">
                                 <thead>
