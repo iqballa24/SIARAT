@@ -14,54 +14,56 @@
     <link rel="stylesheet" href="<?= base_url('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css'); ?>">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url('assets/dist/css/adminlte.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/dist/css/style.css'); ?>">
 </head>
 
-<body class="hold-transition login-page bg-light">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="#"><b>Arsip</b> LSP HCMI</a>
-        </div>
-        <!-- /.login-logo -->
-        <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
-                <?= form_error('username', '<div class="alert alert-danger" role="alert"><small class="text-white pl-3">', '</small></div>'); ?>
-                <form class="user" method="post" action="<?php echo site_url('admin/auth/login/'); ?>">
-                    <div class="input-group mb-3">
-                        <input name="username" type="text" class="form-control" placeholder="Username" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input name="password" type="password" class="form-control" placeholder="Password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <input type="submit" name="submit" value="Login" class="btn btn-success btn-user btn-block">
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
-
+<body class="hold-transition login-page bg-white">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 bg-login">
+               <div class="image-login"></div>
             </div>
-            <!-- /.login-card-body -->
+            <div class="col-md-8 d-flex align-items-center">
+                <div class="login-box mx-auto">
+                    <div class="login-logo">
+                        <a href="#"><b>Arsip</b> LSP HCMI</a>
+                    </div>
+                    <!-- /.login-logo -->
+                    <div class="card">
+                        <div class="card-body login-card-body">
+                            <p class="login-box-msg">Sign in to start your session</p>
+                            <?= form_error('username', '<div class="alert alert-danger" role="alert"><small class="text-white pl-3">', '</small></div>'); ?>
+                            <form class="user" method="post" action="<?php echo site_url('admin/auth/login/'); ?>">
+                                <div class="input-group mb-3">
+                                    <input name="username" type="text" class="form-control" placeholder="Username" required>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input name="password" type="password" class="form-control" placeholder="Password" required>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-lock"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- /.col -->
+                                    <div class="col-12">
+                                        <input type="submit" name="submit" value="Login" class="btn btn-login btn-user btn-block">
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
+
+                        </div>
+                        <!-- /.login-card-body -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /.login-box -->

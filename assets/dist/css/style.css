@@ -1,0 +1,23 @@
+.login-page .bg-login {
+    margin-left: -8px !important;
+    height: 100vh !important;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../img/bg-login.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.login-page .btn-login {
+    background-color: #CF2932;
+    color: white;
+}
+
+.login-page .btn-login:hover {
+    color: #CF2932;
+    letter-spacing: 0.5px;
+    transition: all 0.1s ease;
+    border: 1px solid #CF2932;
+    background-color: transparent;
+}
+
