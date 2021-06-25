@@ -31,7 +31,7 @@ class Surattugas extends CI_Controller {
 
 		$output = array(
 						'theme_page'  => 'surat/v_surattugas.php',
-						'judul' 	  => 'Surat keluar',
+						'judul' 	  => 'Surat tugas',
 						'data_setting'=> $data_setting,
 						'name'		  => $name,
 						'image'		  => $image,
