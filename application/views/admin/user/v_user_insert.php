@@ -24,7 +24,7 @@
                                     <input type="password" class="form-control" name="password" value="<?= set_value('password'); ?>">
                                     <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-6">
                                     <label>Level</label>
                                     <select name="level" class="form-control" value="<?= set_value('level'); ?>">
                                         <option name="" selected disabled>-- Pilih --</option>
@@ -33,7 +33,7 @@
                                     </select>
                                     <?= form_error('level', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-6">
                                     <label>Active</label>
                                     <select name="is_active" class="form-control" value="<?= set_value('is_active'); ?>">
                                         <option name="" selected disabled>-- Pilih --</option>

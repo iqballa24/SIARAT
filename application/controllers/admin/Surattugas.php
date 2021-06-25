@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Suratkeluar extends CI_Controller {
+class Surattugas extends CI_Controller {
 
 	public function __construct() 
 	{
@@ -13,7 +13,7 @@ class Suratkeluar extends CI_Controller {
 		if ($this->session->userdata('is_active') == 'n') {
 			redirect('admin/auth');
 		}
-        $this->load->model(array('m_suratkeluar', 'm_category', 'm_divisi','m_setting'));
+        $this->load->model(array('M_surattugas','M_setting'));
     }
 
     public function index() 
@@ -27,10 +27,10 @@ class Suratkeluar extends CI_Controller {
 	
 		$name  = $this->session->userdata('name');
 		$image = $this->session->userdata('image');
-		$data_setting  = $this->m_setting->read();
+		$data_setting  = $this->M_setting->read();
 
 		$output = array(
-						'theme_page'  => 'surat/v_suratkeluar.php',
+						'theme_page'  => 'surat/v_surattugas.php',
 						'judul' 	  => 'Surat keluar',
 						'data_setting'=> $data_setting,
 						'name'		  => $name,
@@ -89,7 +89,7 @@ class Suratkeluar extends CI_Controller {
 		// sleep(2);
 
 		//memanggil fungsi model datatables
-		$list = $this->m_suratkeluar->get_datatables();
+		$list = $this->M_surattugas->get_datatables();
 		$data = array();
 		$no = $this->input->post('start');
 
@@ -97,27 +97,27 @@ class Suratkeluar extends CI_Controller {
 		foreach ($list as $field) {
 			$no++;
 			$date1 = date_create($field['tgl_surat']);
+			$date2 = date_create($field['tgl_pelaksanaan']);
 			$row = array();
 			$row[] = $no;
 			$row[] = $field['no_surat'];
-			$row[] = $field['perihal'];
 			$row[] = date_format($date1, "D, d M Y");
-			$row[] = $field['jenis_surat'];
-			$row[] = $field['tujuan'];
-			$row[] = $field['divisi'];
-			$row[] = $field['keterangan'];
+			$row[] = $field['skema'];
+			$row[] = $field['batch'];
+			$row[] = date_format($date2, "D, d M Y");
+
 			$row[] = '
 				<div class="btn-group" role="group" aria-label="Basic outlined example">
-					<a href="'.site_url('admin/suratkeluar/detail/'.$field['id_surat']).'" class="btn btn-info btn-sm" title="View" data = "'.$field['id_surat'].'">
+					<a href="'.site_url('admin/surattugas/detail/'.$field['id_surat']).'" class="btn btn-info btn-sm" title="View" data = "'.$field['id_surat'].'">
 						<i class="fas fa-search"></i> 
 					</a>
-					<a href="'.site_url('admin/suratkeluar/update/'.$field['id_surat']). '" class="btn btn-warning btn-sm " title="Edit">
+					<a href="'.site_url('admin/surattugas/update/'.$field['id_surat']). '" class="btn btn-warning btn-sm " title="Edit">
 						<i class="fas fa-edit"></i> 
 					</a>
-					<a href="'.site_url('admin/suratKeluar/getTemplate/'.$field['id_surat']). '" class="btn btn-success btn-sm " title="Template">
+					<a href="'.site_url('admin/surattugas/getTemplate/'.$field['id_surat']). '" class="btn btn-success btn-sm " title="Template">
 						<i class="fas fa-file-invoice-dollar"></i> 
 					</a>
-					<a href="'.site_url('admin/suratkeluar/delete/'.$field['id_surat']).'" class="btn btn-danger btn-sm btnHapus" title="Hapus" data = "'.$field['id_surat'].'">
+					<a href="'.site_url('admin/surattugas/delete/'.$field['id_surat']).'" class="btn btn-danger btn-sm btnHapus" title="Hapus" data = "'.$field['id_surat'].'">
 						<i class="fas fa-trash-alt"></i> 
 					</a>
 				</div>
@@ -129,8 +129,8 @@ class Suratkeluar extends CI_Controller {
 		//mengirim data json
 		$output = array(
 			"draw" => $this->input->post('draw'),
-			"recordsTotal" => $this->m_suratkeluar->count_all(),
-			"recordsFiltered" => $this->m_suratkeluar->count_filtered(),
+			"recordsTotal" => $this->M_surattugas->count_all(),
+			"recordsFiltered" => $this->M_surattugas->count_filtered(),
 			"data" => $data,
 		);
 
@@ -143,23 +143,19 @@ class Suratkeluar extends CI_Controller {
 
 		$this->insert_submit();
 
-        $data_category = $this->m_category->read();
-		$data_divisi   = $this->m_divisi->read();
 		$name  = $this->session->userdata('name');
 		$image = $this->session->userdata('image');
-		$data_setting  = $this->m_setting->read();
+		$data_setting  = $this->M_setting->read();
 
 		// no urut surat
 		$year 		= date('Y'); 
-		$maxData    = $this->m_suratkeluar->getMaxData($year);
+		$maxData    = $this->M_surattugas->getMaxData($year);
 		$no_urut 	= $maxData + 1;
 	
 		// mengirim data ke view
 		$output = array(
-						'theme_page' 	=> 'surat/v_suratkeluar_insert',
-						'judul' 	 	=> 'Surat keluar',
-                        'data_category' => $data_category,
-						'data_divisi'	=> $data_divisi,
+						'theme_page' 	=> 'surat/v_surattugas_insert',
+						'judul' 	 	=> 'Surat tugas',
 						'no_urut'		=> $no_urut,
 						'name'		 	=> $name,
 						'image'			=> $image,
@@ -283,7 +279,7 @@ class Suratkeluar extends CI_Controller {
 		$data_divisi   			 = $this->m_divisi->read();
 		$name  					 = $this->session->userdata('name');
 		$image 					 = $this->session->userdata('image');
-		$data_setting     		 = $this->m_setting->read();
+		$data_setting     		 = $this->M_setting->read();
 
 		//mengirim data ke view
 		$output = array(
@@ -340,7 +336,7 @@ class Suratkeluar extends CI_Controller {
 				$data_divisi   			 = $this->m_divisi->read();
 				$name  					 = $this->session->userdata('name');
 				$image 					 = $this->session->userdata('image');
-				$data_setting     		 = $this->m_setting->read();
+				$data_setting     		 = $this->M_setting->read();
 
 				//mengirim data ke view
 				$output = array(
@@ -434,7 +430,7 @@ class Suratkeluar extends CI_Controller {
         $dt_suratkeluar = $this->m_suratkeluar->detail($id);
 		$name  			= $this->session->userdata('name');
 		$image 			= $this->session->userdata('image');
-		$data_setting   = $this->m_setting->read();
+		$data_setting   = $this->M_setting->read();
         
         // mengirim data ke view
         $output = array(

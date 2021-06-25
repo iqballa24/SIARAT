@@ -4,14 +4,16 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Data surat keluar</h3>
+                        <a href="<?= base_url('admin/suratmasuk/insert'); ?>"><i class="fas fa-plus"></i> Tambah</a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped table-responsive-md" id="table" width="100%" cellspacing="0">
+                        <table class="table table-striped table-responsive" id="table" width="100%" cellspacing="0">
                             <thead class="">
                                 <tr>
                                     <th> # </th>
-                                    <th> Surat keluar </th>
+                                    <th> No surat </th>
+                                    <th> Perihal </th>
+                                    <th> Tanggal Surat </th>
                                     <th> Jenis surat </th>
                                     <th> Ditujukan </th>
                                     <th> Divisi/bagian </th>
@@ -46,7 +48,7 @@
 				"type": "POST"
 			},
 			"columnDefs": [{
-				"targets": [0, 6],
+				"targets": [0, 8],
 				"className": 'dt-center',
 				"orderable": false,
 			}],

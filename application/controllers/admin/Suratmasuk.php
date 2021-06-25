@@ -55,12 +55,15 @@ class Suratmasuk extends CI_Controller {
             $date2 = date_create($field['tgl_surat']);
 			$row = array();
 			$row[] = $no;
-			$row[] = '<b>No surat: </b>'.$field['no_surat'].'<br><b>Perihal: </b>'.$field['perihal'].'<br><b>Tanggal surat: </b>'.date_format($date2, "D, d M Y");
+			$row[] = $field['no_surat'];
+			$row[] = $field['perihal'];
+			$row[] = date_format($date2, "D, d M Y");
 			$row[] = $field['pengirim'];
 			$row[] = date_format($date1, "D, d M Y");
 			$row[] = $field['jenis_surat'];
 			$row[] = $field['keterangan'];
 			$row[] = '
+				<div class="btn-group" role="group" aria-label="Basic outlined example">
 					<a href="'.site_url('admin/suratmasuk/detail/'.$field['id_surat']).'" class="btn btn-info btn-sm" title="View" data = "'.$field['id_surat'].'">
 						<i class="fas fa-search"></i> 
 					</a>
@@ -70,7 +73,8 @@ class Suratmasuk extends CI_Controller {
 					<a href="'.site_url('admin/suratmasuk/delete/'.$field['id_surat']).'" class="btn btn-danger btn-sm btnHapus" title="Hapus" data = "'.$field['id_surat'].'">
 						<i class="fas fa-trash-alt"></i> 
 					</a>
-					';
+				</div>
+				';
 
 			$data[] = $row;
 		}

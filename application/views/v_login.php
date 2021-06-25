@@ -20,8 +20,9 @@
 <body class="hold-transition login-page bg-white">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 bg-login">
-               <div class="image-login"></div>
+            <div class="col-md-4 bg-login d-none d-lg-block">
+                <div class="image-login">
+                </div>
             </div>
             <div class="col-md-8 d-flex align-items-center">
                 <div class="login-box mx-auto">
@@ -32,7 +33,7 @@
                     <div class="card">
                         <div class="card-body login-card-body">
                             <p class="login-box-msg">Sign in to start your session</p>
-                            <?= form_error('username', '<div class="alert alert-danger" role="alert"><small class="text-white pl-3">', '</small></div>'); ?>
+                            <?= form_error('username', '<div class="alert alert-warning" role="alert"><small class="text-white pl-3">', '</small></div>'); ?>
                             <form class="user" method="post" action="<?php echo site_url('admin/auth/login/'); ?>">
                                 <div class="input-group mb-3">
                                     <input name="username" type="text" class="form-control" placeholder="Username" required>

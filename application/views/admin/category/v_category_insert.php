@@ -22,8 +22,8 @@
                             </div>
                             <div class="text-right">
                                 <p>&nbsp;</p>
-                                <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
                                 <a class="btn btn-danger" href="<?= base_url('admin/category/read/'); ?>">Batal</a>
+                                <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
