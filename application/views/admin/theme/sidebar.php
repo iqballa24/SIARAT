@@ -46,15 +46,24 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-header text-md">SURAT</li>
+                <li class="nav-header text-md">Master</li>
+                <li class="nav-item">
+                    <a href="<?= base_url('admin/asesor/read'); ?>" class="nav-link <?= $i =='asesor' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Asesor
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="<?= base_url('admin/divisi/read'); ?>" class="nav-link <?= $i =='divisi' ? 'active' : ''; ?>">
-                        <i class="nav-icon fas fa-user-friends"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
                             Divisi
                         </p>
                     </a>
                 </li>
+                <li class="nav-header text-md">SURAT</li>
                 <li class="nav-item">
                     <a href="<?= base_url('admin/category/read'); ?>" class="nav-link <?= $i == 'category' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-filter"></i>
