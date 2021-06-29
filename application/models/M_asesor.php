@@ -82,6 +82,17 @@ class M_asesor extends CI_Model {
 		return $this->db->count_all_results();
 	}
 
+	public function getDataAsesor() {
+
+		//sql read
+		$this->db->select('*');
+		$this->db->from('tb_asesor');
+		$query = $this->db->get();
+
+		// $query -> result_array = mengirim data ke controller dalam bentuk semua data
+        return $query->result_array();
+	}
+
 	// function read berfungsi mengambil/read data dari table anggota di database
 	public function read() {
 
@@ -108,8 +119,8 @@ class M_asesor extends CI_Model {
 
 		// sql read
 		$this->db->select('*');
-		$this->db->from('tb_category');
-		$this->db->where('kd_surat', $id);
+		$this->db->from('tb_asesor');
+		$this->db->where('id', $id);
 
 		$query = $this->db->get();
 

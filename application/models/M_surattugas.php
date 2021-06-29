@@ -84,43 +84,79 @@ class M_surattugas extends CI_Model {
 
 	public function getMaxData($year)
     {
-        $query = $this->db->query("SELECT MAX(id_surat) as nosurat from tb_suratkeluar where tahun = $year");
+        $query = $this->db->query("SELECT MAX(no_urut) as nosurat from tb_surattugas where tahun = $year");
         $hasil = $query->row();
 
         return $hasil->nosurat;
     }
 
-	public function getLastDataNoSurat($id)
+	public function getDataNoSurat($id)
     {
-        $query = $this->db->query("SELECT no_surat from tb_suratkeluar where id_surat = $id");
+        $query = $this->db->query("SELECT no_surat from tb_surattugas where id_surat = $id");
 		$hasil = $query->row();
 
         return $hasil->no_surat;
     }
 
-	public function getLastDataPerihal($id)
+	public function getDataTglSurat($id)
     {
-        $query = $this->db->query("SELECT perihal from tb_suratkeluar where id_surat = $id");
-		$hasil = $query->row();
-
-        return $hasil->perihal;
-    }
-
-	public function getLastDataTujuan($id)
-    {
-        $query = $this->db->query("SELECT tujuan from tb_suratkeluar where id_surat = $id");
-		$hasil = $query->row();
-
-        return $hasil->tujuan;
-    }
-
-	public function getLastDataTanggal($id)
-    {
-        $query = $this->db->query("SELECT tgl_surat from tb_suratkeluar where id_surat = $id");
+        $query = $this->db->query("SELECT tgl_surat from tb_surattugas where id_surat = $id");
 		$hasil = $query->row();
 
         return $hasil->tgl_surat;
     }
+
+	public function getDataBatch($id)
+    {
+        $query = $this->db->query("SELECT batch from tb_surattugas where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->batch;
+    }
+
+	public function getDataSkema($id)
+    {
+        $query = $this->db->query("SELECT skema from tb_surattugas where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->skema;
+    }
+
+	public function getDataTglPelaksanaan($id)
+    {
+        $query = $this->db->query("SELECT tgl_pelaksanaan from tb_surattugas where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->tgl_pelaksanaan;
+    }
+
+	public function getDataAsesor($id){
+		$query = $this->db->query("SELECT nama from tb_surattugas a join tb_asesor b on a.asesor = b.id where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->nama;
+	}
+
+	public function getDataAsesi1($id){
+		$query = $this->db->query("SELECT asesi1 from tb_surattugas where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->asesi1;
+	}
+
+	public function getDataAsesi2($id){
+		$query = $this->db->query("SELECT asesi2 from tb_surattugas where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->asesi2;
+	}
+
+	public function getDataAsesi3($id){
+		$query = $this->db->query("SELECT asesi3 from tb_surattugas where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->asesi3;
+	}
 
 	// function read berfungsi mengambil/read data dari table anggota di database
 	public function read() {
@@ -160,7 +196,7 @@ class M_surattugas extends CI_Model {
 	public function insert($input)
 	{
 		// $input = data yang dikirim dari controller
-		return $this->db->insert('tb_suratkeluar', $input);
+		return $this->db->insert('tb_surattugas', $input);
 	}
 
 	public function update($input, $id)
@@ -176,7 +212,7 @@ class M_surattugas extends CI_Model {
 	public function delete($id) {
 		// $id = data yang dikirim dari controller (sebagai filter data yang dihapus)
 		$this->db->where('id_surat', $id);
-		return $this->db->delete('tb_suratkeluar');
+		return $this->db->delete('tb_surattugas');
 	}
 
 	public function detail($id)

@@ -169,18 +169,18 @@ class Asesor extends CI_Controller {
 		$data_setting  = $this->M_setting->read();
 
 		//function read berfungsi mengambil 1 data dari table kategori sesuai id yg dipilih
-		$data_category_single = $this->m_category->read_single($id);
+		$data_asesor_single = $this->M_asesor->read_single($id);
 
 		//mengirim data ke view
 		$output = array(
-			'judul'	 		=> 'Update kategori surat',
-			'theme_page' 	=> 'category/v_category_update',
+			'judul'	 		=> 'Update asesor',
+			'theme_page' 	=> 'asesor/v_asesor_update',
 			'data_setting'  => $data_setting,
-			'name'		 => $name,
-			'image'		 => $image,
+			'name'		 	=> $name,
+			'image'		 	=> $image,
 
 			//mengirim data kota yang dipilih ke view
-			'data_category_single' => $data_category_single,
+			'data_asesor' => $data_asesor_single,
 		);
 
 		//memanggil file view
