@@ -176,6 +176,7 @@ class Asesor extends CI_Controller {
 			'judul'	 		=> 'Update asesor',
 			'theme_page' 	=> 'asesor/v_asesor_update',
 			'data_setting'  => $data_setting,
+			'data_asesor_single' => $data_asesor_single,
 			'name'		 	=> $name,
 			'image'		 	=> $image,
 
@@ -193,31 +194,34 @@ class Asesor extends CI_Controller {
 		if ($this->input->post('submit') == 'Simpan') {
 
 			//aturan validasi input login
-			$this->form_validation->set_rules('kode', 'Kode surat', 'required|numeric');
-			$this->form_validation->set_rules('jenis', 'Jenis surat', 'required');
+			$this->form_validation->set_rules('nama', 'Nama', 'required');
+			$this->form_validation->set_rules('noreg', 'No.Reg./MET', 'required|min_length[26]|max_length[26]');
+			$this->form_validation->set_rules('kompetensi', 'Kompetensi', 'required');
 
 			if ($this->form_validation->run() == TRUE) {
 
 				//menangkap id data yg dipilih dari view
-				$id = $this->uri->segment(3);
+				$id = $this->uri->segment(4);
 
 				// menangkap data input dari view
-				$kode	  = $this->input->post('kode');
-				$jenis	  = $this->input->post('jenis');
-
+				$nama         = $this->input->post('nama');
+				$noreg  	  = $this->input->post('noreg');
+				$kompetensi	  = $this->input->post('kompetensi');
+		
 				// mengirim data ke model
 				$input = array(
-					// format : nama field/kolom table => data input dari view
-					'kd_surat'		=> $kode,
-					'jenis_surat'	=> $jenis
-				);
+								// format : nama field/kolom table => data input dari view
+								'nama' 		=> $nama,
+								'Noreg'	    => $noreg,
+                                'Kompetensi'=> $kompetensi
+							);
 
 				//memanggil function update pada kategori model
-				$data_anggota = $this->m_category->update($input, $id);
+				$data_asesor = $this->M_asesor->update($input, $id);
 
 				//mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil di ubah !', 1);
-				redirect('admin/category/read');
+				redirect('admin/asesor/read');
 			}
 		}
 	}
@@ -229,13 +233,13 @@ class Asesor extends CI_Controller {
 		$this->db->db_debug = false; //disable debugging queries
 		
 		// Error handling
-		if (!$this->m_category->delete($id)) {
+		if (!$this->M_asesor->delete($id)) {
 			$msg =  $this->db->error();
 			$this->session->set_tempdata('error', $msg['message'], 1);
 		}
 
 		//mengembalikan halaman ke function read
 		$this->session->set_tempdata('message','Data berhasil dihapus',1);
-		redirect('admin/category/read');
+		redirect('admin/asesor/read');
 	}
 }

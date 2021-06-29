@@ -138,16 +138,16 @@ class M_asesor extends CI_Model {
 	{
 		//$id = id data yang dikirim dari controller (sebagai filter data yang diubah)
 		//filter data sesuai id yang dikirim dari controller
-		$this->db->where('kd_surat', $id);
+		$this->db->where('id', $id);
 
 		//$input = data yang dikirim dari controller
-		return $this->db->update('tb_category', $input);
+		return $this->db->update('tb_asesor', $input);
 	}
 
 	public function delete($id) {
 		// $id = data yang dikirim dari controller (sebagai filter data yang dihapus)
-		$this->db->where('kd_surat', $id);
-		return $this->db->delete('tb_category');
+		$this->db->where('id', $id);
+		return $this->db->delete('tb_asesor');
 	}
 
 }
