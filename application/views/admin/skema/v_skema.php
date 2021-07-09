@@ -4,19 +4,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="<?= base_url('admin/surattugas/insert'); ?>"><i class="fas fa-plus"></i> Tambah</a>
+                    <a href="<?= base_url('admin/skema/insert'); ?>" class=""> <i class="fas fa-plus"></i> Tambah</a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped table-responsive-md" id="table" width="100%" cellspacing="0">
+                        <table class="table table-striped table-responsive-xs" id="table" width="100%" cellspacing="0">
                             <thead class="">
                                 <tr>
                                     <th> # </th>
-                                    <th> No surat </th>
-                                    <th> Tanggal Surat </th>
-                                    <th> Asesor </th>
                                     <th> Skema </th>
-                                    <th> Batch </th>
-                                    <th> Tanggal Pelaksanaan </th>
                                     <th> Action </th>
                                 </tr>
                             </thead>
@@ -43,14 +38,15 @@
 			"serverSide": true,
 			"order": [],
 			"ajax": {
-				"url": "<?php echo site_url('admin/surattugas/datatables') ?>",
+				"url": "<?php echo site_url('admin/skema/datatables') ?>",
 				"type": "POST"
 			},
 			"columnDefs": [{
-				"targets": [0, 7],
+				"targets": [0, 1],
 				"className": 'dt-center',
 				"orderable": false,
 			}],
 		});
+
 	});
 </script>

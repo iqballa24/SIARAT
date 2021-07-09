@@ -23,7 +23,9 @@ class M_surattugas extends CI_Model {
 	{
 
 		$this->db->select('*');
-		$this->db->from('tb_surattugas');
+		$this->db->from('tb_surattugas a');
+		$this->db->join('tb_asesor b', 'a.asesor = b.id');
+
 
 		$i = 0;
 
@@ -184,7 +186,7 @@ class M_surattugas extends CI_Model {
 
 		// sql read
 		$this->db->select('*');
-		$this->db->from('tb_suratkeluar');
+		$this->db->from('tb_surattugas');
 		$this->db->where('id_surat', $id);
 
 		$query = $this->db->get();
@@ -220,9 +222,8 @@ class M_surattugas extends CI_Model {
 
         //sql read
         $this->db->select('*');
-		$this->db->from('tb_suratkeluar a');
-        $this->db->join('tb_category b', 'a.kd_jenis_surat = b.kd_surat');
-        $this->db->join('tb_divisi c', 'a.kd_divisi = c.kode');
+		$this->db->from('tb_surattugas a');
+        $this->db->join('tb_asesor b', 'a.asesor = b.id');
         $this->db->where('a.id_surat', $id);
         $query = $this->db->get();
 

@@ -48,6 +48,14 @@
                 </li>
                 <li class="nav-header text-md">Master</li>
                 <li class="nav-item">
+                    <a href="<?= base_url('admin/skema/read'); ?>" class="nav-link <?= $i =='skema' ? 'active' : ''; ?>">
+                        <i class="fas fa-chalkboard"></i>
+                        <p>
+                            Skema
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url('admin/asesor/read'); ?>" class="nav-link <?= $i =='asesor' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-user"></i>
                         <p>

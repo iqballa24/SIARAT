@@ -102,6 +102,7 @@ class Surattugas extends CI_Controller {
 			$row[] = $no;
 			$row[] = $field['no_surat'];
 			$row[] = date_format($date1, "D, d M Y");
+			$row[] = $field['nama'];
 			$row[] = $field['skema'];
 			$row[] = $field['batch'];
 			$row[] = date_format($date2, "D, d M Y");
@@ -287,20 +288,18 @@ class Surattugas extends CI_Controller {
 
 		//menangkap id data yg dipilih dari view (parameter get)
 		$id  					 = $this->uri->segment(4);
-        $data_category 			 = $this->m_category->read();
-		$data_suratkeluar_single = $this->m_suratkeluar->read_single($id);
-		$data_divisi   			 = $this->m_divisi->read();
+		$data_asesor 			 = $this->M_asesor->getDataAsesor();
+		$data_surattugas_single  = $this->M_surattugas->read_single($id);
 		$name  					 = $this->session->userdata('name');
 		$image 					 = $this->session->userdata('image');
 		$data_setting     		 = $this->M_setting->read();
 
 		//mengirim data ke view
 		$output = array(
-			'judul'	 			      => 'Surat keluar',
-			'theme_page' 		   	  => 'surat/v_suratkeluar_update',
-			'data_category' 		  => $data_category,
-			'data_suratkeluar_single' => $data_suratkeluar_single,
-			'data_divisi'			  => $data_divisi,
+			'judul'	 			      => 'Surat tugas',
+			'theme_page' 		   	  => 'surat/v_surattugas_update',
+			'data_asesor' 		  	  => $data_asesor,
+			'data_surattugas_single'  => $data_surattugas_single,
 			'data_setting'			  => $data_setting,
 			'name'		 			  => $name,
 			'image'		 			  => $image,
@@ -440,16 +439,16 @@ class Surattugas extends CI_Controller {
     {
 
         $id           	= $this->uri->segment(4);
-        $dt_suratkeluar = $this->m_suratkeluar->detail($id);
+        $dt_surattugas  = $this->M_surattugas->detail($id);
 		$name  			= $this->session->userdata('name');
 		$image 			= $this->session->userdata('image');
 		$data_setting   = $this->M_setting->read();
         
         // mengirim data ke view
         $output = array(
-            'theme_page'     => 'surat/v_suratkeluar_detail',
-            'judul'          => 'Detail surat keluar',
-            'dt_suratkeluar' => $dt_suratkeluar,
+            'theme_page'     => 'surat/v_surattugas_detail',
+            'judul'          => 'Detail surat tugas',
+            'dt_surattugas'  => $dt_surattugas,
 			'data_setting'   => $data_setting,
 			'name'		 	 => $name,
 			'image'		 	 => $image,
