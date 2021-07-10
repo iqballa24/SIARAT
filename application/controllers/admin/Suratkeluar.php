@@ -254,6 +254,7 @@ class Suratkeluar extends CI_Controller {
 		$lastDataPerihal		= $this->m_suratkeluar->getLastDataPerihal($id);
 		$lastDataTujuan	     	= $this->m_suratkeluar->getLastDataTujuan($id);
 		$lastDataTanggal		= $this->m_suratkeluar->getLastDataTanggal($id);
+		$lastDataNoUrut			= $this->m_suratkeluar->getLastDataNoUrut($id);
 
 		$no_surat 	  	= $lastDataNoSurat;
 		$perihal	  	= $lastDataPerihal;
@@ -268,7 +269,7 @@ class Suratkeluar extends CI_Controller {
 
 		// header untuk membuka file output RTF dengan MS. Word
 		header("Content-type: application/msword");
-		header("Content-disposition: inline; filename=template.doc");
+		header("Content-disposition: inline; filename= .$lastDataNoUrut $perihal.doc");
 		header("Content-length: ".strlen($document));
 		echo $document;
 	}

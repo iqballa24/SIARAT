@@ -89,6 +89,7 @@ class Asesor extends CI_Controller {
 		
 		$name  = $this->session->userdata('name');
 		$image = $this->session->userdata('image');
+		$skema = $this->M_asesor->getDataSkema();
 		$data_setting  = $this->M_setting->read();
 	
 		// mengirim data ke view
@@ -96,6 +97,7 @@ class Asesor extends CI_Controller {
 						'theme_page' 	=> 'asesor/v_asesor_insert',
 						'judul' 	 	=> 'Asesor',
 						'data_setting'  => $data_setting,
+						'skema'			=> $skema,
 						'name'		    => $name,
 						'image'		 	=> $image
 					);
@@ -166,6 +168,7 @@ class Asesor extends CI_Controller {
 		$id  = $this->uri->segment(4);
 		$name  = $this->session->userdata('name');
 		$image = $this->session->userdata('image');
+		$skema = $this->M_asesor->getDataSkema();
 		$data_setting  = $this->M_setting->read();
 
 		//function read berfungsi mengambil 1 data dari table kategori sesuai id yg dipilih
@@ -177,6 +180,7 @@ class Asesor extends CI_Controller {
 			'theme_page' 	=> 'asesor/v_asesor_update',
 			'data_setting'  => $data_setting,
 			'data_asesor_single' => $data_asesor_single,
+			'skema'		   	=> $skema,
 			'name'		 	=> $name,
 			'image'		 	=> $image,
 

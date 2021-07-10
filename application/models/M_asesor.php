@@ -87,6 +87,18 @@ class M_asesor extends CI_Model {
 		//sql read
 		$this->db->select('*');
 		$this->db->from('tb_asesor');
+		$this->db->order_by("nama", "asc");
+		$query = $this->db->get();
+
+		// $query -> result_array = mengirim data ke controller dalam bentuk semua data
+        return $query->result_array();
+	}
+
+	public function getDataSkema() {
+
+		//sql read
+		$this->db->select('*');
+		$this->db->from('tb_skema');
 		$query = $this->db->get();
 
 		// $query -> result_array = mengirim data ke controller dalam bentuk semua data

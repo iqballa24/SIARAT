@@ -55,7 +55,7 @@
                                             <?= form_error('asesi1', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group col-2 text-right btn-asesi1">
-                                            <a href="#" onclick="addAsesi2()"><i class="fas fa-plus-circle"></i></a>
+                                            <a href="#" onclick="addAsesi2()"><i class="fas fa-plus-circle" title="Add"></i></a>
                                         </div>
                                         <div class="form-group col-10 btn-asesi2" style="display: none;">
                                             <label>Asesi 2</label>
@@ -63,7 +63,7 @@
                                             <?= form_error('asesi2', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group col-2 text-right btnadd-asesi3" style="display: none;">
-                                            <a href="#" onclick="addAsesi3()"><i class="fas fa-plus-circle"></i></a>
+                                            <a href="#" onclick="addAsesi3()" title="Add"><i class="fas fa-plus-circle"></i></a>
                                         </div>
                                         <div class="form-group col-10 btn-asesi3" style="display: none;">
                                             <label>Asesi 3</label>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="text-right">
                                 <p>&nbsp;</p>
-                                <a class="btn btn-danger" href="#" onclick="<?= base_url('admin/surattugas/read/'); ?>">Batal</a>
+                                <a class="btn btn-danger" href="<?= base_url('admin/surattugas/read/'); ?>">Batal</a>
                                 <input type="submit" name="submit" value="Simpan" class="btn btn-info">
                             </div>
                         </form>
@@ -106,9 +106,4 @@
         btnAsesi3.style.display = 'block';
         btnaddAsesi3.style.display = 'none';
     }
-
-    function backtofirst() {
-        formSurat.style.display = 'block';
-        formAsesor.style.display = 'none';
-    }   
 </script>

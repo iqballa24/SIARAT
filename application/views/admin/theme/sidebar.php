@@ -49,7 +49,7 @@
                 <li class="nav-header text-md">Master</li>
                 <li class="nav-item">
                     <a href="<?= base_url('admin/skema/read'); ?>" class="nav-link <?= $i =='skema' ? 'active' : ''; ?>">
-                        <i class="fas fa-chalkboard"></i>
+                        <i class="nav-icon fas fa-chalkboard"></i>
                         <p>
                             Skema
                         </p>

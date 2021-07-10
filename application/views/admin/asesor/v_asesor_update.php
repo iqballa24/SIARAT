@@ -22,10 +22,13 @@
                                 <div class="form-group col-12">
                                     <label>Kompetensi</label>
                                     <select name="kompetensi" class="form-control" value="<?= set_value('kompetensi'); ?>">
-                                        <option value="<?= $data_asesor_single['Kompetensi']; ?>" selected><?= $data_asesor_single['Kompetensi']; ?></option>
-                                        <option value="Skema Perencanaan Human Capital">Skema Perencanaan Human Capital</option>
-                                        <option value="Skema Pengembangan Human Capital">Skema Pengembangan Human Capital</option>
-                                        <option value="Skema Pengelolaan Hubungan Industrial">Skema Pengelolaan Hubungan Industrial</option>
+                                        <?php foreach ($skema as $data) : ?>
+                                            <?php if ($data['skema'] == $data_asesor_single['Kompetensi']) : ?>
+                                                <option value="<?= $data['skema']; ?>" selected><?= $data['skema']; ?></option>
+                                            <?php else : ?>
+                                                <option value="<?= $data['skema']; ?>"><?= $data['skema']; ?></option>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>

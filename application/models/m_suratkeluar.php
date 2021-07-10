@@ -90,6 +90,14 @@ class M_suratkeluar extends CI_Model {
         $hasil = $query->row();
 
         return $hasil->nosurat;
+    }	
+
+	public function getLastDataNoUrut($id)
+    {
+        $query = $this->db->query("SELECT no_urut from tb_suratkeluar where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->no_urut;
     }
 
 	public function getLastDataNoSurat($id)

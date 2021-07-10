@@ -92,6 +92,14 @@ class M_surattugas extends CI_Model {
         return $hasil->nosurat;
     }
 
+	public function getDataNoUrut($id)
+    {
+        $query = $this->db->query("SELECT no_urut from tb_surattugas where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->no_urut;
+    }
+
 	public function getDataNoSurat($id)
     {
         $query = $this->db->query("SELECT no_surat from tb_surattugas where id_surat = $id");

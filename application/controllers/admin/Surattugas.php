@@ -255,6 +255,7 @@ class Surattugas extends CI_Controller {
 		$id  	  = $this->uri->segment(4);
 
 		// menangkap data input dari view
+		$dataNoUrut 		= $this->M_surattugas->getDataNoUrut($id);
 		$dataNoSurat		= $this->M_surattugas->getDataNoSurat($id);
 		$dataTglSurat		= $this->M_surattugas->getDataTglSurat($id);
 		$dataBatch	     	= $this->M_surattugas->getDataBatch($id);
@@ -278,7 +279,7 @@ class Surattugas extends CI_Controller {
 
 		// header untuk membuka file output RTF dengan MS. Word
 		header("Content-type: application/msword");
-		header("Content-disposition: inline; filename=template.doc");
+		header("Content-disposition: inline; filename= .$dataNoUrut. Surat Tugas $dataAsesor.doc");
 		header("Content-length: ".strlen($document));
 		echo $document;
 	}
