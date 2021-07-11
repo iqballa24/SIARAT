@@ -35,7 +35,7 @@ class User extends CI_Controller
         // mengirim data ke view
         $output = array(
             'theme_page'   => 'user/v_user',
-            'judul'        => 'User management',
+            'judul'        => 'Access management',
             'data_setting' => $data_setting,
             'name'		   => $name,
 			'image'		   => $image,
