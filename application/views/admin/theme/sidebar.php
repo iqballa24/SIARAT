@@ -8,16 +8,6 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <?php $img =  $image ? $image : 'user4-128x128.jpg' ;?>
-            <div class="image">
-                <img src="<?= base_url('upload_folder/img/'.$img); ?>" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block"><?= $name ;?></a>
-            </div>
-        </div>
 
         <!-- SidebarSearch Form -->
         <!-- <div class="form-inline">
@@ -111,75 +101,30 @@
                 </li>
                 <li class="nav-header text-md">KEUANGAN</li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link <?= $i == 'invoice' ? 'active' : ''; ?>">
+                    <a href="<?= site_url('admin/invoice/read'); ?>" class="nav-link <?= $i == 'invoice' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-folder-open"></i>
                         <p>
                             Invoice
-                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= site_url('admin/invoice/read'); ?>" class="nav-link <?= $i == 'invoice' && $x == 'read' ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                <p>Lihat data</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= site_url('admin/invoice/insert'); ?>" class="nav-link <?= $i == 'invoice' && $x == 'insert' ? 'active' : ''; ?>">
-                                <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
-                                <p>Tambah data</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link <?= $i == 'kwitansi' ? 'active' : ''; ?>">
+                    <a href="<?= site_url('admin/kwitansi/read'); ?>" class="nav-link <?= $i == 'kwitansi' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-folder-open"></i>
                         <p>
                             kwitansi
-                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= site_url('admin/kwitansi/read'); ?>" class="nav-link <?= $i == 'kwitansi' && $x == 'read' ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                <p>Lihat data</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= site_url('admin/kwitansi/insert'); ?>" class="nav-link <?= $i == 'kwitansi' && $x == 'insert' ? 'active' : ''; ?>">
-                                <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
-                                <p>Tambah data</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <?php $level =  $this->session->userdata('level'); ?>
                 <li class="nav-header text-md <?= $level == 2 ? 'd-none' : '' ?> ">SYSTEM</li>
                 <li class="nav-item <?= $level == 2 ? 'd-none' : '' ?> ">
-                    <a href="#" class="nav-link <?= $i == 'user' ? 'active' : ''; ?>">
-                        <i class="nav-icon fas fa-user"></i>
+                    <a href="<?= base_url('admin/user/read'); ?>" class="nav-link <?= $i == 'user' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-user-lock"></i>
                         <p>
-                            User management
-                            <i class="right fas fa-angle-left"></i>
+                            Access Management
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= site_url('admin/user/read'); ?>" class="nav-link <?= $i == 'user' && $x == 'read' ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                <p>Lihat data</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= site_url('admin/user/insert'); ?>" class="nav-link <?= $i == 'user' && $x == 'insert' ? 'active' : ''; ?>">
-                                <i class="fas fa-plus nav-icon" style="font-size: 12px;"></i>
-                                <p>Tambah data</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="nav-item <?= $level == 2 ? 'd-none' : '' ?> ">
                     <a href="<?= site_url('admin/setting/read'); ?>" class="nav-link <?= $i =='setting' ? 'active' : ''; ?>">
