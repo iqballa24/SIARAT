@@ -216,7 +216,7 @@ class M_surattugas extends CI_Model {
 		$this->db->where('id_surat', $id);
 
 		//$input = data yang dikirim dari controller
-		return $this->db->update('tb_suratkeluar', $input);
+		return $this->db->update('tb_surattugas', $input);
 	}
 
 	public function delete($id) {

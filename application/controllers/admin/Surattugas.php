@@ -13,7 +13,7 @@ class Surattugas extends CI_Controller {
 		if ($this->session->userdata('is_active') == 'n') {
 			redirect('admin/auth');
 		}
-        $this->load->model(array('M_surattugas','M_setting','M_asesor'));
+        $this->load->model(array('M_surattugas','M_setting','M_asesor', 'M_skema'));
     }
 
     public function index() 
@@ -146,8 +146,9 @@ class Surattugas extends CI_Controller {
 
 		$name  = $this->session->userdata('name');
 		$image = $this->session->userdata('image');
-		$data_setting  = $this->M_setting->read();
-        $data_asesor = $this->M_asesor->getDataAsesor();
+		$data_setting = $this->M_setting->read();
+        $data_asesor  = $this->M_asesor->getDataAsesor();
+        $data_skema   = $this->M_skema->read();
 
 		// no urut surat
 		$year 		= date('Y'); 
@@ -162,6 +163,7 @@ class Surattugas extends CI_Controller {
 						'no_urut'		=> $no_urut,
 						'name'		 	=> $name,
 						'image'			=> $image,
+						'skema'			=> $data_skema,
 						'data_setting'  => $data_setting
 					);
 
@@ -294,6 +296,8 @@ class Surattugas extends CI_Controller {
 		$name  					 = $this->session->userdata('name');
 		$image 					 = $this->session->userdata('image');
 		$data_setting     		 = $this->M_setting->read();
+        $data_skema			     = $this->M_skema->read();
+
 
 		//mengirim data ke view
 		$output = array(
@@ -303,6 +307,7 @@ class Surattugas extends CI_Controller {
 			'data_surattugas_single'  => $data_surattugas_single,
 			'data_setting'			  => $data_setting,
 			'name'		 			  => $name,
+			'skema'					  => $data_skema,
 			'image'		 			  => $image,
 		);
 
@@ -319,20 +324,15 @@ class Surattugas extends CI_Controller {
         $this->load->library('upload', $config);
 
         // menangkap data input dari view
-		$no_urut		= $this->input->post('id_surat');
-		$jenis_surat	= $this->input->post('jenis_surat');
-		$perihal	  	= $this->input->post('perihal');
-		$tujuan 	  	= $this->input->post('tujuan');
-		$tgl_surat      = $this->input->post('tgl_surat');
-		$divisi  	    = $this->input->post('divisi');
-		$keterangan     = $this->input->post('ket');
-		$tahun 			= $this->input->post('tahun');
+		$tgl_surat		= $this->input->post('tgl_surat');
+		$skema		  	= $this->input->post('skema');
+		$tgl_pelaksanaan= $this->input->post('tgl_pelaksanaan');
+		$batch      	= $this->input->post('batch');
+		$asesor  	    = $this->input->post('asesor');
+		$asesi1     	= $this->input->post('asesi1');
+		$asesi2     	= $this->input->post('asesi2');
+		$asesi3     	= $this->input->post('asesi3');
 		$oldfile		= $this->input->post('userfileold');
-
-		$getBulan	 = date('n');
-		$bulan		 = $this->getRomawi($getBulan);
-		$year		 = date('Y');
-		$no_surat	 = $jenis_surat.'.'.$no_urut.'/'.$divisi.'./LSP-HCMI/'.$bulan.'/'.$year;
 				
         //menangkap id data yg dipilih dari view (parameter get)
         $id = $this->uri->segment(4);
@@ -342,25 +342,24 @@ class Surattugas extends CI_Controller {
 			//jika gagal upload
 			if (!$this->upload->do_upload('userfile')) {
 	
-				//menangkap id data yg dipilih dari view (parameter get)
 				$id  					 = $this->uri->segment(4);
-				$data_category 			 = $this->m_category->read();
-				$data_suratkeluar_single = $this->m_suratkeluar->read_single($id);
-				$data_divisi   			 = $this->m_divisi->read();
+				$data_asesor 			 = $this->M_asesor->getDataAsesor();
+				$data_surattugas_single  = $this->M_surattugas->read_single($id);
 				$name  					 = $this->session->userdata('name');
 				$image 					 = $this->session->userdata('image');
 				$data_setting     		 = $this->M_setting->read();
+				$data_skema			     = $this->M_skema->read();
 
 				//mengirim data ke view
 				$output = array(
-					'judul'	 			      => 'Surat keluar',
-					'theme_page' 		   	  => 'surat/v_suratkeluar_update',
-					'data_category' 		  => $data_category,
-					'data_suratkeluar_single' => $data_suratkeluar_single,
-					'data_divisi'			  => $data_divisi,
+					'judul'	 			      => 'Surat tugas',
+					'theme_page' 		   	  => 'surat/v_surattugas_update',
+					'data_asesor' 		  	  => $data_asesor,
+					'data_surattugas_single'  => $data_surattugas_single,
 					'data_setting'			  => $data_setting,
 					'name'		 			  => $name,
-					'image'		 			  => $image
+					'skema'					  => $data_skema,
+					'image'		 			  => $image,
 				);
 		
 				//memanggil file view
@@ -374,23 +373,23 @@ class Surattugas extends CI_Controller {
 				//mengirim data ke model
 				$input = array(
 					//format : nama field/kolom table => data input dari view
-					'no_urut'		 => $no_urut,
-					'kd_jenis_surat' => $jenis_surat,
-					'perihal' 	  	 => $perihal,
+					'tgl_surat' 	 => $tgl_surat,
+					'skema' 	  	 => $skema,
 					'tgl_surat'  	 => $tgl_surat,
-					'tujuan'    	 => $tujuan,
-					'kd_divisi'	  	 => $divisi,
-					'keterangan' 	 => $keterangan,
-					'no_surat'		 => $no_surat,
-					'tahun'			 => $tahun,
+					'tgl_pelaksanaan'=> $tgl_pelaksanaan,
+					'batch'	  	 	 => $batch,
+					'asesor' 	 	 => $asesor,
+					'asesi1'		 => $asesi1,
+					'asesi2'		 => $asesi2,
+					'asesi3'		 => $asesi3,
 					'lampiran'    	 => $upload_data
 				);
 	
-				$data_surat = $this->m_suratkeluar->update($input, $id);
+				$data_surat = $this->M_surattugas->update($input, $id);
 	
 				//mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil disimpan', 1);
-				Redirect('admin/suratkeluar/read');
+				Redirect('admin/surattugas/read');
 			}
 
 		} else {
@@ -398,23 +397,22 @@ class Surattugas extends CI_Controller {
 			//mengirim data ke model
 			$input = array(
 				//format : nama field/kolom table => data input dari view
-				'id_surat'		 => $no_urut,
-				'kd_jenis_surat' => $jenis_surat,
-				'perihal' 	  	 => $perihal,
+				'tgl_surat' 	 => $tgl_surat,
+				'skema' 	  	 => $skema,
 				'tgl_surat'  	 => $tgl_surat,
-				'tujuan'    	 => $tujuan,
-				'kd_divisi'	  	 => $divisi,
-				'keterangan' 	 => $keterangan,
-				'no_surat'		 => $no_surat,
-				'lampiran'    	 => $oldfile,
-				'tahun'			 => $tahun
+				'tgl_pelaksanaan'=> $tgl_pelaksanaan,
+				'batch'	  	 	 => $batch,
+				'asesor' 	 	 => $asesor,
+				'asesi1'		 => $asesi1,
+				'asesi2'		 => $asesi2,
+				'asesi3'		 => $asesi3,
 			);
 
-			$data_surat = $this->m_suratkeluar->update($input, $id);
+			$data_surat = $this->M_surattugas->update($input, $id);
 
 			//mengembalikan halaman ke function read
 			$this->session->set_tempdata('message', 'Data berhasil disimpan', 1);
-			Redirect('admin/suratkeluar/read');
+			Redirect('admin/surattugas/read');
 		}
 
     }

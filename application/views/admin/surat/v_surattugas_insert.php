@@ -19,10 +19,10 @@
                                         <div class="form-group col-12">
                                             <label>Skema</label>
                                             <select name="skema" class="form-control" value="<?= set_value('skema'); ?>">
-                                                <option name="" selected disabled>-- Pilih --</option>
-                                                <option value="Skema Perencanaan Human Capital">Skema Perencanaan Human Capital</option>
-                                                <option value="Skema Pengembangan Human Capital">Skema Pengembangan Human Capital</option>
-                                                <option value="Skema Pengelolaan Hubungan Industrial">Skema Pengelolaan Hubungan Industrial</option>
+                                                <option value="" selected disabled>-- Pilih --</option>
+                                                <?php foreach($skema as $data): ?> 
+                                                <option value="<?= $data['skema']; ?>"><?= $data['skema']; ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                             <?= form_error('skema', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>

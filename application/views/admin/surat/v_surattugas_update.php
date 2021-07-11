@@ -18,11 +18,14 @@
                                         </div>
                                         <div class="form-group col-12">
                                             <label>Skema</label>
-                                            <select name="skema" class="form-control" value="<?= set_value('kompskemaetensi'); ?>">
-                                                <option value="<?= $data_surattugas_single['skema']; ?>" selected><?= $data_surattugas_single['skema']; ?></option>
-                                                <option value="Skema Perencanaan Human Capital">Skema Perencanaan Human Capital</option>
-                                                <option value="Skema Pengembangan Human Capital">Skema Pengembangan Human Capital</option>
-                                                <option value="Skema Pengelolaan Hubungan Industrial">Skema Pengelolaan Hubungan Industrial</option>
+                                            <select name="skema" class="form-control" value="<?= set_value('skema'); ?>">
+                                            <?php foreach ($skema as $data) : ?>
+                                                <?php if ($data['skema'] == $data_surattugas_single['skema']) : ?>
+                                                    <option value="<?= $data['skema']; ?>" selected><?= $data['skema']; ?></option>
+                                                <?php else : ?>
+                                                    <option value="<?= $data['skema']; ?>"><?= $data['skema']; ?></option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
                                             </select>
                                             <?= form_error('jenis_surat', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
