@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Data invoice</h3>
+                        <a href="<?= base_url('admin/invoice/insert'); ?>"><i class="fas fa-plus"></i> Tambah</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-responsive-md" id="table" width="100%" cellspacing="0">
