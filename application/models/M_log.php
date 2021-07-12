@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_asesor extends CI_Model {
+class M_log extends CI_Model {
 
-	var $table = array('tb_asesor');
+	var $table = array('tb_log');
 
 	//field yang ditampilkan
-	var $column_order = array(null,'nama', 'Noreg', 'Kompetensi');
+	var $column_order = array(null,'date', 'activity');
 
 	//field yang diizin untuk pencarian 
-	var $column_search = array('nama', 'Noreg', 'Kompetensi');
+	var $column_search = array('id', 'date', 'activity');
 
 	//field pertama yang diurutkan
-	var $order = array('Kompetensi' => 'asc');
+	var $order = array('id' => 'desc');
 
 	public function __construct()
 	{
@@ -82,93 +82,28 @@ class M_asesor extends CI_Model {
 		return $this->db->count_all_results();
 	}
 
-	public function getNamaById($id) {
-
-		$query = $this->db->query("SELECT nama from tb_asesor where id = $id");
-		$hasil = $query->row();
-
-        return $hasil->nama;
-
-	}
-
-	public function getDataAsesor() {
-
-		//sql read
-		$this->db->select('*');
-		$this->db->from('tb_asesor');
-		$this->db->order_by("nama", "asc");
-		$query = $this->db->get();
-
-		// $query -> result_array = mengirim data ke controller dalam bentuk semua data
-        return $query->result_array();
-	}
-
-	public function getDataSkema() {
-
-		//sql read
-		$this->db->select('*');
-		$this->db->from('tb_skema');
-		$query = $this->db->get();
-
-		// $query -> result_array = mengirim data ke controller dalam bentuk semua data
-        return $query->result_array();
-	}
-
 	// function read berfungsi mengambil/read data dari table anggota di database
 	public function read() {
 
 		//sql read
 		$this->db->select('*');
-		$this->db->from('tb_asesor');
+		$this->db->from('tb_log');
 		$query = $this->db->get();
 
 		// $query -> result_array = mengirim data ke controller dalam bentuk semua data
         return $query->result_array();
 	}
 
-	public function read_check($noreg)
-	{
-		$this->db->select('*');
-		$this->db->from('tb_asesor');
-		$this->db->where('Noreg', $noreg);
-		$query = $this->db->get();
-
-		return $query->row_array();
-	}
-
-	public function read_single($id) {
-
-		// sql read
-		$this->db->select('*');
-		$this->db->from('tb_asesor');
-		$this->db->where('id', $id);
-
-		$query = $this->db->get();
-
-		// query -> row_array = mengirim data ke controller dalam bentuk 1 data
-        return $query->row_array();
-	}
-
-	public function insert($input)
+    public function insert($input)
 	{
 		// $input = data yang dikirim dari controller
-		return $this->db->insert('tb_asesor', $input);
+		return $this->db->insert('tb_log', $input);
 	}
 
-	public function update($input, $id)
-	{
-		//$id = id data yang dikirim dari controller (sebagai filter data yang diubah)
-		//filter data sesuai id yang dikirim dari controller
-		$this->db->where('id', $id);
-
-		//$input = data yang dikirim dari controller
-		return $this->db->update('tb_asesor', $input);
-	}
-
-	public function delete($id) {
+	public function delete() {
 		// $id = data yang dikirim dari controller (sebagai filter data yang dihapus)
-		$this->db->where('id', $id);
-		return $this->db->delete('tb_asesor');
+		$this->db->from('tb_log'); 
+		$this->db->truncate(); 
 	}
 
 }

@@ -14,7 +14,7 @@ class Asesor extends CI_Controller {
 			redirect('admin/auth');
 		}
 
-        $this->load->model(array('M_asesor', 'M_setting'));
+        $this->load->model(array('M_asesor', 'M_setting', 'M_log'));
     }
 
     public function index() {
@@ -132,6 +132,21 @@ class Asesor extends CI_Controller {
 		
 				$data_asesor = $this->M_asesor->insert($input);
 
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' menambahkan data asesor : <b>'.$nama.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
+
 				// mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil ditambahkan !', 1);
 				redirect('admin/asesor/read');
@@ -223,6 +238,21 @@ class Asesor extends CI_Controller {
 				//memanggil function update pada kategori model
 				$data_asesor = $this->M_asesor->update($input, $id);
 
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' mengubah data asesor : <b>'.$nama.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
+
 				//mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil di ubah !', 1);
 				redirect('admin/asesor/read');
@@ -235,6 +265,24 @@ class Asesor extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$this->db->db_debug = false; //disable debugging queries
+
+		// Mengambil data dari Model
+		$nama  = $this->M_asesor->getNamaById($id);
+
+		// Input data log
+		date_default_timezone_set('Asia/Jakarta');
+		$name       = $this->session->userdata('name');
+		$date       = date('l, d F Y H:i:s');
+		$activity   = $name.' delete data asesor : <b>'.$nama.'</b>';
+
+		// mengirim data ke model
+		$input_log = array(
+			// format : nama field/kolom table => data input dari view
+			'activity' 	=> $activity,
+			'date'	    => $date,
+		);
+
+		$data_log = $this->M_log->insert($input_log);
 		
 		// Error handling
 		if (!$this->M_asesor->delete($id)) {

@@ -10,8 +10,8 @@
                         <form method="post" action="<?= site_url('admin/suratkeluar/update_submit/'.$data_suratkeluar_single['id_surat']); ?>" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group col-12">
-                                    <input type="hidden" class="form-control" name="id_surat" value="<?= $data_suratkeluar_single['id_surat'] ?>">
-                                    <?= form_error('id_surat', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    <input type="hidden" class="form-control" name="no_urut" value="<?= $data_suratkeluar_single['no_urut'] ?>">
+                                    <?= form_error('no_urut', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <div class="form-group col-12">
                                     <label>Jenis surat</label>

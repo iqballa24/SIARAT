@@ -13,7 +13,7 @@ class Suratkeluar extends CI_Controller {
 		if ($this->session->userdata('is_active') == 'n') {
 			redirect('admin/auth');
 		}
-        $this->load->model(array('m_suratkeluar', 'm_category', 'm_divisi','m_setting'));
+        $this->load->model(array('m_suratkeluar', 'm_category', 'm_divisi','m_setting','M_log'));
     }
 
     public function index() 
@@ -214,6 +214,21 @@ class Suratkeluar extends CI_Controller {
 				);
 				
 				$data_suratkeluar = $this->m_suratkeluar->insert($input);
+
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' menambahkan data surat keluar : <b>'.$no_surat.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
 	
 				//mengembalikan halaman ke function read
 				$this->session->set_tempdata('confirm', 'Data berhasil ditambahkan', 1);
@@ -311,7 +326,7 @@ class Suratkeluar extends CI_Controller {
         $this->load->library('upload', $config);
 
         // menangkap data input dari view
-		$no_urut		= $this->input->post('id_surat');
+		$no_urut		= $this->input->post('no_urut');
 		$jenis_surat	= $this->input->post('jenis_surat');
 		$perihal	  	= $this->input->post('perihal');
 		$tujuan 	  	= $this->input->post('tujuan');
@@ -379,6 +394,21 @@ class Suratkeluar extends CI_Controller {
 				);
 	
 				$data_surat = $this->m_suratkeluar->update($input, $id);
+
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' mengubah data surat keluar : <b>'.$no_surat.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
 	
 				//mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil disimpan', 1);
@@ -404,6 +434,21 @@ class Suratkeluar extends CI_Controller {
 
 			$data_surat = $this->m_suratkeluar->update($input, $id);
 
+			// input data log
+			date_default_timezone_set('Asia/Jakarta');
+			$name       = $this->session->userdata('name');
+			$date       = date('l, d F Y H:i:s');
+			$activity   = $name.' mengubah data surat keluar : <b>'.$no_surat.'</b>';
+
+			// mengirim data ke model
+			$input_log = array(
+				// format : nama field/kolom table => data input dari view
+				'activity' 	=> $activity,
+				'date'	    => $date,
+			);
+
+			$data_log = $this->M_log->insert($input_log);
+
 			//mengembalikan halaman ke function read
 			$this->session->set_tempdata('message', 'Data berhasil disimpan', 1);
 			Redirect('admin/suratkeluar/read');
@@ -416,6 +461,24 @@ class Suratkeluar extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$this->db->db_debug = false; //disable debugging queries
+
+		// Mengambil data dari Model
+		$nosurat  = $this->m_suratkeluar->getLastDataNoSurat($id);
+
+		// Input data log
+		date_default_timezone_set('Asia/Jakarta');
+		$name       = $this->session->userdata('name');
+		$date       = date('l, d F Y H:i:s');
+		$activity   = $name.' delete data surat keluar : <b>'.$nosurat.'</b>';
+
+		// mengirim data ke model
+		$input_log = array(
+			// format : nama field/kolom table => data input dari view
+			'activity' 	=> $activity,
+			'date'	    => $date,
+		);
+
+		$data_log = $this->M_log->insert($input_log);
 		
 		// Error handling
 		if (!$this->m_suratkeluar->delete($id)) {

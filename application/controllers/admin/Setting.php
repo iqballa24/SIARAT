@@ -43,7 +43,7 @@ class Setting extends CI_Controller {
     {
         //setting library upload
         $config['upload_path']          = './upload_folder/img';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
         $config['max_size']             = 5000;
         $this->load->library('upload', $config);
 

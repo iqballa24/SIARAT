@@ -14,7 +14,7 @@ class Skema extends CI_Controller {
 			redirect('admin/auth');
 		}
 
-        $this->load->model(array('M_skema', 'M_setting'));
+        $this->load->model(array('M_skema', 'M_setting', 'M_log'));
     }
 
     public function index() {
@@ -122,6 +122,21 @@ class Skema extends CI_Controller {
 		
 				$data_skema = $this->M_skema->insert($input);
 
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' menambahkan data skema : <b>'.$skema.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
+
 				// mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil ditambahkan !', 1);
 				redirect('admin/skema/read');
@@ -193,24 +208,35 @@ class Skema extends CI_Controller {
 				$id = $this->uri->segment(4);
 
 				// menangkap data input dari view
-				$nama         = $this->input->post('nama');
-				$noreg  	  = $this->input->post('noreg');
-				$kompetensi	  = $this->input->post('kompetensi');
+				$skema	  = $this->input->post('skema');
 		
 				// mengirim data ke model
 				$input = array(
 								// format : nama field/kolom table => data input dari view
-								'nama' 		=> $nama,
-								'Noreg'	    => $noreg,
-                                'Kompetensi'=> $kompetensi
+								'skema' 	=> $skema,
 							);
 
 				//memanggil function update pada kategori model
-				$data_asesor = $this->M_skema->update($input, $id);
+				$data_skema = $this->M_skema->update($input, $id);
+
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' update data skema : <b>'.$skema.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
 
 				//mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil di ubah !', 1);
-				redirect('admin/asesor/read');
+				redirect('admin/skema/read');
 			}
 		}
 	}
@@ -239,6 +265,24 @@ class Skema extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$this->db->db_debug = false; //disable debugging queries
+
+		// Mengambil data dari Model
+		$skema  = $this->M_skema->getSkemaById($id);
+
+		// Input data log
+		date_default_timezone_set('Asia/Jakarta');
+		$name       = $this->session->userdata('name');
+		$date       = date('l, d F Y H:i:s');
+		$activity   = $name.' delete data skema : <b>'.$skema.'</b>';
+
+		// mengirim data ke model
+		$input_log = array(
+			// format : nama field/kolom table => data input dari view
+			'activity' 	=> $activity,
+			'date'	    => $date,
+		);
+
+		$data_log = $this->M_log->insert($input_log);
 		
 		// Error handling
 		if (!$this->M_skema->delete($id)) {

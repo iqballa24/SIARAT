@@ -12,7 +12,7 @@ class Suratmasuk extends CI_Controller {
 		if ($this->session->userdata('is_active') == 'n') {
 			redirect('admin/auth');
 		}
-        $this->load->model(array('m_suratmasuk', 'm_category','m_setting'));
+        $this->load->model(array('m_suratmasuk', 'm_category','m_setting','M_log'));
     }
 
     public function index() {
@@ -187,6 +187,21 @@ class Suratmasuk extends CI_Controller {
                     );
     
                     $data_suratmasuk = $this->m_suratmasuk->insert($input);
+
+					// input data log
+					date_default_timezone_set('Asia/Jakarta');
+					$name       = $this->session->userdata('name');
+					$date       = date('l, d F Y H:i:s');
+					$activity   = $name.' menambahkan data surat masuk : <b>'.$perihal.'</b>';
+
+					// mengirim data ke model
+					$input_log = array(
+						// format : nama field/kolom table => data input dari view
+						'activity' 	=> $activity,
+						'date'	    => $date,
+					);
+
+					$data_log = $this->M_log->insert($input_log);
         
                     //mengembalikan halaman ke function read
                     $this->session->set_tempdata('message', 'Data berhasil ditambahkan', 1);
@@ -313,6 +328,21 @@ class Suratmasuk extends CI_Controller {
 				);
 	
 				$data_surat = $this->m_suratmasuk->update($input, $id);
+
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' mengubah data surat masuk : <b>'.$perihal.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
 	
 				//mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil disimpan', 1);
@@ -336,6 +366,21 @@ class Suratmasuk extends CI_Controller {
 
 			$data_surat = $this->m_suratmasuk->update($input, $id);
 
+			// input data log
+			date_default_timezone_set('Asia/Jakarta');
+			$name       = $this->session->userdata('name');
+			$date       = date('l, d F Y H:i:s');
+			$activity   = $name.' mengubah data surat masuk : <b>'.$perihal.'</b>';
+
+			// mengirim data ke model
+			$input_log = array(
+				// format : nama field/kolom table => data input dari view
+				'activity' 	=> $activity,
+				'date'	    => $date,
+			);
+
+			$data_log = $this->M_log->insert($input_log);
+
 			//mengembalikan halaman ke function read
 			$this->session->set_tempdata('message', 'Data berhasil disimpan', 1);
 			Redirect('admin/suratmasuk/read');
@@ -348,6 +393,24 @@ class Suratmasuk extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$this->db->db_debug = false; //disable debugging queries
+
+		// Mengambil data dari Model
+		$perihal  = $this->m_suratmasuk->getPerihalById($id);
+
+		// Input data log
+		date_default_timezone_set('Asia/Jakarta');
+		$name       = $this->session->userdata('name');
+		$date       = date('l, d F Y H:i:s');
+		$activity   = $name.' delete data surat masuk : <b>'.$perihal.'</b>';
+
+		// mengirim data ke model
+		$input_log = array(
+			// format : nama field/kolom table => data input dari view
+			'activity' 	=> $activity,
+			'date'	    => $date,
+		);
+
+		$data_log = $this->M_log->insert($input_log);
 		
 		// Error handling
 		if (!$this->m_suratmasuk->delete($id)) {

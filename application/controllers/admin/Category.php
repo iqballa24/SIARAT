@@ -14,7 +14,7 @@ class Category extends CI_Controller {
 			redirect('admin/auth');
 		}
 
-        $this->load->model(array('m_category', 'm_setting'));
+        $this->load->model(array('m_category', 'm_setting', 'M_log'));
     }
 
     public function index() {
@@ -124,6 +124,21 @@ class Category extends CI_Controller {
 		
 				$data_category = $this->m_category->insert($input);
 
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' menambahkan data kategori : <b>'.$jenis.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
+
 				// mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil ditambahkan !', 1);
 				redirect('admin/category/read');
@@ -209,6 +224,21 @@ class Category extends CI_Controller {
 				//memanggil function update pada kategori model
 				$data_anggota = $this->m_category->update($input, $id);
 
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' mengubah data kategori : <b>'.$jenis.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
+
 				//mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil di ubah !', 1);
 				redirect('admin/category/read');
@@ -222,6 +252,24 @@ class Category extends CI_Controller {
 
 		$this->db->db_debug = false; //disable debugging queries
 		
+		// Mengambil data dari Model
+		$kategori  = $this->m_category->getCategoryById($id);
+
+		// Input data log
+		date_default_timezone_set('Asia/Jakarta');
+		$name       = $this->session->userdata('name');
+		$date       = date('l, d F Y H:i:s');
+		$activity   = $name.' delete data kategori : <b>'.$kategori.'</b>';
+
+		// mengirim data ke model
+		$input_log = array(
+			// format : nama field/kolom table => data input dari view
+			'activity' 	=> $activity,
+			'date'	    => $date,
+		);
+
+		$data_log = $this->M_log->insert($input_log);
+
 		// Error handling
 		if (!$this->m_category->delete($id)) {
 			$msg =  $this->db->error();

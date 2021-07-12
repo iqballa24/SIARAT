@@ -12,7 +12,7 @@ class Divisi extends CI_Controller {
 		if ($this->session->userdata('is_active') == 'n') {
 			redirect('admin/auth');
 		}
-        $this->load->model(array('m_divisi', 'm_setting'));
+        $this->load->model(array('M_divisi', 'm_setting', 'M_log'));
     }
 
     public function index() {
@@ -44,7 +44,7 @@ class Divisi extends CI_Controller {
 		// sleep(2);
 
 		//memanggil fungsi model datatables
-		$list = $this->m_divisi->get_datatables();
+		$list = $this->M_divisi->get_datatables();
 		$data = array();
 		$no = $this->input->post('start');
 
@@ -69,8 +69,8 @@ class Divisi extends CI_Controller {
 		//mengirim data json
 		$output = array(
 			"draw" => $this->input->post('draw'),
-			"recordsTotal" => $this->m_divisi->count_all(),
-			"recordsFiltered" => $this->m_divisi->count_filtered(),
+			"recordsTotal" => $this->M_divisi->count_all(),
+			"recordsFiltered" => $this->M_divisi->count_filtered(),
 			"data" => $data,
 		);
 
@@ -84,7 +84,6 @@ class Divisi extends CI_Controller {
 		$name  = $this->session->userdata('name');
 		$image = $this->session->userdata('image');
 		$data_setting  = $this->m_setting->read();
-
 	
 		// mengirim data ke view
 		$output = array(
@@ -120,7 +119,22 @@ class Divisi extends CI_Controller {
 								'kode'   => $kode
 							);
 		
-				$data_divisi = $this->m_divisi->insert($input);
+				$data_divisi = $this->M_divisi->insert($input);
+
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' menambahkan data divisi : <b>'.$divisi.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
 
 				// mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil ditambahkan !', 1);
@@ -138,7 +152,7 @@ class Divisi extends CI_Controller {
 		$kode = $this->input->post('Kode');
 
 		//check data di database
-		$data_user = $this->m_divisi->read_check($kode);
+		$data_user = $this->M_divisi->read_check($kode);
 
 		if (!empty($data_user)) {
 
@@ -161,7 +175,7 @@ class Divisi extends CI_Controller {
 		$data_setting  = $this->m_setting->read();
 
 		//function read berfungsi mengambil 1 data dari table kategori sesuai id yg dipilih
-		$data_divisi_single = $this->m_divisi->read_single($id);
+		$data_divisi_single = $this->M_divisi->read_single($id);
 
 		//mengirim data ke view
 		$output = array(
@@ -204,7 +218,22 @@ class Divisi extends CI_Controller {
 					'divisi'	=> $divisi
 				);
 
-				$data_divisi = $this->m_divisi->update($input, $id);
+				$data_divisi = $this->M_divisi->update($input, $id);
+
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' mengubah data divisi : <b>'.$divisi.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
 
 				//mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil di ubah !', 1);
@@ -218,9 +247,27 @@ class Divisi extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$this->db->db_debug = false; //disable debugging queries
+
+		// Mengambil data dari Model
+		$divisi  = $this->M_divisi->getDivisiById($id);
+
+		// Input data log
+		date_default_timezone_set('Asia/Jakarta');
+		$name       = $this->session->userdata('name');
+		$date       = date('l, d F Y H:i:s');
+		$activity   = $name.' delete data divisi : <b>'.$divisi.'</b>';
+
+		// mengirim data ke model
+		$input_log = array(
+			// format : nama field/kolom table => data input dari view
+			'activity' 	=> $activity,
+			'date'	    => $date,
+		);
+
+		$data_log = $this->M_log->insert($input_log);
 		
 		// Error handling
-		if (!$this->m_divisi->delete($id)) {
+		if (!$this->M_divisi->delete($id)) {
 			$msg =  $this->db->error();
 			$this->session->set_tempdata('error', $msg['message'], 1);
 		}

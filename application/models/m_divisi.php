@@ -82,6 +82,15 @@ class M_divisi extends CI_Model {
 		return $this->db->count_all_results();
 	}
 
+	public function getDivisiById($id) {
+
+		$query = $this->db->query("SELECT divisi from tb_divisi where kode = '$id'");
+		$hasil = $query->row();
+
+        return $hasil->divisi;
+
+	}
+
 	// function read berfungsi mengambil/read data dari table anggota di database
 	public function read() {
 

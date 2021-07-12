@@ -9,7 +9,7 @@ class Auth extends CI_Controller {
 		// if (empty($this->session->userdata('NIP'))) {
 		// 	redirect('petugas/login');
 		// }
-        $this->load->model('m_auth');
+        $this->load->model(array('M_auth', 'M_log'));
     }
 
     public function index() {
@@ -40,6 +40,20 @@ class Auth extends CI_Controller {
 
             //jika validasi sukses 
             if ($this->form_validation->run() == TRUE) {
+                
+                date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' login ke sistem';
+
+                // mengirim data ke model
+				$input = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input);
 
                 redirect('admin/dashboard/read');
             }
@@ -56,7 +70,7 @@ class Auth extends CI_Controller {
         $password_encrypt = md5($password);
 
         //check username & password sesuai dengan di database
-        $data_user = $this->m_auth->read_single($username, $password_encrypt);
+        $data_user = $this->M_auth->read_single($username, $password_encrypt);
 
         //jika cocok : dikembalikan ke fungsi login_submit (validasi sukses)
         if (!empty($data_user)) {

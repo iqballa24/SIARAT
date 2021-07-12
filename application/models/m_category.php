@@ -82,6 +82,15 @@ class M_category extends CI_Model {
 		return $this->db->count_all_results();
 	}
 
+	public function getCategoryById($id) {
+
+		$query = $this->db->query("SELECT jenis_surat from tb_category where kd_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->jenis_surat;
+
+	}
+
 	// function read berfungsi mengambil/read data dari table anggota di database
 	public function read() {
 

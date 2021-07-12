@@ -83,6 +83,14 @@ class M_suratmasuk extends CI_Model {
 		return $this->db->count_all_results();
 	}
 
+	public function getPerihalById($id) 
+	{
+		$query = $this->db->query("SELECT perihal from tb_suratmasuk where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->perihal;
+	}
+
 	// function read berfungsi mengambil/read data dari table anggota di database
 	public function read() {
 

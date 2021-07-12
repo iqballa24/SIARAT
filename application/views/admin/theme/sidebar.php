@@ -127,6 +127,14 @@
                     </a>
                 </li>
                 <li class="nav-item <?= $level == 2 ? 'd-none' : '' ?> ">
+                    <a href="<?= site_url('admin/log/read'); ?>" class="nav-link <?= $i =='log' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-history"></i>
+                        <p>
+                            Log Activity
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item <?= $level == 2 ? 'd-none' : '' ?> ">
                     <a href="<?= site_url('admin/setting/read'); ?>" class="nav-link <?= $i =='setting' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-sliders-h"></i>
                         <p>

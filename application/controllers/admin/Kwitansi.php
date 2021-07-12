@@ -14,7 +14,7 @@ class kwitansi extends CI_Controller {
 			redirect('admin/auth');
 		}
 
-        $this->load->model(array('M_invoice','M_setting','M_kwitansi'));
+        $this->load->model(array('M_invoice','M_setting','M_kwitansi','M_log'));
     }
 
     public function index() {
@@ -154,6 +154,21 @@ class kwitansi extends CI_Controller {
 		
 				$data_invoice = $this->M_kwitansi->insert($input);
 
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' menambahkan data kwitansi : <b>'.$no_kwitansi.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
+
 				// mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil ditambahkan !', 1);
 				redirect('admin/kwitansi/read');
@@ -265,13 +280,27 @@ class kwitansi extends CI_Controller {
 				$input = array(
 					//format : nama field/kolom table => data input dari view
 					'no_kwitansi' 		=> $no_kwitansi,
-					'invoice'			=> $invoice,
 					'tujuan_pembayaran'	=> $tujuan_pembayaran,
 					'tgl_terima'		=> $tgl_terima,
 					'lampiran'    		=> $upload_data
 				);
 	
 				$data_kwitansi = $this->M_kwitansi->update($input, $id);
+
+				// input data log
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' mengubah data kwitansi : <b>'.$no_kwitansi.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
 	
 				//mengembalikan halaman ke function read
 				$this->session->set_tempdata('message', 'Data berhasil disimpan', 1);
@@ -284,12 +313,26 @@ class kwitansi extends CI_Controller {
 			$input = array(
 				//format : nama field/kolom table => data input dari view
 				'no_kwitansi' 		=> $no_kwitansi,
-				'invoice'			=> $invoice,
 				'tujuan_pembayaran'	=> $tujuan_pembayaran,
 				'tgl_terima'		=> $tgl_terima
 			);
 
 			$data_kwitansi = $this->M_kwitansi->update($input, $id);
+
+			// input data log
+			date_default_timezone_set('Asia/Jakarta');
+			$name       = $this->session->userdata('name');
+			$date       = date('l, d F Y H:i:s');
+			$activity   = $name.' mengubah data kwitansi : <b>'.$no_kwitansi.'</b>';
+
+			// mengirim data ke model
+			$input_log = array(
+				// format : nama field/kolom table => data input dari view
+				'activity' 	=> $activity,
+				'date'	    => $date,
+			);
+
+			$data_log = $this->M_log->insert($input_log);
 
 			//mengembalikan halaman ke function read
 			$this->session->set_tempdata('message', 'Data berhasil disimpan', 1);
@@ -303,6 +346,24 @@ class kwitansi extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$this->db->db_debug = false; //disable debugging queries
+
+		// Mengambil data dari Model
+		$kwitansi  = $this->M_kwitansi->getDataNoKwitansi($id);
+
+		// Input data log
+		date_default_timezone_set('Asia/Jakarta');
+		$name       = $this->session->userdata('name');
+		$date       = date('l, d F Y H:i:s');
+		$activity   = $name.' delete data kwitansi : <b>'.$kwitansi.'</b>';
+
+		// mengirim data ke model
+		$input_log = array(
+			// format : nama field/kolom table => data input dari view
+			'activity' 	=> $activity,
+			'date'	    => $date,
+		);
+
+		$data_log = $this->M_log->insert($input_log);
 		
 		// Error handling
 		if (!$this->M_kwitansi->delete($id)) {

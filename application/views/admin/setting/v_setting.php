@@ -97,7 +97,7 @@
                                 <label for="inputExperience" class="col-sm-2 col-form-label">Logo</label>
                                 <div class="custom-file col-sm-10">
                                     <input type="hidden" class="" name="userfileold" id="validatedInputGroupCustomFile" value="<?= $data['logo']; ?>">
-                                    <input type="file" class="" name="userfile" id="validatedInputGroupCustomFile" value="<?= $data['logo']; ?>">
+                                    <input type="file" class="" name="userfile" id="validatedInputGroupCustomFile">
                                     <!--response setelah upload-->
                                     <?php if (!empty($response)) : ?>
                                         <small class="text-danger pl-3">

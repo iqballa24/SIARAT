@@ -93,6 +93,15 @@ class M_skema extends CI_Model {
         return $query->result_array();
 	}
 
+	public function getSkemaById($id) {
+
+		$query = $this->db->query("SELECT skema from tb_skema where id = $id");
+		$hasil = $query->row();
+
+        return $hasil->skema;
+
+	}
+
 	// function read berfungsi mengambil/read data dari table anggota di database
 	public function read() {
 
@@ -141,7 +150,7 @@ class M_skema extends CI_Model {
 		$this->db->where('id', $id);
 
 		//$input = data yang dikirim dari controller
-		return $this->db->update('tb_asesor', $input);
+		return $this->db->update('tb_skema', $input);
 	}
 
 	public function delete($id) {
