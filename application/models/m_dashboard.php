@@ -11,6 +11,22 @@ class M_dashboard extends CI_Model
         return $query->result_array();
     }
 
+    public function getTotalSkema() {
+        $this->db->select('COUNT(id) as total');
+        $this->db->from('tb_skema');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function getTotalAsesor() {
+        $this->db->select('COUNT(id) as total');
+        $this->db->from('tb_asesor');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     public function getTotalCategory() {
         $this->db->select('COUNT(kd_surat) as total');
         $this->db->from('tb_category');
@@ -30,6 +46,14 @@ class M_dashboard extends CI_Model
     public function getTotalSuratMasuk() {
         $this->db->select('COUNT(no_surat) as total');
         $this->db->from('tb_suratmasuk');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function getTotalSuratTugas() {
+        $this->db->select('COUNT(id_surat) as total');
+        $this->db->from('tb_surattugas');
         $query = $this->db->get();
 
         return $query->result_array();

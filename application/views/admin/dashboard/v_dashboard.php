@@ -3,6 +3,42 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small card -->
+                <div class="small-box bg-teal">
+                    <div class="inner">
+                        <h3><?php foreach ($skema as $data) : ?>
+                                <?= $data['total']; ?>
+                            <?php endforeach ?></h3>
+
+                        <p>Skema</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chalkboard"></i>
+                    </div>
+                    <a href="<?= site_url('admin/skema/read'); ?>" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-maroon">
+                    <div class="inner">
+                        <h3><?php foreach ($asesor as $data) : ?>
+                                <?= $data['total']; ?>
+                            <?php endforeach ?></h3>
+
+                        <p>Asesor</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <a href="<?= site_url('admin/asesor/read'); ?>" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
                 <div class="small-box bg-info">
                     <div class="inner">
                         <h3><?php foreach ($divisi as $data) : ?>
@@ -77,6 +113,24 @@
                 </div>
             </div>
             <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-navy">
+                    <div class="inner">
+                        <h3><?php foreach ($surattugas as $data) : ?>
+                                <?= $data['total']; ?>
+                            <?php endforeach ?></h3>
+
+                        <p>Surat tugas</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <a href="<?= site_url('admin/suratkeluar/read'); ?>" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small card -->

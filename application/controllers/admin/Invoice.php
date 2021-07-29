@@ -479,9 +479,9 @@ class Invoice extends CI_Controller {
 		$document = str_replace("#lokasi", $lokasi, $document);
 		$document = str_replace("#uraian", $uraian, $document);
 		$document = str_replace("#qty", $qty, $document);
-		$document = str_replace("#harga", 'Rp. '.number_format($harga), $document);
+		$document = str_replace("#harga", 'Rp. '.number_format($harga,2,',','.'), $document);
 		$document = str_replace("#diskon", $diskon == '1' ? '-': $diskon, $document);
-		$document = str_replace("#total", 'Rp. '.number_format($total), $document);
+		$document = str_replace("#total", 'Rp. '.number_format($total,2,',','.'), $document);
 		$document = str_replace("#terbilang", $terbilang, $document);
 		$document = str_replace("#status", $status == '1' ? 'Lunas' : 'Belum lunas', $document);
 

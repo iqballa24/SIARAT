@@ -77,7 +77,20 @@ $(document).ready(() => {
             confirmButtonText: '<a href="http://localhost/lsp_archive/admin/suratkeluar/getTemplate" style="text-decoration: none; color:white;" target="_blank">Download Template</a>'
         })
     }else {
-        console.log('Pindah halaman');
+        
     }
+
+    // session logout
+    let log = new Date();
+    log.setSeconds(log.getSeconds() + 1200);
+    log = new Date(log);
+
+    let int_log = setInterval(()=>{
+        let now = new Date();
+        if (now > log){
+            location.href = "http://localhost/lsp_archive/admin/auth";
+            clearInterval(int_log);
+        }
+    }, 1200000);
 
 });

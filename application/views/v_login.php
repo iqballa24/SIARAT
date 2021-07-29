@@ -20,11 +20,7 @@
 <body class="hold-transition login-page bg-white">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 bg-login d-none d-lg-block">
-                <div class="image-login">
-                </div>
-            </div>
-            <div class="col-md-8 d-flex align-items-center">
+            <div class="col-12">
                 <div class="login-box mx-auto">
                     <div class="login-logo">
                         <a href="#"><b>Arsip</b> LSP HCMI</a>
