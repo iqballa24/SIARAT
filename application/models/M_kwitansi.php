@@ -91,6 +91,19 @@ class M_kwitansi extends CI_Model {
         return $hasil->no_urut;
     }
 
+	public function getInvoice($postData)
+	{
+		$response = array();
+ 
+		// Select record
+		$this->db->select('id,tujuan');
+		$this->db->where('id', $postData['id']);
+		$q = $this->db->get('tb_invoice');
+		$response = $q->result_array();
+	
+		return $response;
+	}
+
 	public function getDataNoKwitansi($id)
     {
         $query = $this->db->query("SELECT no_kwitansi from tb_kwitansi where id_kwitansi = '$id' ");

@@ -48,7 +48,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php $total = $data['diskon'] * $data['kuantitas'] * $data['harga']?>
+                                <?php $total = $data['kuantitas'] * $data['harga'] - (($data['diskon'] * 0.01) * $data['harga'] * $data['kuantitas'])?>
                                     <tr>
                                         <td>1</td>
                                         <td><?= $data['uraian'] ?></td>

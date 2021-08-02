@@ -13,22 +13,22 @@
                                     <input type="text" class="form-control" name="no_urut" value="<?= $data_invoice_single['no_invoice'] ?>" readonly>
                                     <?= form_error('no_urut', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-md-6">
                                     <label>Tanggal Invoice</label>
                                     <input type="date" class="form-control" name="date" value="<?= $data_invoice_single['tgl_invoice'] ?>">
                                     <?= form_error('date', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-md-6">
                                     <label>Jatuh tempo</label>
                                     <input type="text" class="form-control" name="jatuh_tempo" value="<?= $data_invoice_single['jatuh_tempo'] ?>">
                                     <?= form_error('jatuh_tempo', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-6">
                                     <label>Tujuan</label>
                                     <input type="text" name="tujuan" class="form-control" value="<?= $data_invoice_single['tujuan'] ?>">
                                     <?= form_error('tujuan', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-6">
                                     <label>Lokasi</label>
                                     <input type="text" name="lokasi" class="form-control" value="<?= $data_invoice_single['lokasi'] ?>">
                                     <?= form_error('lokasi', '<small class="text-danger pl-3">', '</small>'); ?>

@@ -197,6 +197,16 @@ class kwitansi extends CI_Controller {
 		return TRUE;
 	}
 
+	public function getInvoice()
+	{
+		// POST data 
+		$postData = $this->input->post();
+
+		// get data 
+		$data = $this->M_kwitansi->getInvoice($postData);
+		echo json_encode($data); 
+	}
+
 	public function update()
 	{
 		//menangkap id data yg dipilih dari view (parameter get)

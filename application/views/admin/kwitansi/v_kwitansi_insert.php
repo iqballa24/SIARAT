@@ -13,16 +13,20 @@
                                     <input type="text" class="form-control" name="no_urut" value="No.<?= sprintf("%05s", $no_urut) ?>/KW/LSPHCMI/<?= $year; ?>" readonly>
                                     <?= form_error('no_urut', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-md-6">
                                     <label>No Invoice</label>
-                                    <select multiple name="invoice" class="form-control" required>
+                                    <select id="invoice" name="invoice" class="form-control" required>
                                         <?php foreach ($data_invoice as $data) : ?>
                                             <option value="<?php echo $data['id']; ?>"><?= $data['no_invoice']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <label>Tujuan</label>
+                                    <input id="tujuan" type="text" class="form-control" value="" readonly>
+                                </div>
                                 <div class="form-group col-12">
-                                    <label>Tujuan pembayaran</label>
+                                    <label>Untuk pembayaran</label>
                                     <input type="text" class="form-control" name="tujuan_pembayaran" value="<?= set_value('tujuan_pembayaran'); ?>">
                                     <?= form_error('tujuan_pembayaran', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
@@ -44,3 +48,32 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+// baseURL variable
+const baseURL= "<?php echo base_url();?>";
+
+$(document).ready(function(){
+    $('#invoice').change(function(){
+        const invoice = $(this).val();
+
+        // Ajax request
+        $.ajax({
+            url:'<?= base_url();?>admin/kwitansi/getInvoice',
+            method:'post',
+            data:{id:invoice},
+            dataType:'json',
+            success:function(response){
+
+                // Remove option
+                $('#tujuan').find('option').not(':first').remove();
+
+                // Add option
+                $.each(response,function(index,data){
+                    $('#tujuan').val(data['tujuan']);
+                });
+            }
+        })
+    });
+});
+</script>

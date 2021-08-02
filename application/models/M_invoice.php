@@ -164,7 +164,7 @@ class M_invoice extends CI_Model {
 
 	public function getDataTotal($id)
     {
-        $query = $this->db->query("SELECT (kuantitas * harga * diskon) as total from tb_invoice where id = '$id'");
+        $query = $this->db->query("SELECT (kuantitas * harga - ((diskon * 0.01) * harga * kuantitas)) as total from tb_invoice where id = '$id'");
 		$hasil = $query->row();
 
         return $hasil->total;
