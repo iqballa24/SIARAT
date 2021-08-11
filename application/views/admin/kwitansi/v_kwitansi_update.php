@@ -13,15 +13,18 @@
                                     <input type="text" class="form-control" name="no_urut" value="<?= $data_kwitansi_single['no_kwitansi']; ?>" readonly>
                                     <?= form_error('no_urut', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-md-6">
                                     <label>No Invoice</label>
-                                    <?php foreach ($data_invoice as $data) : ?>
-                                    <input type="text" class="form-control" name="invoice" value="<?= $data['id']; ?>" readonly>
+                                    <input type="text" class="form-control" name="invoice" value="<?= $data_kwitansi_single['no_invoice']; ?>" readonly>
                                     <?= form_error('invoice', '<small class="text-danger pl-3">', '</small>'); ?>
-                                    <?php endforeach; ?>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Tujuan</label>
+                                    <input type="text" class="form-control" value="<?= $data_kwitansi_single['tujuan']; ?>" readonly>
+                                    <?= form_error('invoice', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>Tujuan pembayaran</label>
+                                    <label>Untuk pembayaran</label>
                                     <input type="text" class="form-control" name="tujuan_pembayaran" value="<?= $data_kwitansi_single['tujuan_pembayaran']; ?>">
                                     <?= form_error('tujuan_pembayaran', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>

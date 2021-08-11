@@ -22,7 +22,7 @@ class M_kwitansi extends CI_Model {
 	private function _get_datatables_query()
 	{
 
-		$this->db->select('*');
+		$this->db->select('*, (kuantitas * harga - ((diskon * 0.01) * harga * kuantitas)) as total');
 		$this->db->from('tb_invoice a');
         $this->db->join('tb_kwitansi b', 'a.id = b.invoice');
 
@@ -96,7 +96,7 @@ class M_kwitansi extends CI_Model {
 		$response = array();
  
 		// Select record
-		$this->db->select('id,tujuan');
+		$this->db->select('id,tujuan,uraian');
 		$this->db->where('id', $postData['id']);
 		$q = $this->db->get('tb_invoice');
 		$response = $q->result_array();
@@ -138,7 +138,7 @@ class M_kwitansi extends CI_Model {
 
 	public function getDataTotal($id)
     {
-        $query = $this->db->query("SELECT (kuantitas * harga * diskon) as total from tb_invoice a join tb_kwitansi b on a.id = b.invoice where id_kwitansi = '$id' ");
+        $query = $this->db->query("SELECT (kuantitas * harga - (diskon * 0.01 * kuantitas * harga)) as total from tb_invoice a join tb_kwitansi b on a.id = b.invoice where id_kwitansi = '$id' ");
 		$hasil = $query->row();
 
         return $hasil->total;
@@ -176,21 +176,12 @@ class M_kwitansi extends CI_Model {
         return $query->result_array();
 	}
 
-	public function read_check($kode)
-	{
-		$this->db->select('*');
-		$this->db->from('tb_invoice');
-		$this->db->where('no_invoice', $kode);
-		$query = $this->db->get();
-
-		return $query->row_array();
-	}
-
 	public function read_single($id) {
 
 		// sql read
 		$this->db->select('*');
-		$this->db->from('tb_kwitansi');
+		$this->db->from('tb_kwitansi a');
+        $this->db->join('tb_invoice b', 'a.invoice = b.id');
 		$this->db->where('id_kwitansi', $id);
 
 		$query = $this->db->get();

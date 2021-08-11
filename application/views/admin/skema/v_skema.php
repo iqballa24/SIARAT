@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                    <a href="<?= base_url('admin/skema/insert'); ?>" class=""> <i class="fas fa-plus"></i> Tambah</a>
+                        <a href="<?= base_url('admin/skema/insert'); ?>" class=""> <i class="fas fa-plus"></i> Tambah</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-responsive-xs" id="table" width="100%" cellspacing="0">

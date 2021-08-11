@@ -7,7 +7,7 @@
                         <a href="<?= base_url('admin/kwitansi/insert'); ?>"><i class="fas fa-plus"></i> Tambah</a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped table-responsive-lg" id="table" width="100%" cellspacing="0">
+                        <table class="table table-striped table-responsive" id="table" width="100%" cellspacing="0">
                             <thead class="">
                                 <tr>
                                     <th> # </th>

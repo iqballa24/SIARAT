@@ -260,7 +260,8 @@ class Asesor extends CI_Controller {
 		}
 	}
 
-	public function delete() {
+	public function delete() 
+	{
 
 		$id = $this->uri->segment(4);
 
@@ -294,4 +295,19 @@ class Asesor extends CI_Controller {
 		$this->session->set_tempdata('message','Data berhasil dihapus',1);
 		redirect('admin/asesor/read');
 	}
+
+	public function export_excel()
+    {
+        $data_asesor = $this->M_asesor->read();
+
+        //mengirim data ke view
+        $output = array(
+
+            //data provinsi dikirim ke view
+            'data_asesor' => $data_asesor,
+        );
+
+        //memanggil file view
+        $this->load->view('admin/asesor/v_asesor_export_excel', $output);
+    }
 }

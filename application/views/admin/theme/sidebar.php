@@ -80,19 +80,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= site_url('admin/suratmasuk/read'); ?>" class="nav-link <?= $i == 'suratkeluar' && $x == 'read' ? 'active' : ''; ?>">
+                            <a href="<?= site_url('admin/suratmasuk/read'); ?>" class="nav-link <?= $i == 'suratmasuk' && $x == 'read' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
                                 <p>Surat Masuk</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= site_url('admin/suratkeluar/read'); ?>" class="nav-link <?= $i == 'suratkeluar' && $x == 'insert' ? 'active' : ''; ?>">
+                            <a href="<?= site_url('admin/suratkeluar/read'); ?>" class="nav-link <?= $i == 'suratkeluar' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
                                 <p>Surat Keluar</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= site_url('admin/surattugas/read'); ?>" class="nav-link <?= $i == 'surattugas' && $x == 'insert' ? 'active' : ''; ?>">
+                            <a href="<?= site_url('admin/surattugas/read'); ?>" class="nav-link <?= $i == 'surattugas' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
                                 <p>Surat Tugas</p>
                             </a>

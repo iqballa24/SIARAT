@@ -17,17 +17,18 @@
                                     <label>No Invoice</label>
                                     <select id="invoice" name="invoice" class="form-control" required>
                                         <?php foreach ($data_invoice as $data) : ?>
+                                            <option value="" selected disabled>-- Pilih --</option>
                                             <option value="<?php echo $data['id']; ?>"><?= $data['no_invoice']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Tujuan</label>
-                                    <input id="tujuan" type="text" class="form-control" value="" readonly>
+                                    <input id="txttujuan" type="text" class="form-control" value="" readonly>
                                 </div>
                                 <div class="form-group col-12">
                                     <label>Untuk pembayaran</label>
-                                    <input type="text" class="form-control" name="tujuan_pembayaran" value="<?= set_value('tujuan_pembayaran'); ?>">
+                                    <textarea id="txtpembayaran" type="text" class="form-control" name="tujuan_pembayaran" value="<?= set_value('tujuan_pembayaran'); ?>" rows="1"></textarea>
                                     <?= form_error('tujuan_pembayaran', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <div class="form-group col-md-12">
@@ -56,6 +57,7 @@ const baseURL= "<?php echo base_url();?>";
 $(document).ready(function(){
     $('#invoice').change(function(){
         const invoice = $(this).val();
+        const txtpembayaran = $(this).val();
 
         // Ajax request
         $.ajax({
@@ -66,11 +68,13 @@ $(document).ready(function(){
             success:function(response){
 
                 // Remove option
-                $('#tujuan').find('option').not(':first').remove();
+                $('#txtpembayaran').find('option').not(':first').remove();
+                $('#txttujuan').find('option').not(':first').remove();
 
                 // Add option
                 $.each(response,function(index,data){
-                    $('#tujuan').val(data['tujuan']);
+                    $('#txttujuan').val(data['tujuan']);
+                    $('#txtpembayaran').val(data['uraian']);
                 });
             }
         })

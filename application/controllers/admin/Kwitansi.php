@@ -52,7 +52,6 @@ class kwitansi extends CI_Controller {
 		
 		//mencetak data json
 		foreach ($list as $field) {
-			$jumlah = $field['harga'] * $field['kuantitas'] * $field['diskon'];
 			$no++;
 			$row = array();
 			$row[] = $no;
@@ -60,7 +59,7 @@ class kwitansi extends CI_Controller {
 			$row[] = $field['tujuan'];
 			$row[] = $field['terbilang'];
 			$row[] = $field['tujuan_pembayaran'];
-			$row[] = 'Rp. '.number_format($jumlah);
+			$row[] = 'Rp. '.number_format($field['total']);
 			$row[] = date('d F Y', strtotime($field['tgl_terima']));
 			$row[] = $field['lampiran'] == '' ? '<a href="'.site_url('admin/invoice/update/'.$field['id']).'" title="Upload"> <i class="fas fa-file-upload
 			"></i> </a>' : '<a href="'.base_url('upload_folder/pdf/'.$field['lampiran']).'" target="_blank">'.$field['lampiran'].'</a>';
@@ -178,24 +177,24 @@ class kwitansi extends CI_Controller {
 
 	}
 
-	public function insert_check()
-	{
+	// public function insert_check()
+	// {
 
-		//Menangkap data input dari view
-		$kode = $this->input->post('kode');
+	// 	//Menangkap data input dari view
+	// 	$kode = $this->input->post('kode');
 
-		//check data di database
-		$data_user = $this->m_category->read_check($kode);
+	// 	//check data di database
+	// 	$data_user = $this->m_category->read_check($kode);
 
-		if (!empty($data_user)) {
+	// 	if (!empty($data_user)) {
 
-			//membuat pesan error
-			$this->form_validation->set_message('insert_check', "Kode surat " . $kode . " sudah ada dalam database");
-			$this->session->set_tempdata('error', "Tidak dapat memasukan data yang sama", 1);
-			return FALSE;
-		}
-		return TRUE;
-	}
+	// 		//membuat pesan error
+	// 		$this->form_validation->set_message('insert_check', "Kode surat " . $kode . " sudah ada dalam database");
+	// 		$this->session->set_tempdata('error', "Tidak dapat memasukan data yang sama", 1);
+	// 		return FALSE;
+	// 	}
+	// 	return TRUE;
+	// }
 
 	public function getInvoice()
 	{
@@ -214,7 +213,6 @@ class kwitansi extends CI_Controller {
 		$name  = $this->session->userdata('name');
 		$image = $this->session->userdata('image');
 		$data_setting  = $this->M_setting->read();
-        $data_invoice = $this->M_kwitansi->getDataInvoice();
 
 		//function read berfungsi mengambil 1 data dari table kategori sesuai id yg dipilih
 		$data_kwitansi_single = $this->M_kwitansi->read_single($id);
@@ -224,7 +222,6 @@ class kwitansi extends CI_Controller {
 			'judul'	 		=> 'Update Kwitansi',
 			'theme_page' 	=> 'kwitansi/v_kwitansi_update',
 			'data_setting'  => $data_setting,
-			'data_invoice'  => $data_invoice,
 			'name'		 	=> $name,
 			'image'		 	=> $image,
 
