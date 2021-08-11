@@ -133,8 +133,9 @@ class Invoice extends CI_Controller {
 			$this->form_validation->set_rules('tujuan', 'Tujuan', 'required');
 			$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
 			$this->form_validation->set_rules('status', 'Status', 'required');
+			$this->form_validation->set_rules('terbilang', 'Terbilang', 'required');
 			$this->form_validation->set_rules('uraian', 'Uraian', 'required');
-			$this->form_validation->set_rules('kuantitas', 'Kuantitas', 'required');
+			$this->form_validation->set_rules('kuantitas', 'Qty', 'required');
 			$this->form_validation->set_rules('harga', 'Harga', 'required');
 			$this->form_validation->set_rules('diskon', 'Diskon');
 
@@ -150,7 +151,7 @@ class Invoice extends CI_Controller {
 				$uraian	  	 = $this->input->post('uraian');
 				$kuantitas	 = $this->input->post('kuantitas');
 				$harga	  	 = preg_replace('/[Rp. ]/','',$this->input->post('harga'));
-				$diskon	  	 = $this->input->post('diskon') == '' ? '1' : $this->input->post('diskon') ;
+				$diskon	  	 = $this->input->post('diskon') == '' ? '0' : $this->input->post('diskon') ;
 				$terbilang	 = $this->input->post('terbilang');
 				$year		 = date('Y');
 		
@@ -198,25 +199,6 @@ class Invoice extends CI_Controller {
 
 	}
 
-	public function insert_check()
-	{
-
-		//Menangkap data input dari view
-		$kode = $this->input->post('kode');
-
-		//check data di database
-		$data_user = $this->m_category->read_check($kode);
-
-		if (!empty($data_user)) {
-
-			//membuat pesan error
-			$this->form_validation->set_message('insert_check', "Kode surat " . $kode . " sudah ada dalam database");
-			$this->session->set_tempdata('error', "Tidak dapat memasukan data yang sama", 1);
-			return FALSE;
-		}
-		return TRUE;
-	}
-
 	public function update()
 	{
 		//menangkap id data yg dipilih dari view (parameter get)
@@ -262,7 +244,7 @@ class Invoice extends CI_Controller {
 		$uraian	  	 = $this->input->post('uraian');
 		$kuantitas	 = $this->input->post('kuantitas');
 		$harga	  	 = $this->input->post('harga');
-		$diskon	  	 = $this->input->post('diskon') == '' ? '1' : $this->input->post('diskon') ;
+		$diskon	  	 = $this->input->post('diskon') == '' ? '0' : $this->input->post('diskon') ;
 		$terbilang	 = $this->input->post('terbilang');
 				
         //menangkap id data yg dipilih dari view (parameter get)
@@ -445,31 +427,18 @@ class Invoice extends CI_Controller {
 		$document = file_get_contents("./assets/invoice.rtf");
 
 		// menangkap data input dari view
-		$DataNoInvoice		= $this->M_invoice->getDataNoInvoice($id);
-		$DataTglInvoice		= $this->M_invoice->getDataTglInvoice($id);
-		$DataJatuhTempo		= $this->M_invoice->getDataJatuhTempo($id);
-		$DataTujuan			= $this->M_invoice->getDataTujuan($id);
-		$DataLokasi			= $this->M_invoice->getDataLokasi($id);
-		$DataUraian			= $this->M_invoice->getDataUraian($id);
-		$DataQty			= $this->M_invoice->getDataQty($id);
-		$DataHarga			= $this->M_invoice->getDataHarga($id);
-		$DataDiskon			= $this->M_invoice->getDataDiskon($id);
-		$DataTotal			= $this->M_invoice->getDataTotal($id);
-		$DataTerbilang		= $this->M_invoice->getDataTerbilang($id);
-		$DataStatus			= $this->M_invoice->getDataStatus($id);
-
-		$no_invoice 	  	= $DataNoInvoice;
-		$tgl_invoice 	  	= $DataTglInvoice;
-		$jatuh_tempo 	  	= $DataJatuhTempo;
-		$tujuan		 	  	= $DataTujuan;
-		$lokasi		 	  	= $DataLokasi;
-		$uraian		 	  	= $DataUraian;
-		$qty		 	  	= $DataQty;
-		$harga		 	  	= $DataHarga;
-		$diskon		 	  	= $DataDiskon;
-		$total		 	  	= $DataTotal;
-		$terbilang	 	  	= $DataTerbilang;
-		$status 	  		= $DataStatus;
+		$no_invoice 	  	= $this->M_invoice->getDataNoInvoice($id);
+		$tgl_invoice 	  	= $this->M_invoice->getDataTglInvoice($id);
+		$jatuh_tempo 	  	= $this->M_invoice->getDataJatuhTempo($id);
+		$tujuan		 	  	= $this->M_invoice->getDataTujuan($id);
+		$lokasi		 	  	= $this->M_invoice->getDataLokasi($id);
+		$uraian		 	  	= $this->M_invoice->getDataUraian($id);
+		$qty		 	  	= $this->M_invoice->getDataQty($id);
+		$harga		 	  	= $this->M_invoice->getDataHarga($id);
+		$diskon		 	  	= $this->M_invoice->getDataDiskon($id);
+		$total		 	  	= $this->M_invoice->getDataTotal($id);
+		$terbilang	 	  	= $this->M_invoice->getDataTerbilang($id);
+		$status 	  		= $this->M_invoice->getDataStatus($id);
 
 		// isi dokumen dinyatakan dalam bentuk string
 		$document = str_replace("#no_invoice", $no_invoice, $document);
@@ -480,7 +449,7 @@ class Invoice extends CI_Controller {
 		$document = str_replace("#uraian", $uraian, $document);
 		$document = str_replace("#qty", $qty, $document);
 		$document = str_replace("#harga", 'Rp. '.number_format($harga,0,',','.'), $document);
-		$document = str_replace("#diskon", $diskon == '1' ? '-': $diskon, $document);
+		$document = str_replace("#diskon", $diskon == '0' ? '-': $diskon, $document);
 		$document = str_replace("#total", 'Rp. '.number_format($total,0,',','.'), $document);
 		$document = str_replace("#terbilang", $terbilang, $document);
 		$document = str_replace("#status", $status == '1' ? 'Lunas' : 'Belum lunas', $document);
