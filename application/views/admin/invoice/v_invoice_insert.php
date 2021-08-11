@@ -23,6 +23,7 @@
                                     <label>Jatuh tempo</label>
                                     <input type="text" class="form-control" name="jatuh_tempo" value="<?= set_value('jatuh_tempo'); ?>">
                                     <?= form_error('jatuh_tempo', '<small class="text-danger pl-3">', '</small>'); ?>
+
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Tujuan</label>
@@ -34,34 +35,43 @@
                                     <input type="text" name="lokasi" class="form-control" value="<?= set_value('lokasi');?>">
                                     <?= form_error('lokasi', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <div class="form-group row col-12">
+                                <div class="form-group col-md-12">
                                     <label for="inputName" class="col-md-1 col-form-label">Table</label>
-                                    <div class="col-md-6">
-                                        <textarea id="editor" type="text" class="form-control" name="uraian" value="" rows="5" placeholder="uraian"><?= set_value('uraian'); ?></textarea>
+                                    <textarea id="editor" type="text" class="form-control" name="uraian" value="" rows="1" placeholder="uraian"><?= set_value('uraian'); ?></textarea>
+                                    <?= form_error('uraian', '<small class="text-danger pl-3">', '</small>'); ?>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <input type="text" class="form-control" id="txtqty" placeholder="Qty" name="kuantitas" value="<?= set_value('kuantitas'); ?>">
+                                    <?= form_error('kuantitas', '<small class="text-danger pl-3">', '</small>'); ?>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <input type="text" class="form-control" id="txtharga" placeholder="Harga" name="harga" value="<?= set_value('harga'); ?>">
+                                    <?= form_error('harga', '<small class="text-danger pl-3">', '</small>'); ?>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <input type="text" class="form-control" id="txtdiskon" placeholder="Diskon" name="diskon" value="<?= set_value('diskon'); ?>">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input id="txttotal" class="form-control" type="text" value="total" readonly>
+                                </div>
+                                <div class="row col-md-6">
+                                    <div class="form-group col-md-12">
+                                        <label>Status</label>
+                                        <select name="status" class="form-control" value="<?= set_value('status'); ?>">
+                                            <option selected disabled>-- Pilih --</option>
+                                            <option value="1">Lunas</option>
+                                            <option value="2">Belum lunas</option>
+                                        </select> 
+                                        <?= form_error('status', '<small class="text-danger pl-3">', '</small>'); ?>
+                                        
                                     </div>
-                                    <div class="col-md-1">
-                                        <input type="text" class="form-control" id="inputName" placeholder="Qty" name="kuantitas" value="<?= set_value('kuantitas'); ?>">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control" id="txtharga" placeholder="Harga" name="harga" value="<?= set_value('harga'); ?>">
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="text" class="form-control" id="inputName" placeholder="Diskon" name="diskon" value="<?= set_value('diskon'); ?>">
+                                    <div class="form-group col-md-12">
+                                        <label>Terbilang</label>
+                                        <input type="text" name="terbilang" class="form-control" value="<?= set_value('terbilang');?>">
+                                        <?= form_error('terbilang', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-12">
-                                    <label>Status</label>
-                                    <select name="status" class="form-control" value="<?= set_value('status'); ?>">
-                                        <option selected disabled>-- Pilih --</option>
-                                        <option value="1">Lunas</option>
-                                        <option value="2">Belum lunas</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label>Terbilang</label>
-                                    <input type="text" name="terbilang" class="form-control" value="<?= set_value('terbilang');?>">
-                                    <?= form_error('terbilang', '<small class="text-danger pl-3">', '</small>'); ?>
-                                </div>
+
                             </div>
                         <div class="text-right">
                             <p>&nbsp;</p>
@@ -77,20 +87,43 @@
 </div>
 
 <script type="text/javascript">
-    ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .then( editor => {
-                    console.log( editor );
-            } )
-            .catch( error => {
-                    console.error( error );
-            } );
 
+    //Init variable 
+    const txtqty = document.getElementById('txtqty');
     const txtharga = document.getElementById('txtharga');
-    txtharga.addEventListener('keyup', function(e){
-        txtharga.value = formatRupiah(this.value, 'Rp. ');
+    const txttotal = document.getElementById('txttotal');
+    const txtdiskon = document.getElementById('txtdiskon');
+    let total = '';
+    
+    // Event untuk menghitung total ketika field qty di input
+    txtqty.addEventListener('keyup', ()=>{
+        let diskon = txtdiskon.value == '' ? 0 : txtdiskon.value;
+        let harga = txtharga.value.replace(/\./g,'')
+        total = txtqty.value * harga - (diskon * 0.01 * txtqty.value * harga);
+
+        txttotal.value = formatRupiah(total.toString());
     });
 
+    // Event untuk menghitung total ketika field harga di input
+    txtharga.addEventListener('keyup', function(e){
+        txtharga.value = formatRupiah(this.value);
+        let diskon = txtdiskon.value == '' ? 0 : txtdiskon.value;
+        let harga = txtharga.value.replace(/\./g,'')
+        total = txtqty.value * harga - (diskon * 0.01 * txtqty.value * harga);
+
+        txttotal.value = formatRupiah(total.toString());
+    });
+
+    // Event untuk menghitung total ketika field diskon di input
+    txtdiskon.addEventListener('keyup', function(e){
+        let diskon = txtdiskon.value == '' ? 0 : txtdiskon.value;
+        let harga = txtharga.value.replace(/\./g,'')
+        total = txtqty.value * harga - (diskon * 0.01 * txtqty.value * harga);
+
+        txttotal.value = formatRupiah(total.toString());
+    });
+
+    // Mengubah string menjadi format rupiah
     function formatRupiah(angka, prefix){
         var number_string = angka.replace(/[^,\d]/g, '').toString(),
         split   		= number_string.split(','),

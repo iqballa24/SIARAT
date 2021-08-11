@@ -54,7 +54,7 @@
                                         <td><?= $data['uraian'] ?></td>
                                         <td><?= $data['kuantitas'] ?></td>
                                         <td><?= 'Rp. '.number_format($data['harga']) ?></td>
-                                        <td><?= $data['diskon'] == '1' ? '-' : $data['diskon'] ?></td>
+                                        <td><?= $data['diskon'] == '0' ? '-' : $data['diskon'] ?></td>
                                         <td><?= 'Rp. '.number_format($total) ?></td>
                                     </tr>
                                 </tbody>
