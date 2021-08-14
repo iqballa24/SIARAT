@@ -10,8 +10,8 @@
                             </div>
                             <div class="col-6 text-right">
                                 <a href="<?= base_url('admin/asesor/export_excel'); ?>" class="text-success p-3" title="Export excel"><i class="fas fa-file-export"></i> Excel</a>
-                                |
-                                <a href="<?= base_url('admin/asesor/export_excel'); ?>" class="text-success p-3" title="Export excel"><i class="fas fa-file-export"></i> Excel</a>
+                                <!-- |
+                                <a href="<?= base_url('admin/asesor/export_excel'); ?>" class="text-success p-3" title="Export excel"><i class="fas fa-file-export"></i> Excel</a> -->
                             </div>
                         </div>
                     </div>

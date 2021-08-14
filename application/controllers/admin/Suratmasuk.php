@@ -445,4 +445,18 @@ class Suratmasuk extends CI_Controller {
         // memanggil file view
         $this->load->view('admin/theme/index', $output);
     }
+
+	public function export_excel()
+    {
+        $data_suratmasuk = $this->m_suratmasuk->read();
+
+        //mengirim data ke view
+        $output = array(
+            //data provinsi dikirim ke view
+            'data_suratmasuk' => $data_suratmasuk,
+        );
+
+        //memanggil file view
+        $this->load->view('admin/surat/v_suratmasuk_export_excel', $output);
+    }
 }

@@ -513,4 +513,18 @@ class Suratkeluar extends CI_Controller {
         // memanggil file view
         $this->load->view('admin/theme/index', $output);
     }
+
+	public function export_excel()
+    {
+        $data_suratkeluar = $this->m_suratkeluar->read();
+
+        //mengirim data ke view
+        $output = array(
+            //data provinsi dikirim ke view
+            'data_suratkeluar' => $data_suratkeluar,
+        );
+
+        //memanggil file view
+        $this->load->view('admin/surat/v_suratkeluar_export_excel', $output);
+    }
 }

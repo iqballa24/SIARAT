@@ -433,4 +433,18 @@ class kwitansi extends CI_Controller {
 		header("Content-length: ".strlen($document));
 		echo $document;
 	}
+
+	public function export_excel()
+    {
+        $data_kwitansi = $this->M_kwitansi->read();
+
+        //mengirim data ke view
+        $output = array(
+            //data provinsi dikirim ke view
+            'data_kwitansi' => $data_kwitansi,
+        );
+
+        //memanggil file view
+        $this->load->view('admin/kwitansi/v_kwitansi_export_excel', $output);
+    }
 }

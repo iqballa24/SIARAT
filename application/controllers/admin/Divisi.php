@@ -276,5 +276,20 @@ class Divisi extends CI_Controller {
 		$this->session->set_tempdata('message','Data berhasil dihapus',1);
 		redirect('admin/divisi/read');
 	}
+
+	public function export_excel()
+    {
+        $data_divisi = $this->M_divisi->read();
+
+        //mengirim data ke view
+        $output = array(
+
+            //data provinsi dikirim ke view
+            'data_divisi' => $data_divisi,
+        );
+
+        //memanggil file view
+        $this->load->view('admin/divisi/v_divisi_export_excel', $output);
+    }
     
 }

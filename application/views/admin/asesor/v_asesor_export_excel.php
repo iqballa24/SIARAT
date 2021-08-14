@@ -18,7 +18,6 @@ header("Content-disposition: attachment; filename=Data Asesor.xls");
         </tr>
     </thead>
     <tbody>
-        <!--looping data peminjaman-->
         <?php foreach ($data_asesor as $data) : ?>
             <!--cetak data per baris-->
             <tr>

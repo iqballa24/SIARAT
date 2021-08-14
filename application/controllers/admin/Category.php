@@ -280,4 +280,19 @@ class Category extends CI_Controller {
 		$this->session->set_tempdata('message','Data berhasil dihapus',1);
 		redirect('admin/category/read');
 	}
+
+	public function export_excel()
+    {
+        $data_category = $this->m_category->read();
+
+        //mengirim data ke view
+        $output = array(
+
+            //data provinsi dikirim ke view
+            'data_category' => $data_category,
+        );
+
+        //memanggil file view
+        $this->load->view('admin/category/v_category_export_excel', $output);
+    }
 }

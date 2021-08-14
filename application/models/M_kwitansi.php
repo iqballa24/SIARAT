@@ -168,8 +168,9 @@ class M_kwitansi extends CI_Model {
 	public function read() {
 
 		//sql read
-		$this->db->select('*');
-		$this->db->from('tb_invoice');
+		$this->db->select('*, (kuantitas * harga - ((diskon * 0.01) * harga * kuantitas)) as total');
+		$this->db->from('tb_invoice a');
+        $this->db->join('tb_kwitansi b', 'a.id = b.invoice');
 		$query = $this->db->get();
 
 		// $query -> result_array = mengirim data ke controller dalam bentuk semua data

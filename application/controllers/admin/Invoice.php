@@ -460,4 +460,18 @@ class Invoice extends CI_Controller {
 		header("Content-length: ".strlen($document));
 		echo $document;
 	}
+
+	public function export_excel()
+    {
+        $data_invoice = $this->M_invoice->read();
+
+        //mengirim data ke view
+        $output = array(
+            //data provinsi dikirim ke view
+            'data_invoice' => $data_invoice,
+        );
+
+        //memanggil file view
+        $this->load->view('admin/invoice/v_invoice_export_excel', $output);
+    }
 }

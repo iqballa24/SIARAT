@@ -4,7 +4,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                    <a href="<?= base_url('admin/category/insert'); ?>" class=""> <i class="fas fa-plus"></i> Tambah</a>
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="<?= base_url('admin/category/insert'); ?>" class=""> <i class="fas fa-plus"></i> Tambah</a>
+                            </div>
+                            <div class="col-6 text-right">
+                                <a href="<?= base_url('admin/category/export_excel'); ?>" class="text-success p-3" title="Export excel"><i class="fas fa-file-export"></i> Excel</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-responsive-md" id="table" width="100%" cellspacing="0">

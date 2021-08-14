@@ -294,4 +294,19 @@ class Skema extends CI_Controller {
 		$this->session->set_tempdata('message','Data berhasil dihapus',1);
 		redirect('admin/skema/read');
 	}
+
+	public function export_excel()
+    {
+        $data_skema = $this->M_skema->read();
+
+        //mengirim data ke view
+        $output = array(
+
+            //data provinsi dikirim ke view
+            'data_skema' => $data_skema,
+        );
+
+        //memanggil file view
+        $this->load->view('admin/skema/v_skema_export_excel', $output);
+    }
 }
