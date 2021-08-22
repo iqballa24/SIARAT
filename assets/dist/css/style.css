@@ -11,9 +11,8 @@
 }
 
 .login-page .btn-login:hover {
-    font-weight: 500;
     transition: all 0.1s ease;
-    background-color: #c52931;
+    background-color: #b3282f;
 }
 
 .card {
