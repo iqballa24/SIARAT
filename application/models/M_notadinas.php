@@ -91,6 +91,54 @@ class M_notadinas extends CI_Model {
         return $hasil->nomor;
     }	
 
+	public function getLastDataNomor($id)
+    {
+        $query = $this->db->query("SELECT no_notadinas from tb_notadinas where id = $id");
+		$hasil = $query->row();
+
+        return $hasil->no_notadinas;
+    }
+
+	public function getLastDataTujuan($id)
+    {
+        $query = $this->db->query("SELECT tujuan from tb_notadinas where id = $id");
+		$hasil = $query->row();
+
+        return $hasil->tujuan;
+    }
+
+	public function getLastDataDari($id)
+    {
+        $query = $this->db->query("SELECT dari from tb_notadinas where id = $id");
+		$hasil = $query->row();
+
+        return $hasil->dari;
+    }
+
+	public function getLastDataPerihal($id)
+    {
+        $query = $this->db->query("SELECT perihal from tb_notadinas where id = $id");
+		$hasil = $query->row();
+
+        return $hasil->perihal;
+    }
+
+	public function getLastDataTanggal($id)
+    {
+        $query = $this->db->query("SELECT tanggal from tb_notadinas where id = $id");
+		$hasil = $query->row();
+
+        return $hasil->tanggal;
+    }
+
+	public function getLastDataNoUrut($id)
+    {
+        $query = $this->db->query("SELECT no_urut from tb_notadinas where id = $id");
+		$hasil = $query->row();
+
+        return $hasil->no_urut;
+    }
+
     public function getDataNoSurat($id)
     {
         $query = $this->db->query("SELECT no_notadinas as nomor from tb_notadinas where id = $id");

@@ -412,4 +412,45 @@ class Notadinas extends CI_Controller
         // memanggil file view
         $this->load->view('admin/theme/index', $output);
     }
+
+	public function getTemplate() 
+	{
+		$document = file_get_contents("./assets/notadinas.rtf");
+		$id  	  = $this->uri->segment(4);
+
+		// menangkap data input dari view
+		$nomor		= $this->M_notadinas->getLastDataNomor($id);
+		$tujuan	  	= $this->M_notadinas->getLastDataTujuan($id);
+		$dari	  	= $this->M_notadinas->getLastDataDari($id);
+		$perihal	= $this->M_notadinas->getLastDataPerihal($id);
+		$tanggal	= $this->M_notadinas->getLastDataTanggal($id);
+		$no_urut	= $this->M_notadinas->getLastDataNoUrut($id);
+
+		// isi dokumen dinyatakan dalam bentuk string
+		$document = str_replace("#tujuan", $tujuan, $document);
+		$document = str_replace("#dari", $dari, $document);
+		$document = str_replace("#tanggal", date('d F Y', strtotime($tanggal)), $document);
+		$document = str_replace("#perihal", $perihal, $document);
+		$document = str_replace("#nomor", $nomor, $document);
+
+		// header untuk membuka file output RTF dengan MS. Word
+		header("Content-type: application/msword");
+		header("Content-disposition: inline; filename= .$no_urut $perihal.doc");
+		header("Content-length: ".strlen($document));
+		echo $document;
+	}
+
+	public function export_excel()
+    {
+        $data_notadinas = $this->M_notadinas->read();
+
+        //mengirim data ke view
+        $output = array(
+            //data provinsi dikirim ke view
+            'data_notadinas' => $data_notadinas,
+        );
+
+        //memanggil file view
+        $this->load->view('admin/notadinas/v_notadinas_export_excel', $output);
+    }
 }
