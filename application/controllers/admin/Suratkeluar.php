@@ -321,7 +321,7 @@ class Suratkeluar extends CI_Controller {
     {
         //setting library upload
         $config['upload_path']          = './upload_folder/pdf';
-        $config['allowed_types']        = 'gif|jpg|png|pdf';
+        $config['allowed_types']        = 'pdf';
         $config['max_size']             = 5000;
         $this->load->library('upload', $config);
 
@@ -358,10 +358,14 @@ class Suratkeluar extends CI_Controller {
 				$image 					 = $this->session->userdata('image');
 				$data_setting     		 = $this->m_setting->read();
 
+				//respon alasan kenapa gagal upload
+				$response = $this->upload->display_errors();
+
 				//mengirim data ke view
 				$output = array(
 					'judul'	 			      => 'Surat keluar',
 					'theme_page' 		   	  => 'surat/v_suratkeluar_update',
+					'response'      		  => $response,
 					'data_category' 		  => $data_category,
 					'data_suratkeluar_single' => $data_suratkeluar_single,
 					'data_divisi'			  => $data_divisi,

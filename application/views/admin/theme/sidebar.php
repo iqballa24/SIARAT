@@ -82,19 +82,25 @@
                         <li class="nav-item">
                             <a href="<?= site_url('admin/suratmasuk/read'); ?>" class="nav-link <?= $i == 'suratmasuk' && $x == 'read' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                <p>Surat Masuk</p>
+                                <p>Surat masuk</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= site_url('admin/suratkeluar/read'); ?>" class="nav-link <?= $i == 'suratkeluar' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                <p>Surat Keluar</p>
+                                <p>Surat keluar</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= site_url('admin/surattugas/read'); ?>" class="nav-link <?= $i == 'surattugas' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                <p>Surat Tugas</p>
+                                <p>Surat tugas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('admin/notadinas/read'); ?>" class="nav-link <?= $i == 'notadinas' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
+                                <p>Nota dinas</p>
                             </a>
                         </li>
                     </ul>
