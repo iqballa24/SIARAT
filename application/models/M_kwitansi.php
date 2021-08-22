@@ -6,10 +6,10 @@ class M_kwitansi extends CI_Model {
 	var $table = array('tb_invoice');
 
 	//field yang ditampilkan
-	var $column_order = array(null,'no_kwitansi', 'tujuan', 'terbilang', 'tujuan_pembayaran', 'jumlah', 'tgl_terima');
+	var $column_order = array(null,'no_kwitansi', 'tujuan', 'terbilang', 'tujuan_pembayaran', 'tgl_terima');
 
 	//field yang diizin untuk pencarian 
-	var $column_search = array('no_kwitansi', 'tujuan', 'terbilang', 'tujuan_pembayaran', 'jumlah', 'tgl_terima');
+	var $column_search = array('no_kwitansi', 'tujuan', 'terbilang', 'tujuan_pembayaran', 'tgl_terima');
 
 	//field pertama yang diurutkan
 	var $order = array('id_kwitansi' => 'desc');

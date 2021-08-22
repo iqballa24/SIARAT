@@ -55,7 +55,7 @@
 				"type": "POST"
 			},
 			"columnDefs": [{
-				"targets": [0, 7],
+				"targets": [0, 8],
 				"className": 'dt-center',
 				"orderable": false,
 			}],
