@@ -1,11 +1,8 @@
-.login-page .bg-login {
-    margin-left: -8px !important;
-    height: 100vh !important;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../img/bg-login.jpg");
+.login-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../img/background.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
 }
 
 .login-page .btn-login {
@@ -14,10 +11,27 @@
 }
 
 .login-page .btn-login:hover {
-    color: #CF2932;
-    letter-spacing: 0.5px;
+    font-weight: 500;
     transition: all 0.1s ease;
-    border: 1px solid #CF2932;
-    background-color: transparent;
+    background-color: #c52931;
 }
 
+.card {
+    border-radius: 15px;
+    padding: 0px 10px;
+    background-color: #ffffff91;
+    color: #3b3b3b;
+}
+
+.card-body {
+    background-color: transparent;
+
+}
+
+.login-box-msg, .input-group-text {
+    color: #363636;
+}
+
+input.form-control{
+    background-color: #ffffff85;
+}

@@ -17,18 +17,20 @@
     <link rel="stylesheet" href="<?= base_url('assets/dist/css/style.css'); ?>">
 </head>
 
-<body class="hold-transition login-page bg-white">
+<body class="hold-transition login-page">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="login-box mx-auto">
-                    <div class="login-logo">
-                        <a href="#"><b>Arsip</b> LSP HCMI</a>
-                    </div>
+                <div class="login-box mx-auto" >
                     <!-- /.login-logo -->
                     <div class="card">
+                        <div class="login-logo mt-4 mb-0">
+                            <img src="<?= base_url("assets/img/logolsp.png"); ?>" alt="logo" width="120px">
+                        </div>
                         <div class="card-body login-card-body">
-                            <p class="login-box-msg">Sign in to start your session</p>
+                            <h5 class="login-box-msg">
+                                <strong>Arsip</strong> LSP HCMI
+                            </h5> 
                             <?= form_error('username', '<div class="alert alert-warning" role="alert"><small class="text-white pl-3">', '</small></div>'); ?>
                             <form class="user" method="post" action="<?php echo site_url('admin/auth/login/'); ?>">
                                 <div class="input-group mb-3">
@@ -58,6 +60,8 @@
 
                         </div>
                         <!-- /.login-card-body -->
+                        <hr>
+                        <p class="login-box-msg text-sm">Copyright © 2021 LSP HCMI. All rights reserved.</p>
                     </div>
                 </div>
             </div>
