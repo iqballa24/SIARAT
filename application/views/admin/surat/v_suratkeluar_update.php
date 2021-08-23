@@ -45,7 +45,7 @@
                                     <label>Divisi/bagian</label>
                                     <select name="divisi" class="form-control" value="<?= set_value('divisi'); ?>" required>
                                         <?php foreach ($data_divisi as $divisi) : ?>
-                                            <?php if ($divisi['kd_surat'] == $data_suratkeluar_single['kd_divisi']) : ?>
+                                            <?php if ($divisi['kode'] == $data_suratkeluar_single['kd_divisi']) : ?>
                                                 <option value="<?= $divisi['kode']; ?>" selected><?= $divisi['divisi']; ?></option>
                                             <?php else : ?>
                                                 <option value="<?= $divisi['kode']; ?>"><?= $divisi['divisi']; ?></option>
