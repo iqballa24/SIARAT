@@ -9,6 +9,13 @@
                     <div class="card-body">
                         <form method="post" action="<?= site_url('admin/surattugas/update_submit/'.$data_surattugas_single['id_surat']); ?>" enctype="multipart/form-data">
                             <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group col-12">
+                                        <label>Perihal</label>
+                                        <input type="text" name="perihal" class="form-control" value="<?= $data_surattugas_single['perihal'];?>">
+                                        <?= form_error('perihal', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-row">
                                         <div class="form-group col-12">
@@ -58,10 +65,10 @@
                                             <label>Asesor</label>
                                             <select name="asesor" class="form-control" value="<?= set_value('asesor'); ?>">
                                                 <?php foreach ($data_asesor as $data) : ?>
-                                                    <?php if ($data['id'] == $data_surattugas_single['asesor']) : ?>
-                                                        <option value="<?= $data['id']; ?>" selected><?= $data['nama']; ?></option>
+                                                    <?php if ($data['nama'] == $data_surattugas_single['asesor']) : ?>
+                                                        <option value="<?= $data['nama']; ?>" selected><?= $data['nama']; ?></option>
                                                     <?php else : ?>
-                                                        <option value="<?= $data['id']; ?>"><?= $data['nama']; ?></option>
+                                                        <option value="<?= $data['nama']; ?>"><?= $data['nama']; ?></option>
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
                                             </select>

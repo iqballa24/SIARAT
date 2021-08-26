@@ -4,7 +4,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="<?= base_url('admin/surattugas/insert'); ?>"><i class="fas fa-plus"></i> Tambah</a>
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="<?= base_url('admin/surattugas/insert'); ?>"><i class="fas fa-plus"></i> Uji kompetensi</a>
+                                <a class="ml-2" href="<?= base_url('admin/surattugas/insert2'); ?>"><i class="fas fa-plus"></i> Lainnya</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-responsive-md" id="table" width="100%" cellspacing="0">
@@ -12,10 +17,8 @@
                                 <tr>
                                     <th> # </th>
                                     <th> No surat </th>
+                                    <th> Perihal </th>
                                     <th> Tanggal Surat </th>
-                                    <th> Asesor </th>
-                                    <th> Skema </th>
-                                    <th> Batch </th>
                                     <th> Tanggal Pelaksanaan </th>
                                     <th> Action </th>
                                 </tr>
@@ -33,24 +36,24 @@
 
 <!-- Js -->
 <script type="text/javascript">
-	$(document).ready(() => {
-		$('#table').DataTable({
-			"responsive": true,
-			"processing": true,
-			"language": {
-				"processing": '<i class="fas fa-circle-notch fa-spin fa-1x fa-fw"></i><span>Loading...</span> '
-			},
-			"serverSide": true,
-			"order": [],
-			"ajax": {
-				"url": "<?php echo site_url('admin/surattugas/datatables') ?>",
-				"type": "POST"
-			},
-			"columnDefs": [{
-				"targets": [0, 7],
-				"className": 'dt-center',
-				"orderable": false,
-			}],
-		});
-	});
+    $(document).ready(() => {
+        $('#table').DataTable({
+            "responsive": true,
+            "processing": true,
+            "language": {
+                "processing": '<i class="fas fa-circle-notch fa-spin fa-1x fa-fw"></i><span>Loading...</span> '
+            },
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": "<?php echo site_url('admin/surattugas/datatables') ?>",
+                "type": "POST"
+            },
+            "columnDefs": [{
+                "targets": [0, 5],
+                "className": 'dt-center',
+                "orderable": false,
+            }],
+        });
+    });
 </script>

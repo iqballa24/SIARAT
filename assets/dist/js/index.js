@@ -48,6 +48,8 @@ $(document).ready(() => {
     const error   = $('.flash-data-error').data('tempdata');
     const info    = $('.flash-data-info').data('tempdata');
     const confirm = $('.flash-data-confirm').data('tempdata');
+
+    // for Error message
     if (error) {
         Swal.fire({
             title: 'Oops...',
@@ -55,18 +57,21 @@ $(document).ready(() => {
             icon: 'error'
         });
     }
+    // for success message
     else if(message) {
         Swal.fire({
             title: 'Success',
             text: message,
             icon: 'success'
         });
+    // for Info message
     }else if(info) {
         Swal.fire({
             title: 'Info',
             text: info,
             icon: 'info'
         });
+    // for download template 
     }else if(confirm) {
         Swal.fire({
             title: 'Success',

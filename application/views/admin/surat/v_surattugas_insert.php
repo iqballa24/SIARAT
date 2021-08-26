@@ -9,6 +9,13 @@
                     <div class="card-body">
                         <form method="post" action="<?= site_url('admin/surattugas/insert/'); ?>" enctype="multipart/form-data">
                             <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group col-12">
+                                        <label>Perihal</label>
+                                        <input type="text" name="perihal" class="form-control" value="<?= set_value('perihal');?>" >
+                                        <?= form_error('perihal', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-row">
                                         <div class="form-group col-12">
@@ -45,7 +52,7 @@
                                             <select name="asesor" class="form-control" value="<?= set_value('asesor'); ?>" >
                                                 <option value="" disabled selected>-- Select --</option>
                                                 <?php foreach ($data_asesor as $data) : ?>
-                                                    <option value="<?php echo $data['id']; ?>"><?= $data['nama']; ?> - <?= $data['Kompetensi']; ?></option>
+                                                    <option value="<?php echo $data['nama']; ?>"><?= $data['nama']; ?> - <?= $data['Kompetensi']; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>

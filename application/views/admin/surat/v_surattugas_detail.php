@@ -15,18 +15,6 @@
                                 <p href="" class=""><?= date('d F Y', strtotime($data['tgl_surat'])); ?></p>
                             </li>
                             <li class="list-group-item">
-                                <b>Asesor: </b>
-                                <p href="" class=""><?= $data['nama']; ?></p>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Skema: </b>
-                                <p href="" class=""><?= $data['skema']; ?></p>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Batch: </b>
-                                <p href="" class=""><?= $data['batch']; ?></p>
-                            </li>
-                            <li class="list-group-item">
                                 <b>Tanggal pelaksanaan: </b>
                                 <p href="" class=""><?= date('d F Y', strtotime($data['tgl_pelaksanaan'])); ?></p>
                             </li>

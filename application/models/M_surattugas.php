@@ -6,10 +6,10 @@ class M_surattugas extends CI_Model {
 	var $table = array('tb_surattugas');
 
 	//field yang ditampilkan
-	var $column_order = array(null,'no_surat','tgl_surat', 'skema','batch', 'tgl_pelaksanaan');
+	var $column_order = array(null,'no_surat','perihal','tgl_surat', 'skema','batch', 'tgl_pelaksanaan');
 
 	//field yang diizin untuk pencarian 
-	var $column_search = array('id_surat','no_surat','tgl_surat', 'skema','batch', 'tgl_pelaksanaan');
+	var $column_search = array('id_surat','no_surat','perihal','tgl_surat', 'skema','batch', 'tgl_pelaksanaan');
 
 	//field pertama yang diurutkan
 	var $order = array('id_surat' => 'desc');
@@ -24,8 +24,6 @@ class M_surattugas extends CI_Model {
 
 		$this->db->select('*');
 		$this->db->from('tb_surattugas a');
-		$this->db->join('tb_asesor b', 'a.asesor = b.id');
-
 
 		$i = 0;
 
@@ -108,6 +106,14 @@ class M_surattugas extends CI_Model {
         return $hasil->no_surat;
     }
 
+	public function getDataPerihal($id)
+    {
+        $query = $this->db->query("SELECT perihal from tb_surattugas where id_surat = $id");
+		$hasil = $query->row();
+
+        return $hasil->perihal;
+    }
+
 	public function getDataTglSurat($id)
     {
         $query = $this->db->query("SELECT tgl_surat from tb_surattugas where id_surat = $id");
@@ -141,10 +147,10 @@ class M_surattugas extends CI_Model {
     }
 
 	public function getDataAsesor($id){
-		$query = $this->db->query("SELECT nama from tb_surattugas a join tb_asesor b on a.asesor = b.id where id_surat = $id");
+		$query = $this->db->query("SELECT asesor from tb_surattugas where id_surat = $id");
 		$hasil = $query->row();
 
-        return $hasil->nama;
+        return $hasil->asesor;
 	}
 
 	public function getDataAsesi1($id){
@@ -231,7 +237,6 @@ class M_surattugas extends CI_Model {
         //sql read
         $this->db->select('*');
 		$this->db->from('tb_surattugas a');
-        $this->db->join('tb_asesor b', 'a.asesor = b.id');
         $this->db->where('a.id_surat', $id);
         $query = $this->db->get();
 

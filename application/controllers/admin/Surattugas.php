@@ -85,8 +85,6 @@ class Surattugas extends CI_Controller {
 
 	public function datatables()
 	{
-		//menunda loading (bisa dihapus, hanya untuk menampilkan pesan processing)
-		// sleep(2);
 
 		//memanggil fungsi model datatables
 		$list = $this->M_surattugas->get_datatables();
@@ -101,10 +99,8 @@ class Surattugas extends CI_Controller {
 			$row = array();
 			$row[] = $no;
 			$row[] = $field['no_surat'];
+			$row[] = $field['perihal'];
 			$row[] = date_format($date1, "D, d M Y");
-			$row[] = $field['nama'];
-			$row[] = $field['skema'];
-			$row[] = $field['batch'];
 			$row[] = date_format($date2, "D, d M Y");
 
 			$row[] = '
@@ -139,6 +135,7 @@ class Surattugas extends CI_Controller {
 		echo json_encode($output);
 	}
 
+	// Insert untuk surat tugas uji kompetensi
 	public function insert() 
 	{
 
@@ -158,7 +155,7 @@ class Surattugas extends CI_Controller {
 		// mengirim data ke view
 		$output = array(
 						'theme_page' 	=> 'surat/v_surattugas_insert',
-						'judul' 	 	=> 'Surat tugas',
+						'judul' 	 	=> 'Surat tugas uji kompetensi',
 						'data_asesor'	=> $data_asesor,
 						'no_urut'		=> $no_urut,
 						'name'		 	=> $name,
@@ -178,6 +175,7 @@ class Surattugas extends CI_Controller {
 
 			//aturan validasi input login
 			$this->form_validation->set_rules('no_urut', 'No urut', 'required');
+			$this->form_validation->set_rules('perihal', 'Perihal', 'required');
 			$this->form_validation->set_rules('tgl_surat', 'Tanggal Surat', 'required');
 			$this->form_validation->set_rules('skema', 'Skema', 'required');
 			$this->form_validation->set_rules('tgl_pelaksanaan', 'Tanggal pelaksanaan', 'required');
@@ -190,6 +188,7 @@ class Surattugas extends CI_Controller {
 				// menangkap data input dari view
 				$no_urut		= $this->input->post('no_urut');
 				$tgl_surat		= $this->input->post('tgl_surat');
+				$perihal		= $this->input->post('perihal');
 				$skema		  	= $this->input->post('skema');
 				$tgl_pelaksanaan= $this->input->post('tgl_pelaksanaan');
 				$batch      	= $this->input->post('batch');
@@ -208,6 +207,7 @@ class Surattugas extends CI_Controller {
 					//format : nama field/kolom table => data input dari view
 					'no_surat' 	 	 => $no_surat,
 					'no_urut'		 => $no_urut,
+					'perihal'		 => $perihal,
 					'tgl_surat' 	 => $tgl_surat,
 					'skema' 	  	 => $skema,
 					'tgl_surat'  	 => $tgl_surat,
@@ -238,7 +238,102 @@ class Surattugas extends CI_Controller {
                 $data_log = $this->M_log->insert($input_log);
 	
 				//mengembalikan halaman ke function read
-				$this->session->set_tempdata('confirm', 'Data berhasil ditambahkan', 1);
+				$this->session->set_tempdata('message', 'Data berhasil ditambahkan', 1);
+				Redirect('admin/surattugas/read');
+
+			}
+
+		}
+
+	}
+	
+	// Insert untuk surat tugas lainnya
+	public function insert2() 
+	{
+
+		$this->insert_submit2();
+
+		$name  = $this->session->userdata('name');
+		$image = $this->session->userdata('image');
+		$data_setting = $this->M_setting->read();
+        $data_asesor  = $this->M_asesor->getDataAsesor();
+        $data_skema   = $this->M_skema->read();
+
+		// no urut surat
+		$year 		= date('Y'); 
+		$maxData    = $this->M_surattugas->getMaxData($year);
+		$no_urut 	= $maxData + 1;
+	
+		// mengirim data ke view
+		$output = array(
+						'theme_page' 	=> 'surat/v_surattugas2_insert',
+						'judul' 	 	=> 'Surat tugas',
+						'data_asesor'	=> $data_asesor,
+						'no_urut'		=> $no_urut,
+						'name'		 	=> $name,
+						'image'			=> $image,
+						'skema'			=> $data_skema,
+						'data_setting'  => $data_setting
+					);
+
+		// memanggil file view
+		$this->load->view('admin/theme/index', $output);
+	}
+
+	public function insert_submit2() 
+	{
+
+		if ($this->input->post('submit') == 'Simpan') {
+
+			//aturan validasi input login
+			$this->form_validation->set_rules('no_urut', 'No urut', 'required');
+			$this->form_validation->set_rules('perihal', 'Perihal', 'required');
+			$this->form_validation->set_rules('tgl_surat', 'Tanggal Surat', 'required');
+			$this->form_validation->set_rules('tgl_pelaksanaan', 'Tanggal pelaksanaan', 'required');
+
+			if ($this->form_validation->run() == TRUE) {
+
+				// menangkap data input dari view
+				$no_urut		= $this->input->post('no_urut');
+				$tgl_surat		= $this->input->post('tgl_surat');
+				$perihal		= $this->input->post('perihal');
+				$tgl_pelaksanaan= $this->input->post('tgl_pelaksanaan');
+
+				$getBulan	 = date('n', strtotime($tgl_surat));
+				$bulan		 = $this->getRomawi($getBulan);
+				$year		 = date('Y');
+				$no_surat	 = $no_urut.'/SP/KLSP-HCMI/'.$bulan.'/'.$year;
+				
+				//mengirim data ke model
+				$input = array(
+					//format : nama field/kolom table => data input dari view
+					'no_surat' 	 	 => $no_surat,
+					'no_urut'		 => $no_urut,
+					'perihal'		 => $perihal,
+					'tgl_surat' 	 => $tgl_surat,
+					'tgl_pelaksanaan'=> $tgl_pelaksanaan,
+					'tahun'			 => $year
+				);
+				
+				$data_surattugas = $this->M_surattugas->insert($input);
+
+				// input data log activity
+				date_default_timezone_set('Asia/Jakarta');
+                $name       = $this->session->userdata('name');
+                $date       = date('l, d F Y H:i:s');
+                $activity   = $name.' menambahkan data surat tugas : <b>'.$no_surat.'</b>';
+
+                // mengirim data ke model
+				$input_log = array(
+                    // format : nama field/kolom table => data input dari view
+                    'activity' 	=> $activity,
+                    'date'	    => $date,
+                );
+
+                $data_log = $this->M_log->insert($input_log);
+	
+				//mengembalikan halaman ke function read
+				$this->session->set_tempdata('message', 'Data berhasil ditambahkan', 1);
 				Redirect('admin/surattugas/read');
 
 			}
@@ -247,33 +342,14 @@ class Surattugas extends CI_Controller {
 
 	}
 
-	public function insert_check()
-	{
-
-		//Menangkap data input dari view
-		$no = $this->input->post('no_surat');
-
-		//check data di database
-		$data_user = $this->m_suratmasuk->read_check($no);
-
-		if (!empty($data_user)) {
-
-			//membuat pesan error
-			$this->form_validation->set_message('insert_check', "No surat " . $no . " sudah ada dalam database");
-			$this->session->set_tempdata('error', "Tidak dapat memasukan data yang sama", 1);
-			return FALSE;
-		}
-		return TRUE;
-	}
-
 	public function getTemplate() 
 	{
-		$document = file_get_contents("./assets/surat-tugas.rtf");
 		$id  	  = $this->uri->segment(4);
-
+		
 		// menangkap data input dari view
 		$dataNoUrut 		= $this->M_surattugas->getDataNoUrut($id);
 		$dataNoSurat		= $this->M_surattugas->getDataNoSurat($id);
+		$dataPerihal		= $this->M_surattugas->getDataPerihal($id);
 		$dataTglSurat		= $this->M_surattugas->getDataTglSurat($id);
 		$dataBatch	     	= $this->M_surattugas->getDataBatch($id);
 		$dataSkema			= $this->M_surattugas->getDataSkema($id);
@@ -282,6 +358,10 @@ class Surattugas extends CI_Controller {
 		$dataAsesi1			= $this->M_surattugas->getDataAsesi1($id);
 		$dataAsesi2			= $this->M_surattugas->getDataAsesi2($id);
 		$dataAsesi3			= $this->M_surattugas->getDataAsesi3($id);
+
+		// pemilihan path dokumen
+		$path = empty($this->M_surattugas->getDataAsesor($id)) ? "./assets/surat-tugas-default.rtf" : "./assets/surat-tugas.rtf";
+		$document = file_get_contents($path);
 
 		// isi dokumen dinyatakan dalam bentuk string
 		$document = str_replace("#nosurat", $dataNoSurat, $document);
@@ -296,14 +376,13 @@ class Surattugas extends CI_Controller {
 
 		// header untuk membuka file output RTF dengan MS. Word
 		header("Content-type: application/msword");
-		header("Content-disposition: inline; filename= .$dataNoUrut. Surat Tugas $dataAsesor.doc");
+		header("Content-disposition: inline; filename= .$dataNoUrut. Surat Tugas $dataPerihal.doc");
 		header("Content-length: ".strlen($document));
 		echo $document;
 	}
 
 	public function update()
 	{
-
 		//menangkap id data yg dipilih dari view (parameter get)
 		$id  					 = $this->uri->segment(4);
 		$data_asesor 			 = $this->M_asesor->getDataAsesor();
@@ -313,11 +392,13 @@ class Surattugas extends CI_Controller {
 		$data_setting     		 = $this->M_setting->read();
         $data_skema			     = $this->M_skema->read();
 
+		// pemilihan path dokumen
+		$path = empty($this->M_surattugas->getDataAsesor($id)) ? "surat/v_surattugas2_update" : "surat/v_surattugas_update";
 
 		//mengirim data ke view
 		$output = array(
 			'judul'	 			      => 'Surat tugas',
-			'theme_page' 		   	  => 'surat/v_surattugas_update',
+			'theme_page' 		   	  => $path,
 			'data_asesor' 		  	  => $data_asesor,
 			'data_surattugas_single'  => $data_surattugas_single,
 			'data_setting'			  => $data_setting,
@@ -340,6 +421,7 @@ class Surattugas extends CI_Controller {
 
         // menangkap data input dari view
 		$tgl_surat		= $this->input->post('tgl_surat');
+		$perihal		= $this->input->post('perihal');
 		$skema		  	= $this->input->post('skema');
 		$tgl_pelaksanaan= $this->input->post('tgl_pelaksanaan');
 		$batch      	= $this->input->post('batch');
@@ -389,6 +471,7 @@ class Surattugas extends CI_Controller {
 				$input = array(
 					//format : nama field/kolom table => data input dari view
 					'tgl_surat' 	 => $tgl_surat,
+					'perihal' 	 	 => $perihal,
 					'skema' 	  	 => $skema,
 					'tgl_surat'  	 => $tgl_surat,
 					'tgl_pelaksanaan'=> $tgl_pelaksanaan,
@@ -405,7 +488,7 @@ class Surattugas extends CI_Controller {
 				$id = $this->uri->segment(4);
 
 				// Mengambil data dari Model
-				$no_surat = $this->db->getDataNoSurat($id);
+				$no_surat = $this->M_surattugas->getDataNoSurat($id);
 
 				// input data log
 				date_default_timezone_set('Asia/Jakarta');
@@ -433,6 +516,7 @@ class Surattugas extends CI_Controller {
 			$input = array(
 				//format : nama field/kolom table => data input dari view
 				'tgl_surat' 	 => $tgl_surat,
+				'perihal' 	 	 => $perihal,
 				'skema' 	  	 => $skema,
 				'tgl_surat'  	 => $tgl_surat,
 				'tgl_pelaksanaan'=> $tgl_pelaksanaan,
