@@ -92,7 +92,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= site_url('admin/surattugas/read'); ?>" class="nav-link <?= $i == 'suratkeluar' ? 'active' : ''; ?>">
+                                <a href="<?= site_url('admin/surattugas/read'); ?>" class="nav-link <?= $i == 'surattugas' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
                                     <p>Surat tugas</p>
                                 </a>
@@ -101,6 +101,12 @@
                                 <a href="<?= site_url('admin/notadinas/read'); ?>" class="nav-link <?= $i == 'notadinas' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
                                     <p>Nota dinas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= site_url('admin/notadinas/read'); ?>" class="nav-link <?= $i == 'notadinas' ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
+                                    <p>SPPD</p>
                                 </a>
                             </li>
                         </ul>

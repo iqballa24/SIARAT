@@ -30,7 +30,7 @@ class Surattugas extends CI_Controller {
 		$data_setting  = $this->M_setting->read();
 
 		$output = array(
-						'theme_page'  => 'surat/v_surattugas.php',
+						'theme_page'  => 'surat/surattugas/v_surattugas.php',
 						'judul' 	  => 'Surat tugas',
 						'data_setting'=> $data_setting,
 						'name'		  => $name,
@@ -154,7 +154,7 @@ class Surattugas extends CI_Controller {
 	
 		// mengirim data ke view
 		$output = array(
-						'theme_page' 	=> 'surat/v_surattugas_insert',
+						'theme_page' 	=> 'surat/surattugas/v_surattugas_insert',
 						'judul' 	 	=> 'Surat tugas uji kompetensi',
 						'data_asesor'	=> $data_asesor,
 						'no_urut'		=> $no_urut,
@@ -266,7 +266,7 @@ class Surattugas extends CI_Controller {
 	
 		// mengirim data ke view
 		$output = array(
-						'theme_page' 	=> 'surat/v_surattugas2_insert',
+						'theme_page' 	=> 'surat/surattugas/v_surattugas2_insert',
 						'judul' 	 	=> 'Surat tugas',
 						'data_asesor'	=> $data_asesor,
 						'no_urut'		=> $no_urut,
@@ -393,7 +393,7 @@ class Surattugas extends CI_Controller {
         $data_skema			     = $this->M_skema->read();
 
 		// pemilihan path dokumen
-		$path = empty($this->M_surattugas->getDataAsesor($id)) ? "surat/v_surattugas2_update" : "surat/v_surattugas_update";
+		$path = empty($this->M_surattugas->getDataAsesor($id)) ? "surat/surattugas/v_surattugas2_update" : "surat/surattugas/v_surattugas_update";
 
 		//mengirim data ke view
 		$output = array(
@@ -450,7 +450,7 @@ class Surattugas extends CI_Controller {
 				//mengirim data ke view
 				$output = array(
 					'judul'	 			      => 'Surat tugas',
-					'theme_page' 		   	  => 'surat/v_surattugas_update',
+					'theme_page' 		   	  => 'surat/surattugas/v_surattugas_update',
 					'data_asesor' 		  	  => $data_asesor,
 					'data_surattugas_single'  => $data_surattugas_single,
 					'data_setting'			  => $data_setting,
@@ -600,7 +600,7 @@ class Surattugas extends CI_Controller {
         
         // mengirim data ke view
         $output = array(
-            'theme_page'     => 'surat/v_surattugas_detail',
+            'theme_page'     => 'surat/surattugas/v_surattugas_detail',
             'judul'          => 'Detail surat tugas',
             'dt_surattugas'  => $dt_surattugas,
 			'data_setting'   => $data_setting,

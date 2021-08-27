@@ -27,7 +27,7 @@ class Suratmasuk extends CI_Controller {
 		$data_setting  = $this->m_setting->read();
 
 		$output = array(
-						'theme_page'   => 'surat/v_suratmasuk.php',
+						'theme_page'   => 'surat/suratmasuk/v_suratmasuk.php',
 						'judul' 	   => 'Surat masuk',
 						'data_setting' => $data_setting,
 						'name'		   => $name,
@@ -101,7 +101,7 @@ class Suratmasuk extends CI_Controller {
 	
 		// mengirim data ke view
 		$output = array(
-						'theme_page' 	=> 'surat/v_suratmasuk_insert',
+						'theme_page' 	=> 'surat/suratmasuk/v_suratmasuk_insert',
 						'judul' 	 	=> 'Surat masuk',
                         'data_category' => $data_category,
 						'data_setting'  => $data_setting,
@@ -247,7 +247,7 @@ class Suratmasuk extends CI_Controller {
 		//mengirim data ke view
 		$output = array(
 			'judul'	 			     => 'Surat masuk',
-			'theme_page' 		   	 => 'surat/v_suratmasuk_update',
+			'theme_page' 		   	 => 'surat/suratmasuk/v_suratmasuk_update',
 			'data_category' 		 => $data_category,
 			'data_setting'			 => $data_setting,	
 			'data_suratmasuk_single' => $data_suratmasuk_single,
@@ -297,7 +297,7 @@ class Suratmasuk extends CI_Controller {
 				//mengirim data ke view
 				$output = array(
 					'judul'	 				 => 'Surat masuk',
-					'theme_page' 			 => 'surat/v_suratmasuk_update',
+					'theme_page' 			 => 'surat/suratmasuk/v_suratmasuk_update',
 					'data_category' 		 => $data_category,
 					'response'				 => $response,
 					'data_suratmasuk_single' => $data_suratmasuk_single,
@@ -434,7 +434,7 @@ class Suratmasuk extends CI_Controller {
         
         // mengirim data ke view
         $output = array(
-            'theme_page'    => 'surat/v_suratmasuk_detail',
+            'theme_page'    => 'surat/suratmasuk/v_suratmasuk_detail',
             'judul'         => 'Detail surat masuk',
             'dt_suratmasuk' => $dt_suratmasuk,
 			'data_setting'  => $data_setting,
@@ -457,6 +457,6 @@ class Suratmasuk extends CI_Controller {
         );
 
         //memanggil file view
-        $this->load->view('admin/surat/v_suratmasuk_export_excel', $output);
+        $this->load->view('admin/surat/suratmasuk/v_suratmasuk_export_excel', $output);
     }
 }

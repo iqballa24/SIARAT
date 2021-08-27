@@ -30,7 +30,7 @@ class Suratkeluar extends CI_Controller {
 		$data_setting  = $this->m_setting->read();
 
 		$output = array(
-						'theme_page'  => 'surat/v_suratkeluar.php',
+						'theme_page'  => 'surat/suratkeluar/v_suratkeluar.php',
 						'judul' 	  => 'Surat keluar',
 						'data_setting'=> $data_setting,
 						'name'		  => $name,
@@ -156,7 +156,7 @@ class Suratkeluar extends CI_Controller {
 	
 		// mengirim data ke view
 		$output = array(
-						'theme_page' 	=> 'surat/v_suratkeluar_insert',
+						'theme_page' 	=> 'surat/suratkeluar/v_suratkeluar_insert',
 						'judul' 	 	=> 'Surat keluar',
                         'data_category' => $data_category,
 						'data_divisi'	=> $data_divisi,
@@ -231,32 +231,13 @@ class Suratkeluar extends CI_Controller {
                 $data_log = $this->M_log->insert($input_log);
 	
 				//mengembalikan halaman ke function read
-				$this->session->set_tempdata('confirm', 'Data berhasil ditambahkan', 1);
+				$this->session->set_tempdata('message', 'Data berhasil ditambahkan', 1);
 				Redirect('admin/suratkeluar/read');
 
 			}
 
 		}
 
-	}
-
-	public function insert_check()
-	{
-
-		//Menangkap data input dari view
-		$no = $this->input->post('no_surat');
-
-		//check data di database
-		$data_user = $this->m_suratmasuk->read_check($no);
-
-		if (!empty($data_user)) {
-
-			//membuat pesan error
-			$this->form_validation->set_message('insert_check', "No surat " . $no . " sudah ada dalam database");
-			$this->session->set_tempdata('error', "Tidak dapat memasukan data yang sama", 1);
-			return FALSE;
-		}
-		return TRUE;
 	}
 
 	public function getTemplate() 
@@ -304,7 +285,7 @@ class Suratkeluar extends CI_Controller {
 		//mengirim data ke view
 		$output = array(
 			'judul'	 			      => 'Surat keluar',
-			'theme_page' 		   	  => 'surat/v_suratkeluar_update',
+			'theme_page' 		   	  => 'surat/suratkeluar/v_suratkeluar_update',
 			'data_category' 		  => $data_category,
 			'data_suratkeluar_single' => $data_suratkeluar_single,
 			'data_divisi'			  => $data_divisi,
@@ -364,7 +345,7 @@ class Suratkeluar extends CI_Controller {
 				//mengirim data ke view
 				$output = array(
 					'judul'	 			      => 'Surat keluar',
-					'theme_page' 		   	  => 'surat/v_suratkeluar_update',
+					'theme_page' 		   	  => 'surat/suratkeluar/v_suratkeluar_update',
 					'response'      		  => $response,
 					'data_category' 		  => $data_category,
 					'data_suratkeluar_single' => $data_suratkeluar_single,
@@ -506,7 +487,7 @@ class Suratkeluar extends CI_Controller {
         
         // mengirim data ke view
         $output = array(
-            'theme_page'     => 'surat/v_suratkeluar_detail',
+            'theme_page'     => 'surat/suratkeluar/v_suratkeluar_detail',
             'judul'          => 'Detail surat keluar',
             'dt_suratkeluar' => $dt_suratkeluar,
 			'data_setting'   => $data_setting,
@@ -529,6 +510,6 @@ class Suratkeluar extends CI_Controller {
         );
 
         //memanggil file view
-        $this->load->view('admin/surat/v_suratkeluar_export_excel', $output);
+        $this->load->view('admin/surat/suratkeluar/v_suratkeluar_export_excel', $output);
     }
 }
