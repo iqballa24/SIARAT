@@ -242,7 +242,7 @@ class Suratkeluar extends CI_Controller {
 
 	public function getTemplate() 
 	{
-		$document = file_get_contents("./assets/template.rtf");
+		$document = file_get_contents("./assets/template/template.rtf");
 		$id  	  = $this->uri->segment(4);
 
 		// menangkap data input dari view
@@ -441,7 +441,8 @@ class Suratkeluar extends CI_Controller {
 
     }
 
-	public function delete() {
+	public function delete() 
+	{
 
 		$id = $this->uri->segment(4);
 

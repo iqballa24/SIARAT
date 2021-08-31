@@ -19,13 +19,11 @@ class Notadinas extends CI_Controller
 
     public function index()
     {
-
         $this->read();
     }
 
     public function read()
     {
-
         $name             = $this->session->userdata('name');
         $image            = $this->session->userdata('image');
         $data_setting     = $this->m_setting->read();
@@ -415,7 +413,7 @@ class Notadinas extends CI_Controller
 
 	public function getTemplate() 
 	{
-		$document = file_get_contents("./assets/notadinas.rtf");
+		$document = file_get_contents("./assets/template/notadinas.rtf");
 		$id  	  = $this->uri->segment(4);
 
 		// menangkap data input dari view

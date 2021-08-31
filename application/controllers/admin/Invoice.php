@@ -424,7 +424,7 @@ class Invoice extends CI_Controller {
 
 	public function getTemplate($id) 
 	{
-		$document = file_get_contents("./assets/invoice.rtf");
+		$document = file_get_contents("./assets/template/invoice.rtf");
 
 		// menangkap data input dari view
 		$no_invoice 	  	= $this->M_invoice->getDataNoInvoice($id);

@@ -84,6 +84,7 @@ class M_suratkeluar extends CI_Model {
 		return $this->db->count_all_results();
 	}
 
+	// mendapatkan no urut terakhir berdasarkan tahun
 	public function getMaxData($year)
     {
         $query = $this->db->query("SELECT MAX(no_urut) as nosurat from tb_suratkeluar where tahun = $year");
@@ -144,16 +145,6 @@ class M_suratkeluar extends CI_Model {
 
 		// $query -> result_array = mengirim data ke controller dalam bentuk semua data
         return $query->result_array();
-	}
-
-	public function read_check($kode)
-	{
-		$this->db->select('*');
-		$this->db->from('tb_suratmasuk');
-		$this->db->where('no_surat', $kode);
-		$query = $this->db->get();
-
-		return $query->row_array();
 	}
 
 	public function read_single($id) {

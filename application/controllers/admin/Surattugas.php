@@ -360,7 +360,7 @@ class Surattugas extends CI_Controller {
 		$dataAsesi3			= $this->M_surattugas->getDataAsesi3($id);
 
 		// pemilihan path dokumen
-		$path = empty($this->M_surattugas->getDataAsesor($id)) ? "./assets/surat-tugas-default.rtf" : "./assets/surat-tugas.rtf";
+		$path = empty($this->M_surattugas->getDataAsesor($id)) ? "./assets/template/surat-tugas-default.rtf" : "./assets/template/surat-tugas.rtf";
 		$document = file_get_contents($path);
 
 		// isi dokumen dinyatakan dalam bentuk string

@@ -408,7 +408,7 @@ class kwitansi extends CI_Controller {
 
 	public function getTemplate($id) 
 	{
-		$document = file_get_contents("./assets/Kwitansi.rtf");
+		$document = file_get_contents("./assets/template/Kwitansi.rtf");
 
 		// menangkap data input dari view
 		$DataNoKwitansi		 = $this->M_kwitansi->getDataNoKwitansi($id);

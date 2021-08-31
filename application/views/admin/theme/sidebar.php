@@ -54,6 +54,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="<?= base_url('admin/pegawai/read'); ?>" class="nav-link <?= $i == 'pegawai' ? 'active' : ''; ?>">
+                            <i class="nav-icon fas fa-user-tie"></i>
+                            <p>
+                                Pegawai
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?= base_url('admin/divisi/read'); ?>" class="nav-link <?= $i == 'divisi' ? 'active' : ''; ?>">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
@@ -104,13 +112,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= site_url('admin/notadinas/read'); ?>" class="nav-link <?= $i == 'notadinas' ? 'active' : ''; ?>">
+                                <a href="<?= site_url('admin/sppd/read'); ?>" class="nav-link <?= $i == 'sppd' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
                                     <p>SPPD</p>
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>                  
                     <li class="nav-header text-md">KEUANGAN</li>
                     <li class="nav-item">
                         <a href="<?= site_url('admin/invoice/read'); ?>" class="nav-link <?= $i == 'invoice' ? 'active' : ''; ?>">

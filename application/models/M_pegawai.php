@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_asesor extends CI_Model {
+class M_pegawai extends CI_Model {
 
-	var $table = array('tb_asesor');
+	var $table = array('tb_pegawai');
 
 	//field yang ditampilkan
-	var $column_order = array(null,'nama', 'Noreg', 'Kompetensi');
+	var $column_order = array(null,'nama', 'jabatan');
 
 	//field yang diizin untuk pencarian 
-	var $column_search = array('nama', 'Noreg', 'Kompetensi');
+	var $column_search = array('nama', 'jabatan');
 
 	//field pertama yang diurutkan
-	var $order = array('Kompetensi' => 'asc');
+	var $order = array('nama' => 'asc');
 
 	public function __construct()
 	{
@@ -84,7 +84,7 @@ class M_asesor extends CI_Model {
 
 	public function getNamaById($id) {
 
-		$query = $this->db->query("SELECT nama from tb_asesor where id = $id");
+		$query = $this->db->query("SELECT nama from tb_pegawai where id = $id");
 		$hasil = $query->row();
 
         return $hasil->nama;
@@ -119,7 +119,7 @@ class M_asesor extends CI_Model {
 
 		//sql read
 		$this->db->select('*');
-		$this->db->from('tb_asesor');
+		$this->db->from('tb_pegawai');
 		$query = $this->db->get();
 
 		// $query -> result_array = mengirim data ke controller dalam bentuk semua data
@@ -129,19 +129,18 @@ class M_asesor extends CI_Model {
 	public function read_check($noreg)
 	{
 		$this->db->select('*');
-		$this->db->from('tb_asesor');
+		$this->db->from('tb_pegawai');
 		$this->db->where('Noreg', $noreg);
 		$query = $this->db->get();
 
 		return $query->row_array();
 	}
 
-	public function read_single($id) 
-	{
+	public function read_single($id) {
 
 		// sql read
 		$this->db->select('*');
-		$this->db->from('tb_asesor');
+		$this->db->from('tb_pegawai');
 		$this->db->where('id', $id);
 
 		$query = $this->db->get();
@@ -153,7 +152,7 @@ class M_asesor extends CI_Model {
 	public function insert($input)
 	{
 		// $input = data yang dikirim dari controller
-		return $this->db->insert('tb_asesor', $input);
+		return $this->db->insert('tb_pegawai', $input);
 	}
 
 	public function update($input, $id)
@@ -163,13 +162,13 @@ class M_asesor extends CI_Model {
 		$this->db->where('id', $id);
 
 		//$input = data yang dikirim dari controller
-		return $this->db->update('tb_asesor', $input);
+		return $this->db->update('tb_pegawai', $input);
 	}
 
 	public function delete($id) {
 		// $id = data yang dikirim dari controller (sebagai filter data yang dihapus)
 		$this->db->where('id', $id);
-		return $this->db->delete('tb_asesor');
+		return $this->db->delete('tb_pegawai');
 	}
 
 }
